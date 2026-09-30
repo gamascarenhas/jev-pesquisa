@@ -1,0 +1,30 @@
+# PostgreSQL local só para desenvolvimento e testes. Porta 5433 para não colidir com a 5432.
+services:
+  banco:
+    image: postgres:16
+    container_name: jev-pesquisa-banco
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: jev
+      POSTGRES_PASSWORD: jev_dev_inseguro
+      POSTGRES_DB: jev_dev
+    ports:
+      - '127.0.0.1:5433:5432'
+    volumes:
+      - dados-banco:/var/lib/postgresql/data
+    configs:
+      - source: criar-banco-testes
+        target: /docker-entrypoint-initdb.d/01-criar-banco-testes.sql
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U jev -d jev_dev']
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+configs:
+  criar-banco-testes:
+    content: |
+      CREATE DATABASE jev_teste OWNER jev;
+
+volumes:
+  dados-banco:

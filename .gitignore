@@ -1,0 +1,13 @@
+node_modules/
+dist/
+coverage/
+*.log
+
+# Arquivos de ambiente preenchidos (os .example ficam versionados)
+.env.development
+.env.production
+
+# Uploads temporários (fase 5)
+server/tmp/
+
+.DS_Store

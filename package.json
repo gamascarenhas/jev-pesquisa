@@ -1,0 +1,32 @@
+{
+  "name": "jev-pesquisa",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "workspaces": [
+    "server"
+  ],
+  "scripts": {
+    "banco:subir": "docker compose -f docker-compose.dev.yml up -d --wait",
+    "predev": "npm run banco:subir",
+    "dev": "cross-env AMBIENTE_APP=development NODE_ENV=development npm run dev -w server",
+    "pretest": "npm run banco:subir",
+    "test": "cross-env AMBIENTE_APP=development NODE_ENV=development npm run test -w server",
+    "typecheck": "npm run typecheck -w server",
+    "lint": "eslint .",
+    "build": "npm run build -w server",
+    "start": "cross-env AMBIENTE_APP=production NODE_ENV=production npm run start -w server",
+    "verificar": "npm run typecheck && npm run lint && npm run test",
+    "auditoria": "npm audit --omit=dev --audit-level=high"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "cross-env": "^10.1.0",
+    "eslint": "^10.11.0",
+    "prettier": "^3.9.9",
+    "typescript-eslint": "^8.71.0"
+  }
+}
