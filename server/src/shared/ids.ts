@@ -9,6 +9,7 @@ export type ProjetoId = Marcado<'ProjetoId'>;
 export type ComentarioId = Marcado<'ComentarioId'>;
 export type FonteId = Marcado<'FonteId'>;
 export type TrabalhoId = Marcado<'TrabalhoId'>;
+export type TokenId = Marcado<'TokenId'>;
 
 export function comoContaId(valor: string): ContaId {
   return valor as ContaId;
@@ -32,4 +33,8 @@ export function comoFonteId(valor: string): FonteId {
 
 export function comoTrabalhoId(valor: string): TrabalhoId {
   return valor as TrabalhoId;
+}
+
+export function comoTokenId(valor: string): TokenId {
+  return valor as TokenId;
 }

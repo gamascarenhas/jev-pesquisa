@@ -47,6 +47,15 @@ export class ErroDeConflito extends ErroDeDominio {
   }
 }
 
+export class ErroMuitasRequisicoes extends ErroDeDominio {
+  constructor(
+    mensagem = 'Muitas requisições. Tente novamente em instantes.',
+    codigo = 'muitas_requisicoes',
+  ) {
+    super(codigo, 429, mensagem);
+  }
+}
+
 export class ErroServicoIndisponivel extends ErroDeDominio {
   constructor(mensagem = 'Serviço temporariamente indisponível.', codigo = 'servico_indisponivel') {
     super(codigo, 503, mensagem);

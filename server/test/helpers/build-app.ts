@@ -4,6 +4,8 @@ import { criarAplicacao, type Aplicacao } from '../../src/app.js';
 import { carregarConfiguracao, type Configuracao } from '../../src/config/config.js';
 import { semearPlanos } from '../../src/db/dados-iniciais.js';
 import { aplicarMigracoes } from '../../src/db/migrar.js';
+import type { EnviadorDeEmail } from '../../src/integrations/mail/enviador-email.js';
+import type { PassoAntesDeEncerrarConta } from '../../src/modules/data-deletion/exclusao-dados.servico.js';
 import { criarRegistrador, type Registrador } from '../../src/shared/logger.js';
 import type { Relogio } from '../../src/shared/clock.js';
 
@@ -11,9 +13,11 @@ export interface OpcoesAppDeTeste {
   configuracao?: Partial<Configuracao>;
   registrador?: Registrador;
   relogio?: Relogio;
+  enviadorDeEmail?: EnviadorDeEmail;
+  passosAntesDeEncerrarConta?: PassoAntesDeEncerrarConta[];
   /** Padrão true; false testa o app sem banco. */
   prepararBanco?: boolean;
-  rotasExtras?: (app: FastifyInstance) => void;
+  rotasExtras?: (app: FastifyInstance, aplicacao: Aplicacao) => void;
 }
 
 export interface AppDeTeste extends Aplicacao {
@@ -38,12 +42,16 @@ export async function montarAppDeTeste(opcoes: OpcoesAppDeTeste = {}): Promise<A
   const aplicacao = await criarAplicacao(configuracao, {
     registrador: opcoes.registrador ?? criarRegistrador({ nivel: 'silent', legivel: false }),
     ...(opcoes.relogio ? { relogio: opcoes.relogio } : {}),
+    ...(opcoes.enviadorDeEmail ? { enviadorDeEmail: opcoes.enviadorDeEmail } : {}),
+    ...(opcoes.passosAntesDeEncerrarConta
+      ? { passosAntesDeEncerrarConta: opcoes.passosAntesDeEncerrarConta }
+      : {}),
   });
   if (opcoes.prepararBanco !== false) {
     await aplicarMigracoes(aplicacao.banco, aplicacao.registrador);
     await semearPlanos(aplicacao.banco);
   }
-  opcoes.rotasExtras?.(aplicacao.app);
+  opcoes.rotasExtras?.(aplicacao.app, aplicacao);
   await aplicacao.app.ready();
 
   let encerrado = false;

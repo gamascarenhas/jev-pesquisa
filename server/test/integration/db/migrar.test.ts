@@ -11,6 +11,13 @@ import { criarRegistradorCapturado } from '../../helpers/factories.js';
 
 const { urlBanco } = carregarConfiguracaoDeTeste();
 const { registrador } = criarRegistradorCapturado();
+const MIGRATIONS_ATUAIS = [
+  '0001_extensoes.sql',
+  '0002_planos.sql',
+  '0003_contas_usuarios.sql',
+  '0004_tokens_autenticacao_sessoes.sql',
+  '0005_projetos.sql',
+];
 const bancos: Banco[] = [];
 const diretorios: string[] = [];
 
@@ -51,10 +58,10 @@ afterAll(async () => {
 });
 
 describe('aplicarMigracoes', () => {
-  it('aplica as duas migrations da fase 1 e registra nome e checksum SHA-256', async () => {
+  it('aplica as migrations existentes e registra nome e checksum SHA-256', async () => {
     const aplicadas = await aplicarMigracoes(banco, registrador);
 
-    expect(aplicadas).toEqual(['0001_extensoes.sql', '0002_planos.sql']);
+    expect(aplicadas).toEqual(MIGRATIONS_ATUAIS);
     const linhas = await banco.query<{ versao: string; checksum: string }>(
       'SELECT versao, checksum FROM migracoes_aplicadas ORDER BY versao',
     );
@@ -69,7 +76,7 @@ describe('aplicarMigracoes', () => {
     const segundaVez = await aplicarMigracoes(banco, registrador);
 
     expect(segundaVez).toEqual([]);
-    expect(await contarAplicadas(banco)).toBe(2);
+    expect(await contarAplicadas(banco)).toBe(MIGRATIONS_ATUAIS.length);
   });
 
   it('recusa iniciar quando uma migration já aplicada foi alterada', async () => {
@@ -107,20 +114,20 @@ describe('aplicarMigracoes', () => {
       aplicarMigracoes(abrirBanco(), registrador),
     ]);
 
-    expect([...primeira, ...segunda].sort()).toEqual(['0001_extensoes.sql', '0002_planos.sql']);
-    expect(await contarAplicadas(banco)).toBe(2);
+    expect([...primeira, ...segunda].sort()).toEqual(MIGRATIONS_ATUAIS);
+    expect(await contarAplicadas(banco)).toBe(MIGRATIONS_ATUAIS.length);
   });
 
   it('uma migration com erro é desfeita por inteiro e não fica registrada', async () => {
     const diretorio = await copiarMigrations();
     await writeFile(
-      join(diretorio, '0003_quebrada.sql'),
+      join(diretorio, '9999_quebrada.sql'),
       'CREATE TABLE parcial (id int);\nSELECT coluna_inexistente FROM parcial;\n',
     );
 
-    await expect(aplicarMigracoes(banco, registrador, diretorio)).rejects.toThrow(/0003_quebrada/);
+    await expect(aplicarMigracoes(banco, registrador, diretorio)).rejects.toThrow(/9999_quebrada/);
 
-    expect(await contarAplicadas(banco)).toBe(2);
+    expect(await contarAplicadas(banco)).toBe(MIGRATIONS_ATUAIS.length);
     const tabela = await banco.query("SELECT to_regclass('parcial') AS tabela");
     expect(tabela.rows[0]).toEqual({ tabela: null });
   });

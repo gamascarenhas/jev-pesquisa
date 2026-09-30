@@ -19,3 +19,5 @@ export function criarBanco(urlBanco: string): Banco {
 export async function verificarBanco(banco: Banco): Promise<void> {
   await banco.query('SELECT 1');
 }
+
+export type Executor = Banco | ClienteBanco;
