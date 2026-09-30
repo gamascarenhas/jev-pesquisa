@@ -2,6 +2,7 @@ import type { FastifyError, FastifyInstance, FastifyReply, FastifyRequest } from
 import { ZodError } from 'zod';
 
 import { ErroDeDominio, montarCorpoDeErro } from '../../shared/errors.js';
+import type { TratadorDeRotaDoFront } from './estaticos.plugin.js';
 
 const MENSAGEM_ERRO_INTERNO = 'Erro interno do servidor.';
 
@@ -69,7 +70,11 @@ function registrarNoLog(requisicao: FastifyRequest, erro: unknown, resposta: Res
   }
 }
 
-export function registrarManipuladorDeErros(app: FastifyInstance, estaEmProducao: boolean): void {
+export function registrarManipuladorDeErros(
+  app: FastifyInstance,
+  estaEmProducao: boolean,
+  tratarRotaDoFront?: TratadorDeRotaDoFront,
+): void {
   app.setErrorHandler((erro: unknown, requisicao: FastifyRequest, resposta: FastifyReply) => {
     const traduzido = traduzir(erro, estaEmProducao);
     registrarNoLog(requisicao, erro, traduzido);
@@ -79,6 +84,9 @@ export function registrarManipuladorDeErros(app: FastifyInstance, estaEmProducao
   });
 
   app.setNotFoundHandler((requisicao, resposta) => {
+    if (tratarRotaDoFront?.(requisicao, resposta) === true) {
+      return;
+    }
     const padrao = MENSAGENS_POR_STATUS[404] ?? ERRO_CLIENTE_GENERICO;
     void resposta
       .status(404)

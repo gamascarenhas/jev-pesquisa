@@ -1,0 +1,48 @@
+@layer components {
+  .superficie-plana {
+    background-color: var(--cor-superficie);
+    border: var(--largura-borda) solid var(--cor-borda);
+    border-radius: var(--raio-cartao);
+  }
+
+  .superficie-sutil {
+    background-color: var(--cor-superficie-sutil);
+    border-radius: var(--raio-controle);
+  }
+
+  .superficie-elevada {
+    background-color: var(--cor-superficie);
+    border: var(--largura-borda) solid var(--cor-borda);
+    border-radius: var(--raio-modal);
+    box-shadow: var(--sombra-modal);
+  }
+
+  .superficie-menu {
+    background-color: var(--cor-superficie);
+    border: var(--largura-borda) solid var(--cor-borda);
+    border-radius: var(--raio-cartao);
+    box-shadow: var(--sombra-menu);
+  }
+
+  .sobreposicao {
+    background-color: var(--cor-sobreposicao);
+  }
+}
+
+@layer components {
+  .camada-barra {
+    z-index: var(--camada-barra);
+  }
+
+  .camada-lateral {
+    z-index: var(--camada-lateral);
+  }
+
+  .camada-modal {
+    z-index: var(--camada-modal);
+  }
+
+  .camada-aviso {
+    z-index: var(--camada-aviso);
+  }
+}

@@ -1,4 +1,6 @@
 import { randomUUID } from 'node:crypto';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import Fastify, { LogController, type FastifyInstance } from 'fastify';
 
@@ -26,6 +28,7 @@ import { criarPlanosServico } from './modules/plans/planos.servico.js';
 import { criarPlanosSistemaRepositorio } from './modules/plans/planos.sistema.repositorio.js';
 import { criarProjetosRepositorio } from './modules/projects/projetos.repositorio.js';
 import { criarProjetosServico } from './modules/projects/projetos.servico.js';
+import { prepararEstaticos, type EstaticosPreparados } from './http/plugins/estaticos.plugin.js';
 import { registrarCabecalhosDeSeguranca } from './http/plugins/cabecalhos-seguranca.plugin.js';
 import { registrarLimiteDeRequisicoes } from './http/plugins/limite-requisicoes.plugin.js';
 import { registrarManipuladorDeErros } from './http/plugins/manipulador-erros.plugin.js';
@@ -42,12 +45,15 @@ import { relogioDoSistema, type Relogio } from './shared/clock.js';
 export const TEMPO_LIMITE_DESLIGAMENTO_MS = 30_000;
 const LIMITE_CORPO_PADRAO_BYTES = 1_048_576;
 const INTERVALO_VARREDURA_OCIOSAS_MS = 100;
+const DIRETORIO_DO_BUILD_WEB = resolve(dirname(fileURLToPath(import.meta.url)), '../../web/dist');
 
 export interface OpcoesAplicacao {
   registrador?: Registrador;
   relogio?: Relogio;
   enviadorDeEmail?: EnviadorDeEmail;
   passosAntesDeEncerrarConta?: PassoAntesDeEncerrarConta[];
+  /** Só em produção o servidor serve o build do web; os testes informam o diretório. */
+  diretorioWeb?: string;
 }
 
 export interface Aplicacao {
@@ -98,7 +104,8 @@ export async function criarAplicacao(
     passosAntesDeEncerrarConta: opcoes.passosAntesDeEncerrarConta ?? [],
   });
 
-  registrarManipuladorDeErros(app, configuracao.estaEmProducao);
+  const front = await prepararFront(configuracao, opcoes.diretorioWeb);
+  registrarManipuladorDeErros(app, configuracao.estaEmProducao, front?.tratarRotaDoFront);
   await registrarCabecalhosDeSeguranca(app, configuracao);
   await registrarSessao(app, {
     armazenamento: armazenamentoDeSessao,
@@ -113,8 +120,20 @@ export async function criarAplicacao(
     relogio,
     servicos,
   });
+  await front?.registrar(app);
 
   return { app, banco, registrador, relogio, configuracao, servicos };
+}
+
+async function prepararFront(
+  configuracao: Readonly<Configuracao>,
+  diretorioInformado: string | undefined,
+): Promise<EstaticosPreparados | undefined> {
+  const diretorio =
+    diretorioInformado ?? (configuracao.estaEmProducao ? DIRETORIO_DO_BUILD_WEB : undefined);
+  return diretorio === undefined
+    ? undefined
+    : prepararEstaticos({ diretorio, nomeNegocio: configuracao.nomeNegocio });
 }
 
 function criarEnviador(

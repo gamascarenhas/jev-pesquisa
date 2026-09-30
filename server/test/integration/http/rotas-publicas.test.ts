@@ -19,7 +19,7 @@ describe('GET /api/configuracao-publica', () => {
     });
 
     expect(resposta.statusCode).toBe(200);
-    expect(resposta.json()).toEqual({ nomeNegocio: 'Nome Provisório' });
+    expect(resposta.json()).toEqual({ nomeNegocio: 'Escuta' });
   });
 
   it('não vaza nenhum segredo nem URL de banco', async () => {

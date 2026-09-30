@@ -1,0 +1,78 @@
+/* Ponte entre os tokens e o Tailwind: só existem utilitários para nomes de tokens. */
+@theme inline {
+  --color-*: initial;
+  --text-*: initial;
+  --font-*: initial;
+  --font-weight-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+  --ease-*: initial;
+  --breakpoint-*: initial;
+
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+
+  --spacing: var(--espaco-base);
+
+  --color-fundo: var(--cor-fundo);
+  --color-superficie: var(--cor-superficie);
+  --color-superficie-sutil: var(--cor-superficie-sutil);
+  --color-superficie-selecionada: var(--cor-superficie-selecionada);
+  --color-texto: var(--cor-texto);
+  --color-texto-secundario: var(--cor-texto-secundario);
+  --color-borda: var(--cor-borda);
+  --color-acao: var(--cor-acao);
+  --color-acao-sutil: var(--cor-acao-sutil);
+  --color-perigo: var(--cor-perigo);
+  --color-perigo-hover: var(--cor-perigo-hover);
+  --color-acao-hover: var(--cor-acao-hover);
+  --color-acao-texto: var(--cor-acao-texto);
+  --color-acao-sutil-hover: var(--cor-acao-sutil-hover);
+  --color-borda-campo: var(--cor-borda-campo);
+  --color-borda-forte: var(--cor-borda-forte);
+  --color-texto-invertido: var(--cor-texto-invertido);
+
+  --font-titulo: var(--fonte-titulo);
+  --font-corpo: var(--fonte-corpo);
+
+  --radius-controle: var(--raio-controle);
+  --radius-cartao: var(--raio-cartao);
+  --radius-pilula: var(--raio-pilula);
+
+  --shadow-menu: var(--sombra-menu);
+
+  --container-*: initial;
+  --container-modal: var(--largura-modal);
+  --container-leitura: var(--largura-leitura);
+
+  --ease-saida: var(--curva-saida);
+}
+
+@layer base {
+  html {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    font-family: var(--fonte-corpo);
+    font-size: var(--tamanho-raiz);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    font-size: var(--tamanho-corpo);
+    line-height: var(--altura-corpo);
+    min-height: 100dvh;
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    margin: 0;
+  }
+
+  :focus-visible {
+    outline: var(--tamanho-foco) solid var(--cor-foco);
+    outline-offset: var(--tamanho-foco);
+  }
+}

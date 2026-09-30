@@ -1,0 +1,34 @@
+@layer components {
+  .movimento-cores {
+    transition:
+      background-color var(--duracao-rapida) var(--curva-saida),
+      border-color var(--duracao-rapida) var(--curva-saida),
+      color var(--duracao-rapida) var(--curva-saida);
+  }
+
+  .movimento-entrada {
+    animation: entrada var(--duracao-media) var(--curva-saida);
+  }
+
+  @keyframes entrada {
+    from {
+      opacity: 0;
+      transform: translateY(0.5rem);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .movimento-cores {
+      transition: none;
+    }
+
+    .movimento-entrada {
+      animation: none;
+    }
+  }
+}

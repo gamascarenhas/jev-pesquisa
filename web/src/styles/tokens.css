@@ -1,0 +1,35 @@
+:root {
+  --espaco-base: 0.25rem;
+  --espaco-campo: 0.375rem;
+  --espaco-grupo: 1rem;
+  --espaco-secao: 2rem;
+  --espaco-pagina: 1.5rem;
+  --espaco-pagina-celular: 1rem;
+
+  --raio-controle: 0.375rem;
+  --raio-cartao: 0.5rem;
+  --raio-modal: 0.75rem;
+  --raio-pilula: 62.5rem;
+
+  --sombra-menu: 0 4px 12px var(--cor-sombra);
+  --sombra-modal: 0 12px 32px var(--cor-sombra-forte);
+
+  --camada-barra: 20;
+  --camada-lateral: 30;
+  --camada-modal: 40;
+  --camada-aviso: 50;
+
+  --duracao-rapida: 120ms;
+  --duracao-media: 200ms;
+  --curva-saida: cubic-bezier(0.2, 0, 0, 1);
+
+  --largura-lateral: 15rem;
+  --largura-conteudo: 72rem;
+  --largura-formulario: 25rem;
+  --largura-leitura: 44rem;
+  --largura-modal: 30rem;
+  --altura-barra-superior: 3.5rem;
+  --altura-controle: 2.5rem;
+  --tamanho-foco: 2px;
+  --largura-borda: 1px;
+}

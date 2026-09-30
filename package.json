@@ -7,26 +7,39 @@
     "node": ">=20"
   },
   "workspaces": [
-    "server"
+    "server",
+    "web"
   ],
   "scripts": {
     "banco:subir": "docker compose -f docker-compose.dev.yml up -d --wait",
     "predev": "npm run banco:subir",
-    "dev": "cross-env AMBIENTE_APP=development NODE_ENV=development npm run dev -w server",
+    "dev": "cross-env AMBIENTE_APP=development NODE_ENV=development npm run dev:completo -w server",
     "pretest": "npm run banco:subir",
-    "test": "cross-env AMBIENTE_APP=development NODE_ENV=development npm run test -w server",
-    "typecheck": "npm run typecheck -w server",
+    "test": "cross-env AMBIENTE_APP=development NODE_ENV=development npm run test -w server && npm run test -w web",
+    "typecheck": "npm run typecheck -w server && npm run typecheck -w web",
     "lint": "eslint .",
-    "build": "npm run build -w server",
+    "stylelint": "npm run stylelint -w web",
+    "build": "npm run build -w server && npm run build -w web",
     "start": "cross-env AMBIENTE_APP=production NODE_ENV=production npm run start -w server",
-    "verificar": "npm run typecheck && npm run lint && npm run test",
+    "verificar": "npm run typecheck && npm run lint && npm run stylelint && npm run test",
     "auditoria": "npm audit --omit=dev --audit-level=high"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "cross-env": "^10.1.0",
     "eslint": "^10.11.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "prettier": "^3.9.9",
     "typescript-eslint": "^8.71.0"
+  },
+  "overrides": {
+    "eslint-plugin-react": {
+      "eslint": "$eslint"
+    },
+    "eslint-plugin-jsx-a11y": {
+      "eslint": "$eslint"
+    }
   }
 }

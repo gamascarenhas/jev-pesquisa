@@ -28,7 +28,7 @@ describe('configuração em desenvolvimento', () => {
   it('aceita o .env.development.example sem nenhuma alteração', () => {
     const config = validarConfiguracao('development', lerExemploDeAmbiente('development'));
 
-    expect(config.nomeNegocio).toBe('Nome Provisório');
+    expect(config.nomeNegocio).toBe('Escuta');
     expect(config.estaEmProducao).toBe(false);
     expect(config.origemApp).toBe('http://localhost:5173');
     expect(config.jev.simulado).toBe(true);

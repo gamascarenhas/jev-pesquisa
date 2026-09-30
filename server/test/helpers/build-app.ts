@@ -17,6 +17,7 @@ export interface OpcoesAppDeTeste {
   passosAntesDeEncerrarConta?: PassoAntesDeEncerrarConta[];
   /** Padrão true; false testa o app sem banco. */
   prepararBanco?: boolean;
+  diretorioWeb?: string;
   rotasExtras?: (app: FastifyInstance, aplicacao: Aplicacao) => void;
 }
 
@@ -43,6 +44,7 @@ export async function montarAppDeTeste(opcoes: OpcoesAppDeTeste = {}): Promise<A
     registrador: opcoes.registrador ?? criarRegistrador({ nivel: 'silent', legivel: false }),
     ...(opcoes.relogio ? { relogio: opcoes.relogio } : {}),
     ...(opcoes.enviadorDeEmail ? { enviadorDeEmail: opcoes.enviadorDeEmail } : {}),
+    ...(opcoes.diretorioWeb ? { diretorioWeb: opcoes.diretorioWeb } : {}),
     ...(opcoes.passosAntesDeEncerrarConta
       ? { passosAntesDeEncerrarConta: opcoes.passosAntesDeEncerrarConta }
       : {}),

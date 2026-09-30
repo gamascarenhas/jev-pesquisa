@@ -1,0 +1,87 @@
+@layer components {
+  .texto-destaque {
+    font-family: var(--fonte-titulo);
+    font-size: var(--tamanho-destaque);
+    line-height: var(--altura-destaque);
+    font-weight: var(--peso-negrito);
+    color: var(--cor-texto);
+    font-variant-numeric: var(--numeros-tabulares);
+  }
+
+  .texto-titulo-pagina {
+    font-family: var(--fonte-titulo);
+    font-size: var(--tamanho-titulo-pagina);
+    line-height: var(--altura-titulo-pagina);
+    font-weight: var(--peso-semibold);
+    color: var(--cor-texto);
+  }
+
+  .texto-titulo-secao {
+    font-family: var(--fonte-titulo);
+    font-size: var(--tamanho-titulo-secao);
+    line-height: var(--altura-titulo-secao);
+    font-weight: var(--peso-semibold);
+    color: var(--cor-texto);
+  }
+
+  .texto-corpo {
+    font-family: var(--fonte-corpo);
+    font-size: var(--tamanho-corpo);
+    line-height: var(--altura-corpo);
+    font-weight: var(--peso-normal);
+    color: var(--cor-texto);
+  }
+
+  .texto-auxiliar {
+    font-family: var(--fonte-corpo);
+    font-size: var(--tamanho-auxiliar);
+    line-height: var(--altura-auxiliar);
+    font-weight: var(--peso-normal);
+    color: var(--cor-texto-secundario);
+  }
+
+  .texto-rotulo {
+    font-family: var(--fonte-corpo);
+    font-size: var(--tamanho-rotulo);
+    line-height: var(--altura-rotulo);
+    font-weight: var(--peso-medio);
+    color: var(--cor-texto);
+  }
+
+  .texto-celula {
+    font-family: var(--fonte-corpo);
+    font-size: var(--tamanho-celula);
+    line-height: var(--altura-celula);
+    font-weight: var(--peso-normal);
+    color: var(--cor-texto);
+    font-variant-numeric: var(--numeros-tabulares);
+  }
+
+  .texto-cabecalho-tabela {
+    font-family: var(--fonte-corpo);
+    font-size: var(--tamanho-auxiliar);
+    line-height: var(--altura-auxiliar);
+    font-weight: var(--peso-semibold);
+    color: var(--cor-texto-secundario);
+    text-align: left;
+  }
+
+  .texto-secundario {
+    color: var(--cor-texto-secundario);
+  }
+
+  .texto-erro {
+    color: var(--cor-critico-texto);
+  }
+
+  .texto-link {
+    color: var(--cor-link);
+    font-weight: var(--peso-medio);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .texto-link:hover {
+    color: var(--cor-acao-hover);
+  }
+}

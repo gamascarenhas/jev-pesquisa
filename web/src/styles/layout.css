@@ -1,0 +1,75 @@
+@layer components {
+  .pagina-conteudo {
+    width: 100%;
+    max-width: var(--largura-conteudo);
+    margin-inline: auto;
+    padding: var(--espaco-pagina-celular);
+  }
+
+  .pilha-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-grupo);
+  }
+
+  .pilha-secoes {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-secao);
+  }
+
+  .pilha-horizontal {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(var(--espaco-base) * 3);
+  }
+
+  .cabecalho-pagina {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--espaco-grupo);
+  }
+
+  .tela-centralizada {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--espaco-secao);
+    padding: var(--espaco-pagina-celular);
+  }
+
+  .coluna-formulario {
+    width: 100%;
+    max-width: var(--largura-formulario);
+  }
+
+  .estrutura-app {
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: var(--altura-barra-superior) 1fr;
+  }
+
+  .estrutura-app-corpo {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .conteiner-rolavel {
+    overflow-x: auto;
+  }
+
+  @media (min-width: 48rem) {
+    .estrutura-app-corpo {
+      grid-template-columns: var(--largura-lateral) minmax(0, 1fr);
+    }
+
+    .pagina-conteudo {
+      padding: var(--espaco-pagina);
+    }
+  }
+}

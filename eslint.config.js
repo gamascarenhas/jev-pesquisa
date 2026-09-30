@@ -2,7 +2,7 @@
 import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
 
-const ARQUIVOS_DE_TESTE = ['**/test/**/*.ts', '**/*.test.ts'];
+const ARQUIVOS_DE_TESTE = ['**/test/**/*.ts', '**/*.test.ts', '**/*.test.tsx'];
 
 // Entre módulos, só *.servico.ts e *.tipos.ts; shared e integrations passam.
 const PADRAO_ENTRE_MODULOS = {

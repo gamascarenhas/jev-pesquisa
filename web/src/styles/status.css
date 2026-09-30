@@ -1,0 +1,67 @@
+@layer components {
+  .status-sucesso {
+    background-color: var(--cor-sucesso-fundo);
+    color: var(--cor-sucesso-texto);
+    border-color: var(--cor-sucesso-borda);
+  }
+
+  .status-atencao {
+    background-color: var(--cor-atencao-fundo);
+    color: var(--cor-atencao-texto);
+    border-color: var(--cor-atencao-borda);
+  }
+
+  .status-critico {
+    background-color: var(--cor-critico-fundo);
+    color: var(--cor-critico-texto);
+    border-color: var(--cor-critico-borda);
+  }
+
+  .status-info {
+    background-color: var(--cor-info-fundo);
+    color: var(--cor-info-texto);
+    border-color: var(--cor-info-borda);
+  }
+
+  .status-neutro {
+    background-color: var(--cor-neutro-fundo);
+    color: var(--cor-neutro-texto);
+    border-color: var(--cor-neutro-borda);
+  }
+
+  .faixa-alta {
+    background-color: var(--cor-faixa-alta-fundo);
+    color: var(--cor-faixa-alta-texto);
+    border-color: var(--cor-faixa-alta-borda);
+  }
+
+  .faixa-media {
+    background-color: var(--cor-faixa-media-fundo);
+    color: var(--cor-faixa-media-texto);
+    border-color: var(--cor-faixa-media-borda);
+  }
+
+  .faixa-baixa {
+    background-color: var(--cor-faixa-baixa-fundo);
+    color: var(--cor-faixa-baixa-texto);
+    border-color: var(--cor-faixa-baixa-borda);
+  }
+
+  .alerta-baixo {
+    background-color: var(--cor-alerta-baixo-fundo);
+    color: var(--cor-alerta-baixo-texto);
+    border-color: var(--cor-alerta-baixo-borda);
+  }
+
+  .alerta-medio {
+    background-color: var(--cor-alerta-medio-fundo);
+    color: var(--cor-alerta-medio-texto);
+    border-color: var(--cor-alerta-medio-borda);
+  }
+
+  .alerta-alto {
+    background-color: var(--cor-alerta-alto-fundo);
+    color: var(--cor-alerta-alto-texto);
+    border-color: var(--cor-alerta-alto-borda);
+  }
+}

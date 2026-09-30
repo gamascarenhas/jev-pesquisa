@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --fonte-titulo: 'Inter Tight', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --fonte-corpo: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --peso-normal: 400;
+  --peso-medio: 500;
+  --peso-semibold: 600;
+  --peso-negrito: 700;
+
+  --tamanho-raiz: 109.375%;
+
+  --tamanho-destaque: 1.75rem;
+  --altura-destaque: 2rem;
+  --tamanho-titulo-pagina: 1.5rem;
+  --altura-titulo-pagina: 1.875rem;
+  --tamanho-titulo-secao: 1.125rem;
+  --altura-titulo-secao: 1.625rem;
+  --tamanho-corpo: 0.875rem;
+  --altura-corpo: 1.375rem;
+  --tamanho-rotulo: 0.8125rem;
+  --altura-rotulo: 1.125rem;
+  --tamanho-auxiliar: 0.75rem;
+  --altura-auxiliar: 1.125rem;
+  --tamanho-celula: 0.8125rem;
+  --altura-celula: 1.25rem;
+
+  --numeros-tabulares: tabular-nums;
+}

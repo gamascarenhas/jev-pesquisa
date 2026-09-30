@@ -2,7 +2,7 @@
 
 SaaS self-service que classifica comentários de clientes com o Jev, modelo da TypeSafe AI que devolve decisões tipadas com probabilidades e não gera texto. A especificação está em `docs/SPEC.md`.
 
-Monorepo simples: `server/` (API Fastify). O `web/` entra na fase 3 e o `site/`, na fase 13.
+Monorepo simples: `server/` (API Fastify) e `web/` (React + Vite). O `site/` entra na fase 13.
 
 ## Requisitos
 
@@ -17,7 +17,7 @@ cp .env.development.example .env.development   # sem alterar nada
 npm run dev
 ```
 
-`npm run dev` sobe o PostgreSQL 16 local pelo `docker-compose.dev.yml` (porta 5433), aplica as migrations pendentes, cria os planos iniciais e sobe o servidor em `http://localhost:3100`. Não há passo manual de banco. Confira em `GET /api/saude`.
+`npm run dev` sobe o PostgreSQL 16 local pelo `docker-compose.dev.yml` (porta 5432), aplica as migrations pendentes, cria os planos iniciais e sobe a API em `http://localhost:3000` e o front em `http://localhost:5173` (o Vite repassa `/api` para a API). Abra o front. Não há passo manual de banco. Confira em `GET /api/saude`.
 
 O compose cria dois bancos: `jev_dev`, para rodar, e `jev_teste`, só para os testes. Os testes recriam o `jev_teste` a cada execução e recusam rodar se `URL_BANCO_TESTES` não existir ou for igual a `URL_BANCO`, então nunca tocam os dados de desenvolvimento.
 
@@ -27,16 +27,17 @@ Por padrão o exemplo de desenvolvimento liga todos os modos simulados (Jev, Goo
 
 | Script | O que faz |
 | --- | --- |
-| `npm run dev` | sobe o banco local e o servidor com recarga automática |
+| `npm run dev` | sobe o banco local, a API e o front com recarga automática |
 | `npm test` | roda os testes contra `URL_BANCO_TESTES` |
 | `npm run typecheck` | checagem de tipos |
 | `npm run lint` | ESLint |
-| `npm run verificar` | `typecheck`, `lint` e `test` em sequência |
-| `npm run build` | compila para `server/dist`; não precisa de nenhum segredo |
-| `npm start` | roda o build em produção |
+| `npm run stylelint` | stylelint dos CSS do `web` |
+| `npm run verificar` | `typecheck`, `lint`, `stylelint` e `test` em sequência |
+| `npm run build` | compila `server/dist` e `web/dist`; não precisa de nenhum segredo |
+| `npm start` | roda o build em produção; a API serve o `web/dist` |
 | `npm run auditoria` | `npm audit --omit=dev --audit-level=high` |
 
-`AMBIENTE_APP` e `NODE_ENV` são definidos pelos scripts (com `cross-env`, então funcionam no Windows) e nunca dentro dos arquivos de ambiente. O `stylelint` entra na fase 3.
+`AMBIENTE_APP` e `NODE_ENV` são definidos pelos scripts (com `cross-env`, então funcionam no Windows) e nunca dentro dos arquivos de ambiente.
 
 ## Preparar produção
 
