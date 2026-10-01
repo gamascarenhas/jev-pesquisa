@@ -1,0 +1,26 @@
+{
+  "accounts/1000000001": [
+    {
+      "name": "accounts/1000000001/locations/2000000001",
+      "title": "Rede Exemplo - Centro",
+      "address": "Rua das Flores, 100, São Paulo"
+    },
+    {
+      "name": "accounts/1000000001/locations/2000000002",
+      "title": "Rede Exemplo - Zona Sul",
+      "address": "Avenida Brasil, 2000, São Paulo"
+    },
+    {
+      "name": "accounts/1000000001/locations/2000000003",
+      "title": "Rede Exemplo - Aeroporto",
+      "address": null
+    }
+  ],
+  "accounts/1000000002": [
+    {
+      "name": "accounts/1000000002/locations/2000000004",
+      "title": "Padaria Exemplo - Matriz",
+      "address": "Praça da Sé, 1, São Paulo"
+    }
+  ]
+}

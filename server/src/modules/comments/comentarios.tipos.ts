@@ -54,3 +54,20 @@ export interface OpcoesDeFiltro {
   fontes: { id: string; nome: string }[];
   unidades: string[];
 }
+
+export interface ComentarioExterno {
+  idExterno: string;
+  /** Nulo quando a avaliação traz só estrelas. */
+  texto: string | null;
+  nota: number | null;
+  unidade: string | null;
+  autor: string | null;
+  comentadoEm: Date | null;
+  atualizadoEm: Date;
+}
+
+export interface ResultadoDaSincronizacao {
+  inseridos: number;
+  atualizados: number;
+  semTexto: number;
+}

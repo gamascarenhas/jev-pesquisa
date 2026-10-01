@@ -4,6 +4,7 @@ import {
   comoProjetoId,
   comoTrabalhoId,
   type ContaId,
+  type ProjetoId,
   type TrabalhoId,
 } from '../shared/ids.js';
 import type {
@@ -101,6 +102,20 @@ export class TrabalhosRepositorio {
       [contaId, tipo],
     );
     return resultado.rows.map(mapearTrabalho);
+  }
+
+  // Só o que ainda não começou: um job em execução termina sozinho, e a sincronização confere a conexão.
+  async cancelarNaoIniciados(
+    contaId: ContaId,
+    projetoId: ProjetoId,
+    tipo: TipoDeTrabalho,
+  ): Promise<number> {
+    const resultado = await this.banco.query(
+      `UPDATE trabalhos SET status = 'cancelled', finalizado_em = now()
+        WHERE conta_id = $1 AND projeto_id = $2 AND tipo = $3 AND status = 'pending'`,
+      [contaId, projetoId, tipo],
+    );
+    return resultado.rowCount ?? 0;
   }
 
   async buscarPorId(contaId: ContaId, trabalhoId: TrabalhoId): Promise<Trabalho | undefined> {

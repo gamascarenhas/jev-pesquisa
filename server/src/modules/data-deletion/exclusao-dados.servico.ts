@@ -7,8 +7,8 @@ import type { EncerradorDeSessoes } from '../auth/autenticacao.tipos.js';
 import type { UsuariosServico } from '../auth/usuarios.servico.js';
 import type { ProjetosServico } from '../projects/projetos.servico.js';
 
-// A fase 10 acrescenta aqui a revogação do token do Google, antes de apagar a conta.
 export type PassoAntesDeEncerrarConta = (contaId: ContaId) => Promise<void>;
+export type PassoAntesDeApagarProjeto = (contaId: ContaId, projetoId: ProjetoId) => Promise<void>;
 
 export interface DependenciasDeExclusao {
   projetos: ProjetosServico;
@@ -17,6 +17,7 @@ export interface DependenciasDeExclusao {
   encerradorDeSessoes: EncerradorDeSessoes;
   registrador: Registrador;
   passosAntesDeEncerrarConta: PassoAntesDeEncerrarConta[];
+  passosAntesDeApagarProjeto: PassoAntesDeApagarProjeto[];
 }
 
 export interface ExclusaoDadosServico {
@@ -38,6 +39,9 @@ export function criarExclusaoDadosServico(dep: DependenciasDeExclusao): Exclusao
           'Digite o nome exato do projeto para confirmar.',
           'confirmacao_invalida',
         );
+      }
+      for (const passo of dep.passosAntesDeApagarProjeto) {
+        await passo(contaId, projetoId);
       }
       // Comentários, classificações e demais dados do projeto saem por ON DELETE CASCADE.
       await dep.projetos.apagar(contaId, projetoId);

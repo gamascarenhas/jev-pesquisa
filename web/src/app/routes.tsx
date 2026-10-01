@@ -12,6 +12,7 @@ import { PrivacidadePage } from '@/features/legal/pages/PrivacidadePage';
 import { TermosPage } from '@/features/legal/pages/TermosPage';
 import { ClassificacaoPage } from '@/features/dashboard/pages/ClassificacaoPage';
 import { PainelPage } from '@/features/dashboard/pages/PainelPage';
+import { GooglePage } from '@/features/google/pages/GooglePage';
 import { PlanosPage } from '@/features/plans/pages/PlanosPage';
 import { PrimeirosPassosPage } from '@/features/onboarding/pages/PrimeirosPassosPage';
 import { FilaDeRevisaoPage } from '@/features/review-queue/pages/FilaDeRevisaoPage';
@@ -51,6 +52,7 @@ export const rotas: RouteObject[] = [
     children: [
       { path: '/projetos', element: <ProjetosPage /> },
       { path: '/comecar', element: <PrimeirosPassosPage /> },
+      { path: '/projetos/:projetoId/google', element: <GooglePage /> },
       { path: '/projetos/:projetoId/importar', element: <UploadPage /> },
       { path: '/projetos/:projetoId/classificar', element: <ClassificacaoPage /> },
       { path: '/projetos/:projetoId/painel', element: <PainelPage /> },

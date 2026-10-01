@@ -23,6 +23,9 @@ import { registrarRotasDeClassificacao } from '../modules/classification/classif
 import type { ClassificacaoServico } from '../modules/classification/classificacao.servico.js';
 import { registrarRotasDeComentarios } from '../modules/comments/comentarios.rotas.js';
 import type { ComentariosServico } from '../modules/comments/comentarios.servico.js';
+import { registrarRotasDoGoogle } from '../modules/google-business/google.rotas.js';
+import type { GoogleOauthServico } from '../modules/google-business/google-oauth.servico.js';
+import type { GoogleUnidadesServico } from '../modules/google-business/google-unidades.servico.js';
 import type { ExportacaoServico } from '../modules/dashboard/exportacao.servico.js';
 import type { PainelServico } from '../modules/dashboard/painel.servico.js';
 import { registrarRotasDoPainel } from '../modules/dashboard/painel.rotas.js';
@@ -52,10 +55,13 @@ export interface ServicosDaAplicacao {
   painel: PainelServico;
   exportacao: ExportacaoServico;
   exclusao: ExclusaoDadosServico;
+  googleOauth: GoogleOauthServico;
+  googleUnidades: GoogleUnidadesServico;
 }
 
 export interface DependenciasRotas extends DependenciasSaude {
   nomeNegocio: string;
+  urlApp: string;
   cobrancaAtivada: boolean;
   relogio: Relogio;
   servicos: ServicosDaAplicacao;
@@ -91,6 +97,13 @@ function registrarRotasDeNegocio(api: FastifyInstance, dependencias: Dependencia
     painel: servicos.painel,
     exportacao: servicos.exportacao,
     exigirAutenticacao,
+  });
+  registrarRotasDoGoogle(api, {
+    oauth: servicos.googleOauth,
+    unidades: servicos.googleUnidades,
+    urlApp: dependencias.urlApp,
+    exigirAutenticacao,
+    exigirDono,
   });
   registrarRotasDeEnvios(api, { servico: servicos.envios, exigirAutenticacao });
   registrarRotasDeTrabalhos(api, { servico: servicos.trabalhos, exigirAutenticacao });

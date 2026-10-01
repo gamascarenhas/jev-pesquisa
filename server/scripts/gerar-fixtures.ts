@@ -4,6 +4,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { iniciarCsv, montarLinhaDeCsv } from '../src/shared/safe-csv.js';
 import { gerarComentariosDeDemonstracao } from './dados-demonstracao.js';
+import { gravarFixturesDoGoogle } from './fixtures-google.js';
 
 export const QUANTIDADE_NO_EXEMPLO = 100;
 export const SEMENTE_DO_EXEMPLO = 20_260_202;
@@ -41,6 +42,8 @@ async function gerar(): Promise<void> {
   await mkdir(dirname(CAMINHO_DO_EXEMPLO), { recursive: true });
   await writeFile(CAMINHO_DO_EXEMPLO, gerarCsvDeExemplo(), 'utf8');
   process.stdout.write(`Arquivo de exemplo gerado em ${CAMINHO_DO_EXEMPLO}\n`);
+  await gravarFixturesDoGoogle();
+  process.stdout.write('Avaliações fictícias do Google geradas.\n');
 }
 
 if (process.argv[1] !== undefined && import.meta.url === pathToFileURL(process.argv[1]).href) {

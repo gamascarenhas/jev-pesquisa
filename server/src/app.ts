@@ -79,6 +79,7 @@ export async function criarAplicacao(
   await registrarPlugins(app, configuracao, armazenamentoDeSessao, front?.tratarRotaDoFront);
   await registrarRotas(app, {
     nomeNegocio: configuracao.nomeNegocio,
+    urlApp: configuracao.origemApp,
     cobrancaAtivada: configuracao.cobrancaAtivada,
     verificarBanco: () => verificarBanco(banco),
     relogio,

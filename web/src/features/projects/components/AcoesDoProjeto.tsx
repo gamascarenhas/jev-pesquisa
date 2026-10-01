@@ -13,6 +13,12 @@ interface AcoesDoProjetoProps {
   aoApagar: (projeto: Projeto) => void;
 }
 
+const LINKS_SECUNDARIOS = [
+  { caminho: 'classificar', rotulo: textos.projetos.classificar },
+  { caminho: 'importar', rotulo: textos.projetos.importar },
+  { caminho: 'google', rotulo: textos.projetos.google },
+];
+
 export function AcoesDoProjeto({ projeto, ehDono, aoRenomear, aoApagar }: AcoesDoProjetoProps) {
   return (
     <div
@@ -26,18 +32,15 @@ export function AcoesDoProjeto({ projeto, ehDono, aoRenomear, aoApagar }: AcoesD
       >
         {textos.projetos.painel}
       </Link>
-      <Link
-        to={`/projetos/${projeto.id}/classificar`}
-        className={botaoVariantes({ variante: 'secundario', tamanho: 'sm' })}
-      >
-        {textos.projetos.classificar}
-      </Link>
-      <Link
-        to={`/projetos/${projeto.id}/importar`}
-        className={botaoVariantes({ variante: 'secundario', tamanho: 'sm' })}
-      >
-        {textos.projetos.importar}
-      </Link>
+      {LINKS_SECUNDARIOS.map(({ caminho, rotulo }) => (
+        <Link
+          key={caminho}
+          to={`/projetos/${projeto.id}/${caminho}`}
+          className={botaoVariantes({ variante: 'secundario', tamanho: 'sm' })}
+        >
+          {rotulo}
+        </Link>
+      ))}
       <Botao
         variante="secundario"
         tamanho="sm"

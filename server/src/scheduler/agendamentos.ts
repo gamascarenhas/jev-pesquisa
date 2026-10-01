@@ -6,15 +6,32 @@ export interface TarefasDoSistema {
   limparSessoesExpiradas: () => Promise<unknown>;
   limparTokensExpirados: () => Promise<unknown>;
   limparEnviosOrfaos: () => Promise<unknown>;
+  sincronizarGoogle: () => Promise<unknown>;
+}
+
+const HORAS_POR_DIA = 24;
+const HORA_DA_SINCRONIZACAO_DIARIA = 3;
+
+function expressaoDaSincronizacao(intervaloEmHoras: number): string {
+  return intervaloEmHoras >= HORAS_POR_DIA
+    ? `0 ${String(HORA_DA_SINCRONIZACAO_DIARIA)} * * *`
+    : `0 */${String(intervaloEmHoras)} * * *`;
 }
 
 async function sem(resultado: () => Promise<unknown>): Promise<void> {
   await resultado();
 }
 
-// A sincronização do Google entra na fase 10.
-export function montarAgendamentos(tarefas: TarefasDoSistema): Agendamento[] {
+export function montarAgendamentos(
+  tarefas: TarefasDoSistema,
+  intervaloDaSincronizacaoEmHoras: number,
+): Agendamento[] {
   return [
+    {
+      nome: 'google-sincronizacao',
+      expressao: expressaoDaSincronizacao(intervaloDaSincronizacaoEmHoras),
+      tarefa: () => sem(tarefas.sincronizarGoogle),
+    },
     {
       nome: 'virada-de-ciclo',
       expressao: '*/5 * * * *',

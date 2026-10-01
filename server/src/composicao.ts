@@ -20,6 +20,8 @@ import { criarRecuperacaoTrabalhos } from './jobs/recuperacao-trabalhos.js';
 import { criarTrabalhosRepositorio } from './jobs/trabalhos.repositorio.js';
 import { criarTrabalhosServico } from './jobs/trabalhos.servico.js';
 import type { GanchoDeRecuperacao, MapaDeManipuladores } from './jobs/trabalhos.tipos.js';
+import type { FonteDeAvaliacoes } from './integrations/google/fonte-avaliacoes.js';
+import { montarGoogle, sincronizarGoogleAgendado, type Google } from './composicao-google.js';
 import type { ClassificadorDeComentarios } from './integrations/jev/classificador-comentarios.js';
 import { criarClassificacoesRepositorio } from './modules/classification/classificacoes.repositorio.js';
 import {
@@ -76,6 +78,7 @@ export interface OpcoesDeComposicao {
   ganchosDeRecuperacao?: GanchoDeRecuperacao[];
   diretorioDeEnvios?: string;
   classificadorDeComentarios?: ClassificadorDeComentarios;
+  fonteDeAvaliacoes?: FonteDeAvaliacoes;
   ajustesDoExecutor?: Partial<OpcoesDoExecutor>;
 }
 
@@ -176,7 +179,11 @@ function montarNucleo(
   };
 }
 
-function montarExecutor(entrada: EntradaDaComposicao, nucleo: Nucleo): ExecutorTrabalhos {
+function montarExecutor(
+  entrada: EntradaDaComposicao,
+  nucleo: Nucleo,
+  google: Google,
+): ExecutorTrabalhos {
   const { registrador, relogio, opcoes } = entrada;
   const { fila, uploads, custo, classificacao } = nucleo;
   const recuperacao = criarRecuperacaoTrabalhos({
@@ -202,6 +209,7 @@ function montarExecutor(entrada: EntradaDaComposicao, nucleo: Nucleo): ExecutorT
     manipuladores: {
       import_upload: criarManipuladorImportarEnvio(uploads.importacao),
       classify: criarManipuladorClassificar(classificacao),
+      google_sync: google.manipulador,
       ...opcoes.manipuladoresDeTrabalho,
     },
     relogio,
@@ -214,6 +222,7 @@ function montarExclusao(
   entrada: EntradaDaComposicao,
   base: Pick<ServicosDaAplicacao, 'contas' | 'usuarios' | 'projetos'>,
   nucleo: Nucleo,
+  google: Google,
 ): ServicosDaAplicacao['exclusao'] {
   const { projetos, contas, usuarios } = base;
   const { registrador, opcoes } = entrada;
@@ -224,8 +233,12 @@ function montarExclusao(
     encerradorDeSessoes: entrada.armazenamentoDeSessao,
     registrador,
     passosAntesDeEncerrarConta: [
+      (contaId) => google.oauth.revogarDaConta(contaId),
       (contaId) => nucleo.uploads.armazenamento.apagarPastaDaConta(contaId),
       ...(opcoes.passosAntesDeEncerrarConta ?? []),
+    ],
+    passosAntesDeApagarProjeto: [
+      (contaId, projetoId) => google.oauth.revogarDoProjeto(contaId, projetoId),
     ],
   });
 }
@@ -243,6 +256,7 @@ export function compor(base: EntradaBase): Composicao {
   const projetos = criarProjetosServico(criarProjetosRepositorio(banco));
   const trabalhos = criarTrabalhosServico(criarTrabalhosRepositorio(banco));
   const nucleo = montarNucleo(entrada, projetos, trabalhos, usuarios);
+  const google = montarGoogle(entrada, { projetos, trabalhos, comentarios: nucleo.comentarios });
   const servicos: ServicosDaAplicacao = {
     autenticacao: criarAutenticacaoServico(dependenciasDeAuth),
     convites: criarConvitesServico(dependenciasDeAuth, contas),
@@ -262,19 +276,19 @@ export function compor(base: EntradaBase): Composicao {
       projetos,
       registrador,
     }),
-    exclusao: montarExclusao(entrada, { contas, usuarios, projetos }, nucleo),
+    exclusao: montarExclusao(entrada, { contas, usuarios, projetos }, nucleo, google),
+    googleOauth: google.oauth,
+    googleUnidades: google.unidades,
   };
   const agendador = montarAgendadorDoSistema({
-    banco,
-    relogio: entrada.relogio,
-    registrador,
+    ...entrada,
     custo: nucleo.custo,
-    armazenamentoDeSessao: entrada.armazenamentoDeSessao,
     limparEnviosOrfaos: nucleo.uploads.limpeza,
+    sincronizarGoogle: () => sincronizarGoogleAgendado(google.sistema, trabalhos),
   });
   return {
     servicos,
-    executorDeTrabalhos: montarExecutor(entrada, nucleo),
+    executorDeTrabalhos: montarExecutor(entrada, nucleo, google),
     agendador,
     provedorDeCobranca,
   };

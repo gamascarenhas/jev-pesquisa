@@ -91,7 +91,9 @@ describe('PrimeirosPassosPage', () => {
       'href',
       '/exemplo-comentarios.csv',
     );
-    expect(atual.getByText('Perfil da Empresa no Google (em breve)')).toBeInTheDocument();
+    expect(
+      atual.getByRole('link', { name: 'Conectar o Perfil da Empresa no Google' }),
+    ).toHaveAttribute('href', '/projetos/p-1/google');
   });
 
   it('com comentários esperando, o passo 4 leva à classificação', async () => {

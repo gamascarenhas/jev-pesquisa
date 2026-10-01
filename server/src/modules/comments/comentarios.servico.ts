@@ -11,10 +11,12 @@ import { mascararTexto } from './anonimizador.js';
 import type { ComentariosRepositorio } from './comentarios.repositorio.js';
 import type {
   ComentarioListado,
+  ComentarioExterno,
   ComentarioParaImportar,
   ContagemDeGravidade,
   ContagemTemaSentimento,
   OpcoesDeFiltro,
+  ResultadoDaSincronizacao,
   ResultadoDoLote,
   ResumoDoPainel,
 } from './comentarios.tipos.js';
@@ -22,9 +24,11 @@ import type { ConsultasComentariosRepositorio } from './consultas-comentarios.re
 import type { FiltrosDeComentarios } from './filtros-comentarios.js';
 
 export { converterFiltros, esquemaFiltrosDeComentarios } from './filtros-comentarios.js';
-import { calcularHashDeUpload } from './hash-conteudo.js';
+import { calcularHashDeUpload, calcularHashDoGoogle } from './hash-conteudo.js';
 
 export type {
+  ComentarioExterno,
+  ResultadoDaSincronizacao,
   ComentarioListado,
   ComentarioParaImportar,
   ContagemDeGravidade,
@@ -43,6 +47,12 @@ export interface ComentariosServico {
     comentarios: ComentarioParaImportar[],
     executor?: Executor,
   ): Promise<ResultadoDoLote>;
+  sincronizarExternos(
+    contaId: ContaId,
+    projetoId: ProjetoId,
+    fonteId: FonteId,
+    comentarios: ComentarioExterno[],
+  ): Promise<ResultadoDaSincronizacao>;
   resumo(
     contaId: ContaId,
     projetoId: ProjetoId,
@@ -136,6 +146,27 @@ class ComentariosServicoImpl implements ComentariosServico {
     executor?: Executor,
   ): Promise<ResultadoDoLote> {
     return importarLote(this.dep.repositorio, contaId, projetoId, fonteId, comentarios, executor);
+  }
+
+  async sincronizarExternos(
+    contaId: ContaId,
+    projetoId: ProjetoId,
+    fonteId: FonteId,
+    comentarios: ComentarioExterno[],
+  ): Promise<ResultadoDaSincronizacao> {
+    const unicos = new Map(comentarios.map((comentario) => [comentario.idExterno, comentario]));
+    const linhas = [...unicos.values()].map((comentario) => ({
+      idExterno: comentario.idExterno,
+      textoOriginal: comentario.texto,
+      textoMascarado: comentario.texto === null ? null : mascararTexto(comentario.texto),
+      nota: comentario.nota,
+      unidade: comentario.unidade,
+      autor: comentario.autor,
+      comentadoEm: comentario.comentadoEm,
+      atualizadoEm: comentario.atualizadoEm,
+      hashConteudo: calcularHashDoGoogle(comentario.idExterno),
+    }));
+    return this.dep.repositorio.sincronizarExternos(contaId, projetoId, fonteId, linhas);
   }
 
   async resumo(contaId: ContaId, projetoId: ProjetoId, filtros: FiltrosDeComentarios) {

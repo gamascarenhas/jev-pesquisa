@@ -199,3 +199,28 @@ export interface Plano {
   nome: string;
   precoMensalCentavos: number;
 }
+
+export interface UnidadeSincronizada {
+  nomeUnidade: string;
+  titulo: string;
+  ultimaSincronizacaoEm: string | null;
+  falha: { codigo: string; mensagem: string } | null;
+}
+
+export interface StatusDoGoogle {
+  conectado: boolean;
+  email: string | null;
+  simulado: boolean;
+  sincronizando: boolean;
+  unidades: UnidadeSincronizada[];
+}
+
+export interface ContaDoGoogle {
+  id: string;
+  nome: string;
+  unidades: { nome: string; titulo: string; endereco: string | null; selecionada: boolean }[];
+}
+
+export interface InicioDaSincronizacao {
+  trabalhoId: string;
+}

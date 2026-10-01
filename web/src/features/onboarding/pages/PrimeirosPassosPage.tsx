@@ -42,7 +42,9 @@ function Acao({ passo, projetoId }: { passo: PassoDoOnboarding; projetoId: strin
               {passos.fonte.exemplo}
             </a>
           </div>
-          <p className="texto-auxiliar">{passos.fonte.google}</p>
+          <Link to={`/projetos/${projetoId}/google`} className="texto-link">
+            {passos.fonte.google}
+          </Link>
         </div>
       );
     case 'colunas':

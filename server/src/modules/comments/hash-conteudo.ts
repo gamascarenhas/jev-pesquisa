@@ -25,3 +25,7 @@ export function calcularHashDeUpload(campos: CamposDoHash): string {
     )
     .digest('hex');
 }
+
+export function calcularHashDoGoogle(idExterno: string): string {
+  return createHash('sha256').update(`google:${idExterno}`).digest('hex');
+}

@@ -89,15 +89,20 @@ describe('agendador', () => {
       chamadas.push(nome);
       return Promise.resolve();
     };
-    const agendamentos = montarAgendamentos({
-      virarCiclosVencidos: registrar('ciclos'),
-      liberarReservasAntigas: registrar('reservas'),
-      limparSessoesExpiradas: registrar('sessoes'),
-      limparTokensExpirados: registrar('tokens'),
-      limparEnviosOrfaos: registrar('envios'),
-    });
+    const agendamentos = montarAgendamentos(
+      {
+        virarCiclosVencidos: registrar('ciclos'),
+        liberarReservasAntigas: registrar('reservas'),
+        limparSessoesExpiradas: registrar('sessoes'),
+        limparTokensExpirados: registrar('tokens'),
+        limparEnviosOrfaos: registrar('envios'),
+        sincronizarGoogle: registrar('google'),
+      },
+      6,
+    );
 
     expect(agendamentos.map((a) => a.nome)).toEqual([
+      'google-sincronizacao',
       'virada-de-ciclo',
       'liberar-reservas-antigas',
       'limpeza-de-sessoes-e-tokens',
@@ -107,6 +112,6 @@ describe('agendador', () => {
     for (const agendamento of agendamentos) {
       await agendamento.tarefa();
     }
-    expect(chamadas).toEqual(['ciclos', 'reservas', 'sessoes', 'tokens', 'envios']);
+    expect(chamadas).toEqual(['google', 'ciclos', 'reservas', 'sessoes', 'tokens', 'envios']);
   });
 });

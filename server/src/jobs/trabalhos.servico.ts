@@ -1,6 +1,6 @@
 import { ehViolacaoDeChaveEstrangeira } from '../db/erros-banco.js';
 import { ErroDeValidacao, ErroNaoEncontrado } from '../shared/errors.js';
-import type { ContaId, TrabalhoId } from '../shared/ids.js';
+import type { ContaId, ProjetoId, TrabalhoId } from '../shared/ids.js';
 import type { TrabalhosRepositorio } from './trabalhos.repositorio.js';
 import type { EntradaDeNovoTrabalho, TipoDeTrabalho, Trabalho } from './trabalhos.tipos.js';
 
@@ -13,6 +13,11 @@ export interface TrabalhosServico {
   criar(contaId: ContaId, entrada: EntradaDeNovoTrabalho): Promise<ResultadoDeCriacao>;
   obter(contaId: ContaId, trabalhoId: TrabalhoId): Promise<Trabalho>;
   listarAtivosDoTipo(contaId: ContaId, tipo: TipoDeTrabalho): Promise<Trabalho[]>;
+  cancelarNaoIniciados(
+    contaId: ContaId,
+    projetoId: ProjetoId,
+    tipo: TipoDeTrabalho,
+  ): Promise<number>;
 }
 
 // O job existente pode terminar entre o INSERT e a busca; a segunda rodada cria o novo.
@@ -62,6 +67,8 @@ export function criarTrabalhosServico(repositorio: TrabalhosRepositorio): Trabal
     },
 
     listarAtivosDoTipo: (contaId, tipo) => repositorio.listarAtivosDoTipo(contaId, tipo),
+    cancelarNaoIniciados: (contaId, projetoId, tipo) =>
+      repositorio.cancelarNaoIniciados(contaId, projetoId, tipo),
 
     async obter(contaId, trabalhoId) {
       const trabalho = await repositorio.buscarPorId(contaId, trabalhoId);

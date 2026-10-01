@@ -18,6 +18,7 @@ declare module 'fastify' {
     usuarioId?: string;
     contaId?: string;
     criadaEm?: string;
+    googleEstado?: { valor: string; projetoId: string; criadoEm: number } | undefined;
   }
 }
 

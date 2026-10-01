@@ -11,7 +11,9 @@ export type AcaoDeAuditoria =
   | 'usuario_removido'
   | 'projeto_apagado'
   | 'conta_encerrada'
-  | 'exportacao';
+  | 'exportacao'
+  | 'google_conectado'
+  | 'google_desconectado';
 
 export interface IdsDeAuditoria {
   contaId?: string;

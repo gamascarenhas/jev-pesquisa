@@ -1,0 +1,2165 @@
+{
+  "accounts/1000000001/locations/2000000001": [
+    {
+      "reviewId": "AbFvOq000001",
+      "starRating": "FOUR",
+      "createTime": "2025-06-01T00:00:00.000Z",
+      "updateTime": "2025-06-04T00:00:00.000Z",
+      "reviewer": {
+        "isAnonymous": true
+      }
+    },
+    {
+      "reviewId": "AbFvOq000002",
+      "starRating": "FOUR",
+      "createTime": "2025-06-02T06:00:00.000Z",
+      "updateTime": "2025-06-02T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Fábio",
+        "isAnonymous": false
+      },
+      "comment": "Precisei de ajuda com a troca e o atendimento foi excelente, equipe muito atenciosa. Espero que melhorem. (#2)"
+    },
+    {
+      "reviewId": "AbFvOq000003",
+      "starRating": "FIVE",
+      "createTime": "2025-06-03T12:00:00.000Z",
+      "updateTime": "2025-06-03T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Elisa",
+        "isAnonymous": false
+      },
+      "comment": "Resolvi voltar depois de meses e o sistema estava fora do ar e não puderam finalizar a compra. Nota máxima. (#3)"
+    },
+    {
+      "reviewId": "AbFvOq000007",
+      "starRating": "TWO",
+      "createTime": "2025-06-08T12:00:00.000Z",
+      "updateTime": "2025-06-08T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      },
+      "comment": "Comprei pelo aplicativo e a troca foi feita na hora, sem perguntas. Nota máxima. (#7)"
+    },
+    {
+      "reviewId": "AbFvOq000008",
+      "starRating": "ONE",
+      "createTime": "2025-06-09T18:00:00.000Z",
+      "updateTime": "2025-06-09T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      }
+    },
+    {
+      "reviewId": "AbFvOq000009",
+      "starRating": "TWO",
+      "createTime": "2025-06-11T00:00:00.000Z",
+      "updateTime": "2025-06-11T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Gabi",
+        "isAnonymous": false
+      },
+      "comment": "Meu pedido chegou e a fila no caixa estava enorme e só havia um atendente. Já indiquei para amigos. (#9)"
+    },
+    {
+      "reviewId": "AbFvOq000013",
+      "starRating": "ONE",
+      "createTime": "2025-06-16T00:00:00.000Z",
+      "updateTime": "2025-06-16T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Gabi",
+        "isAnonymous": false
+      },
+      "comment": "Resolvi voltar depois de meses e o gerente me recebeu bem e ouviu minha reclamação. Vale a visita. (#13)"
+    },
+    {
+      "reviewId": "AbFvOq000014",
+      "starRating": "FOUR",
+      "createTime": "2025-06-17T06:00:00.000Z",
+      "updateTime": "2025-06-17T06:00:00.000Z",
+      "reviewer": {
+        "isAnonymous": true
+      },
+      "comment": "Liguei para a central e resolveram meu problema rápido, sem burocracia. Vale a visita. (#14)"
+    },
+    {
+      "reviewId": "AbFvOq000015",
+      "starRating": "THREE",
+      "createTime": "2025-06-18T12:00:00.000Z",
+      "updateTime": "2025-06-18T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Ana",
+        "isAnonymous": false
+      }
+    },
+    {
+      "reviewId": "AbFvOq000019",
+      "starRating": "THREE",
+      "createTime": "2025-06-23T12:00:00.000Z",
+      "updateTime": "2025-06-23T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Carla",
+        "isAnonymous": false
+      },
+      "comment": "Resolvi voltar depois de meses e o gerente me recebeu bem e ouviu minha reclamação. Nota máxima. (#19)"
+    },
+    {
+      "reviewId": "AbFvOq000020",
+      "starRating": "TWO",
+      "createTime": "2025-06-24T18:00:00.000Z",
+      "updateTime": "2025-06-24T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Heitor",
+        "isAnonymous": false
+      },
+      "comment": "Precisei de ajuda com a troca e o aplicativo é simples e funciona bem. Podem melhorar nisso. (#20)"
+    },
+    {
+      "reviewId": "AbFvOq000021",
+      "starRating": "THREE",
+      "createTime": "2025-06-26T00:00:00.000Z",
+      "updateTime": "2025-06-26T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Carla",
+        "isAnonymous": false
+      },
+      "comment": "Meu pedido chegou e o preço está acima do que vi em outros lugares. Fiquei decepcionado. (#21)"
+    },
+    {
+      "reviewId": "AbFvOq000025",
+      "starRating": "FIVE",
+      "createTime": "2025-07-01T00:00:00.000Z",
+      "updateTime": "2025-07-01T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Irene",
+        "isAnonymous": false
+      },
+      "comment": "Levei minha família e o atendimento foi excelente, equipe muito atenciosa. Espero que melhorem. (#25)"
+    },
+    {
+      "reviewId": "AbFvOq000026",
+      "starRating": "ONE",
+      "createTime": "2025-07-02T06:00:00.000Z",
+      "updateTime": "2025-07-02T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Irene",
+        "isAnonymous": false
+      },
+      "comment": "Fui atendido ontem e o gerente me recebeu bem e ouviu minha reclamação. Vale a visita. (#26)"
+    },
+    {
+      "reviewId": "AbFvOq000027",
+      "starRating": "FOUR",
+      "createTime": "2025-07-03T12:00:00.000Z",
+      "updateTime": "2025-07-03T12:00:00.000Z",
+      "reviewer": {
+        "isAnonymous": true
+      },
+      "comment": "Meu pedido chegou e o aplicativo é simples e funciona bem. Nota máxima. (#27)"
+    },
+    {
+      "reviewId": "AbFvOq000031",
+      "starRating": "FOUR",
+      "createTime": "2025-07-08T12:00:00.000Z",
+      "updateTime": "2025-07-08T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Elisa",
+        "isAnonymous": false
+      },
+      "comment": "Fiz a reserva por telefone e ninguém soube explicar a política de devolução. Podem melhorar nisso. (#31)"
+    },
+    {
+      "reviewId": "AbFvOq000032",
+      "starRating": "FIVE",
+      "createTime": "2025-07-09T18:00:00.000Z",
+      "updateTime": "2025-07-09T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Fábio",
+        "isAnonymous": false
+      },
+      "comment": "Liguei para a central e ninguém soube explicar a política de devolução. Não volto mais. (#32)"
+    },
+    {
+      "reviewId": "AbFvOq000033",
+      "starRating": "FOUR",
+      "createTime": "2025-07-11T00:00:00.000Z",
+      "updateTime": "2025-07-11T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Bruno",
+        "isAnonymous": false
+      },
+      "comment": "Comprei pelo aplicativo e o aplicativo é simples e funciona bem. Já indiquei para amigos. (#33)"
+    },
+    {
+      "reviewId": "AbFvOq000037",
+      "starRating": "TWO",
+      "createTime": "2025-07-16T00:00:00.000Z",
+      "updateTime": "2025-07-16T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Bruno",
+        "isAnonymous": false
+      },
+      "comment": "Fui atendido ontem e a fila no caixa estava enorme e só havia um atendente. Não volto mais. (#37)"
+    },
+    {
+      "reviewId": "AbFvOq000038",
+      "starRating": "FIVE",
+      "createTime": "2025-07-17T06:00:00.000Z",
+      "updateTime": "2025-07-17T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Irene",
+        "isAnonymous": false
+      },
+      "comment": "Meu pedido chegou e a troca foi feita na hora, sem perguntas. Vale a visita. (#38)"
+    },
+    {
+      "reviewId": "AbFvOq000039",
+      "starRating": "ONE",
+      "createTime": "2025-07-18T12:00:00.000Z",
+      "updateTime": "2025-07-18T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      },
+      "comment": "Passei na unidade do centro e o sistema estava fora do ar e não puderam finalizar a compra. Espero que melhorem. (#39)"
+    },
+    {
+      "reviewId": "AbFvOq000043",
+      "starRating": "FOUR",
+      "createTime": "2025-07-23T12:00:00.000Z",
+      "updateTime": "2025-07-23T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Bruno",
+        "isAnonymous": false
+      }
+    },
+    {
+      "reviewId": "AbFvOq000044",
+      "starRating": "FOUR",
+      "createTime": "2025-07-24T18:00:00.000Z",
+      "updateTime": "2025-07-24T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Carla",
+        "isAnonymous": false
+      },
+      "comment": "Passei na unidade do centro e a espera passou de quarenta minutos sem nenhum aviso. Podem melhorar nisso. (#44)"
+    },
+    {
+      "reviewId": "AbFvOq000045",
+      "starRating": "ONE",
+      "createTime": "2025-07-26T00:00:00.000Z",
+      "updateTime": "2025-07-29T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Ana",
+        "isAnonymous": false
+      },
+      "comment": "Fui atendido ontem e resolveram meu problema rápido, sem burocracia. Não volto mais. (#45)"
+    },
+    {
+      "reviewId": "AbFvOq000049",
+      "starRating": "FIVE",
+      "createTime": "2025-07-31T00:00:00.000Z",
+      "updateTime": "2025-07-31T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Carla",
+        "isAnonymous": false
+      },
+      "comment": "Precisei de ajuda com a troca e o gerente me recebeu bem e ouviu minha reclamação. Já indiquei para amigos. (#49)"
+    },
+    {
+      "reviewId": "AbFvOq000050",
+      "starRating": "TWO",
+      "createTime": "2025-08-01T06:00:00.000Z",
+      "updateTime": "2025-08-01T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Ana",
+        "isAnonymous": false
+      }
+    },
+    {
+      "reviewId": "AbFvOq000051",
+      "starRating": "TWO",
+      "createTime": "2025-08-02T12:00:00.000Z",
+      "updateTime": "2025-08-02T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Elisa",
+        "isAnonymous": false
+      },
+      "comment": "Comprei pelo aplicativo e a entrega atrasou três dias e ninguém avisou. Já indiquei para amigos. (#51)"
+    },
+    {
+      "reviewId": "AbFvOq000055",
+      "starRating": "THREE",
+      "createTime": "2025-08-07T12:00:00.000Z",
+      "updateTime": "2025-08-07T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Irene",
+        "isAnonymous": false
+      },
+      "comment": "Comprei pelo aplicativo e a limpeza do ambiente estava impecável. Podem melhorar nisso. (#55)"
+    },
+    {
+      "reviewId": "AbFvOq000056",
+      "starRating": "FIVE",
+      "createTime": "2025-08-08T18:00:00.000Z",
+      "updateTime": "2025-08-11T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Heitor",
+        "isAnonymous": false
+      },
+      "comment": "Resolvi voltar depois de meses e a loja estava desorganizada e não achei o que procurava. Fiquei decepcionado. (#56)"
+    },
+    {
+      "reviewId": "AbFvOq000057",
+      "starRating": "TWO",
+      "createTime": "2025-08-10T00:00:00.000Z",
+      "updateTime": "2025-08-10T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Heitor",
+        "isAnonymous": false
+      }
+    },
+    {
+      "reviewId": "AbFvOq000061",
+      "starRating": "FOUR",
+      "createTime": "2025-08-15T00:00:00.000Z",
+      "updateTime": "2025-08-15T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Irene",
+        "isAnonymous": false
+      },
+      "comment": "Levei minha família e a comida chegou fria e faltou um item. Recomendo. (#61)"
+    },
+    {
+      "reviewId": "AbFvOq000062",
+      "starRating": "THREE",
+      "createTime": "2025-08-16T06:00:00.000Z",
+      "updateTime": "2025-08-16T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Heitor",
+        "isAnonymous": false
+      },
+      "comment": "Resolvi voltar depois de meses e o produto veio com defeito e ninguém quis trocar. Recomendo. (#62)"
+    },
+    {
+      "reviewId": "AbFvOq000063",
+      "starRating": "ONE",
+      "createTime": "2025-08-17T12:00:00.000Z",
+      "updateTime": "2025-08-17T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Irene",
+        "isAnonymous": false
+      },
+      "comment": "Comprei pelo aplicativo e a limpeza do ambiente estava impecável. Podem melhorar nisso. (#63)"
+    },
+    {
+      "reviewId": "AbFvOq000067",
+      "starRating": "ONE",
+      "createTime": "2025-08-22T12:00:00.000Z",
+      "updateTime": "2025-08-25T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      },
+      "comment": "Precisei de ajuda com a troca e a comida chegou fria e faltou um item. Vale a visita. (#67)"
+    },
+    {
+      "reviewId": "AbFvOq000068",
+      "starRating": "TWO",
+      "createTime": "2025-08-23T18:00:00.000Z",
+      "updateTime": "2025-08-23T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Bruno",
+        "isAnonymous": false
+      },
+      "comment": "Comprei pelo aplicativo e a entrega atrasou três dias e ninguém avisou. Fiquei decepcionado. (#68)"
+    },
+    {
+      "reviewId": "AbFvOq000069",
+      "starRating": "ONE",
+      "createTime": "2025-08-25T00:00:00.000Z",
+      "updateTime": "2025-08-25T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Carla",
+        "isAnonymous": false
+      },
+      "comment": "Levei minha família e a troca foi feita na hora, sem perguntas. Podem melhorar nisso. (#69)"
+    },
+    {
+      "reviewId": "AbFvOq000073",
+      "starRating": "TWO",
+      "createTime": "2025-08-30T00:00:00.000Z",
+      "updateTime": "2025-08-30T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Elisa",
+        "isAnonymous": false
+      },
+      "comment": "Precisei de ajuda com a troca e o estacionamento é pequeno e difícil de manobrar. Nota máxima. (#73)"
+    },
+    {
+      "reviewId": "AbFvOq000074",
+      "starRating": "THREE",
+      "createTime": "2025-08-31T06:00:00.000Z",
+      "updateTime": "2025-08-31T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Fábio",
+        "isAnonymous": false
+      },
+      "comment": "Fui atendido ontem e a entrega atrasou três dias e ninguém avisou. Vale a visita. (#74)"
+    },
+    {
+      "reviewId": "AbFvOq000075",
+      "starRating": "FOUR",
+      "createTime": "2025-09-01T12:00:00.000Z",
+      "updateTime": "2025-09-01T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Heitor",
+        "isAnonymous": false
+      },
+      "comment": "Meu pedido chegou e a comida chegou fria e faltou um item. Fiquei decepcionado. (#75)"
+    },
+    {
+      "reviewId": "AbFvOq000079",
+      "starRating": "ONE",
+      "createTime": "2025-09-06T12:00:00.000Z",
+      "updateTime": "2025-09-06T12:00:00.000Z",
+      "reviewer": {
+        "isAnonymous": true
+      },
+      "comment": "Fiz a reserva por telefone e a embalagem veio amassada, mas o produto estava intacto. Não volto mais. (#79)"
+    },
+    {
+      "reviewId": "AbFvOq000080",
+      "starRating": "TWO",
+      "createTime": "2025-09-07T18:00:00.000Z",
+      "updateTime": "2025-09-07T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Ana",
+        "isAnonymous": false
+      },
+      "comment": "Comprei pelo aplicativo e a comida chegou fria e faltou um item. Espero que melhorem. (#80)"
+    },
+    {
+      "reviewId": "AbFvOq000081",
+      "starRating": "FOUR",
+      "createTime": "2025-09-09T00:00:00.000Z",
+      "updateTime": "2025-09-09T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Carla",
+        "isAnonymous": false
+      },
+      "comment": "Fui atendido ontem e o atendimento foi excelente, equipe muito atenciosa. Recomendo. (#81)"
+    },
+    {
+      "reviewId": "AbFvOq000085",
+      "starRating": "THREE",
+      "createTime": "2025-09-14T00:00:00.000Z",
+      "updateTime": "2025-09-14T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Carla",
+        "isAnonymous": false
+      }
+    },
+    {
+      "reviewId": "AbFvOq000086",
+      "starRating": "FOUR",
+      "createTime": "2025-09-15T06:00:00.000Z",
+      "updateTime": "2025-09-15T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Elisa",
+        "isAnonymous": false
+      },
+      "comment": "Comprei pelo aplicativo e o produto veio com defeito e ninguém quis trocar. Espero que melhorem. (#86)"
+    },
+    {
+      "reviewId": "AbFvOq000087",
+      "starRating": "FIVE",
+      "createTime": "2025-09-16T12:00:00.000Z",
+      "updateTime": "2025-09-16T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Heitor",
+        "isAnonymous": false
+      },
+      "comment": "Estive na loja no sábado e o gerente me recebeu bem e ouviu minha reclamação. Espero que melhorem. (#87)"
+    },
+    {
+      "reviewId": "AbFvOq000091",
+      "starRating": "TWO",
+      "createTime": "2025-09-21T12:00:00.000Z",
+      "updateTime": "2025-09-21T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Ana",
+        "isAnonymous": false
+      },
+      "comment": "Comprei pelo aplicativo e a troca foi feita na hora, sem perguntas. Já indiquei para amigos. (#91)"
+    },
+    {
+      "reviewId": "AbFvOq000092",
+      "starRating": "FOUR",
+      "createTime": "2025-09-22T18:00:00.000Z",
+      "updateTime": "2025-09-22T18:00:00.000Z",
+      "reviewer": {
+        "isAnonymous": true
+      }
+    },
+    {
+      "reviewId": "AbFvOq000093",
+      "starRating": "ONE",
+      "createTime": "2025-09-24T00:00:00.000Z",
+      "updateTime": "2025-09-24T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Irene",
+        "isAnonymous": false
+      },
+      "comment": "Levei minha família e a loja estava desorganizada e não achei o que procurava. Não volto mais. (#93) Levei minha família e a loja estava desorganizada e não achei o que procurava. Não volto mais. (#93) Levei minha família e a loja estava desorganizada e não achei o que procurava. Não volto mais. (#93) Levei minha família e a loja estava desorganizada e não achei o que procurava. Não volto mais. (#93) Levei minha família e a loja estava desorganizada e não achei o que procurava. Não volto mais. (#93) Levei minha família e a loja estava desorganizada e não achei o que procurava. Não volto mais. (#93) Levei minha família e a loja estava desorganizada e não achei o que procurava. Não volto mais. (#93) Levei minha família e a loja estava desorganizada e não achei o que procurava. Não volto mais. (#93) Levei minha família e a loja estava desorganizada e não achei o que procurava. Não volto mais. (#93) Levei minha família e a loja estava desorganizada e não achei o que procurava. Não volto mais. (#93) Levei minha família e a loja estava desorganizada e não achei o que procurava. Não volto mais. (#93) Levei minha família e a loja estava desorganizada e não achei o que procurava. Não volto mais. (#93)"
+    },
+    {
+      "reviewId": "AbFvOq000097",
+      "starRating": "THREE",
+      "createTime": "2025-09-29T00:00:00.000Z",
+      "updateTime": "2025-09-29T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Elisa",
+        "isAnonymous": false
+      },
+      "comment": "Resolvi voltar depois de meses e o entregador chegou no horário e foi educado. Podem melhorar nisso. (#97)"
+    },
+    {
+      "reviewId": "AbFvOq000098",
+      "starRating": "FOUR",
+      "createTime": "2025-09-30T06:00:00.000Z",
+      "updateTime": "2025-09-30T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Carla",
+        "isAnonymous": false
+      },
+      "comment": "Passei na unidade do centro e o preço está acima do que vi em outros lugares. Podem melhorar nisso. (#98)"
+    },
+    {
+      "reviewId": "AbFvOq000099",
+      "starRating": "TWO",
+      "createTime": "2025-10-01T12:00:00.000Z",
+      "updateTime": "2025-10-01T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Elisa",
+        "isAnonymous": false
+      }
+    },
+    {
+      "reviewId": "AbFvOq000103",
+      "starRating": "FIVE",
+      "createTime": "2025-10-06T12:00:00.000Z",
+      "updateTime": "2025-10-06T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Ana",
+        "isAnonymous": false
+      },
+      "comment": "Passei na unidade do centro e o site travou na hora de pagar e perdi a promoção. Fiquei decepcionado. (#103)"
+    },
+    {
+      "reviewId": "AbFvOq000104",
+      "starRating": "FIVE",
+      "createTime": "2025-10-07T18:00:00.000Z",
+      "updateTime": "2025-10-07T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Ana",
+        "isAnonymous": false
+      },
+      "comment": "Passei na unidade do centro e o atendimento foi excelente, equipe muito atenciosa. Recomendo. (#104)"
+    },
+    {
+      "reviewId": "AbFvOq000105",
+      "starRating": "FOUR",
+      "createTime": "2025-10-09T00:00:00.000Z",
+      "updateTime": "2025-10-09T00:00:00.000Z",
+      "reviewer": {
+        "isAnonymous": true
+      },
+      "comment": "Meu pedido chegou e o site travou na hora de pagar e perdi a promoção. Não volto mais. (#105)"
+    },
+    {
+      "reviewId": "AbFvOq000109",
+      "starRating": "TWO",
+      "createTime": "2025-10-14T00:00:00.000Z",
+      "updateTime": "2025-10-14T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Gabi",
+        "isAnonymous": false
+      },
+      "comment": "Precisei de ajuda com a troca e resolveram meu problema rápido, sem burocracia. Vale a visita. (#109)"
+    },
+    {
+      "reviewId": "AbFvOq000110",
+      "starRating": "THREE",
+      "createTime": "2025-10-15T06:00:00.000Z",
+      "updateTime": "2025-10-15T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Carla",
+        "isAnonymous": false
+      },
+      "comment": "Liguei para a central e o ambiente estava barulhento e desconfortável. Não volto mais. (#110)"
+    },
+    {
+      "reviewId": "AbFvOq000111",
+      "starRating": "FOUR",
+      "createTime": "2025-10-16T12:00:00.000Z",
+      "updateTime": "2025-10-19T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      },
+      "comment": "Estive na loja no sábado e a loja estava desorganizada e não achei o que procurava. Vale a visita. (#111)"
+    },
+    {
+      "reviewId": "AbFvOq000115",
+      "starRating": "THREE",
+      "createTime": "2025-10-21T12:00:00.000Z",
+      "updateTime": "2025-10-21T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Bruno",
+        "isAnonymous": false
+      },
+      "comment": "Fiz a reserva por telefone e o entregador chegou no horário e foi educado. Recomendo. (#115)"
+    },
+    {
+      "reviewId": "AbFvOq000116",
+      "starRating": "ONE",
+      "createTime": "2025-10-22T18:00:00.000Z",
+      "updateTime": "2025-10-22T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      },
+      "comment": "Meu pedido chegou e a troca foi feita na hora, sem perguntas. Espero que melhorem. (#116) Meu pedido chegou e a troca foi feita na hora, sem perguntas. Espero que melhorem. (#116) Meu pedido chegou e a troca foi feita na hora, sem perguntas. Espero que melhorem. (#116) Meu pedido chegou e a troca foi feita na hora, sem perguntas. Espero que melhorem. (#116) Meu pedido chegou e a troca foi feita na hora, sem perguntas. Espero que melhorem. (#116) Meu pedido chegou e a troca foi feita na hora, sem perguntas. Espero que melhorem. (#116) Meu pedido chegou e a troca foi feita na hora, sem perguntas. Espero que melhorem. (#116) Meu pedido chegou e a troca foi feita na hora, sem perguntas. Espero que melhorem. (#116) Meu pedido chegou e a troca foi feita na hora, sem perguntas. Espero que melhorem. (#116) Meu pedido chegou e a troca foi feita na hora, sem perguntas. Espero que melhorem. (#116) Meu pedido chegou e a troca foi feita na hora, sem perguntas. Espero que melhorem. (#116) Meu pedido chegou e a troca foi feita na hora, sem perguntas. Espero que melhorem. (#116)"
+    },
+    {
+      "reviewId": "AbFvOq000117",
+      "starRating": "ONE",
+      "createTime": "2025-10-24T00:00:00.000Z",
+      "updateTime": "2025-10-24T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      },
+      "comment": "Fiz a reserva por telefone e demoraram para responder minha mensagem no chat. Não volto mais. (#117)"
+    },
+    {
+      "reviewId": "AbFvOq000121",
+      "starRating": "TWO",
+      "createTime": "2025-10-29T00:00:00.000Z",
+      "updateTime": "2025-10-29T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      },
+      "comment": "Precisei de ajuda com a troca e a embalagem veio amassada, mas o produto estava intacto. Vale a visita. (#121)"
+    },
+    {
+      "reviewId": "AbFvOq000122",
+      "starRating": "THREE",
+      "createTime": "2025-10-30T06:00:00.000Z",
+      "updateTime": "2025-11-02T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Elisa",
+        "isAnonymous": false
+      },
+      "comment": "Meu pedido chegou e o entregador chegou no horário e foi educado. Vale a visita. (#122)"
+    },
+    {
+      "reviewId": "AbFvOq000123",
+      "starRating": "ONE",
+      "createTime": "2025-10-31T12:00:00.000Z",
+      "updateTime": "2025-10-31T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Irene",
+        "isAnonymous": false
+      },
+      "comment": "Comprei pelo aplicativo e o atendimento foi excelente, equipe muito atenciosa. Já indiquei para amigos. (#123)"
+    },
+    {
+      "reviewId": "AbFvOq000127",
+      "starRating": "THREE",
+      "createTime": "2025-11-05T12:00:00.000Z",
+      "updateTime": "2025-11-05T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Fábio",
+        "isAnonymous": false
+      }
+    },
+    {
+      "reviewId": "AbFvOq000128",
+      "starRating": "TWO",
+      "createTime": "2025-11-06T18:00:00.000Z",
+      "updateTime": "2025-11-06T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      },
+      "comment": "Resolvi voltar depois de meses e ninguém soube explicar a política de devolução. Podem melhorar nisso. (#128)"
+    },
+    {
+      "reviewId": "AbFvOq000129",
+      "starRating": "ONE",
+      "createTime": "2025-11-08T00:00:00.000Z",
+      "updateTime": "2025-11-08T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Heitor",
+        "isAnonymous": false
+      },
+      "comment": "Passei na unidade do centro e a atendente foi grosseira quando pedi uma segunda via. Já indiquei para amigos. (#129)"
+    },
+    {
+      "reviewId": "AbFvOq000133",
+      "starRating": "THREE",
+      "createTime": "2025-11-13T00:00:00.000Z",
+      "updateTime": "2025-11-16T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Heitor",
+        "isAnonymous": false
+      },
+      "comment": "Estive na loja no sábado e o gerente me recebeu bem e ouviu minha reclamação. Podem melhorar nisso. (#133)"
+    },
+    {
+      "reviewId": "AbFvOq000134",
+      "starRating": "TWO",
+      "createTime": "2025-11-14T06:00:00.000Z",
+      "updateTime": "2025-11-14T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Bruno",
+        "isAnonymous": false
+      }
+    },
+    {
+      "reviewId": "AbFvOq000135",
+      "starRating": "ONE",
+      "createTime": "2025-11-15T12:00:00.000Z",
+      "updateTime": "2025-11-15T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Elisa",
+        "isAnonymous": false
+      },
+      "comment": "Passei na unidade do centro e a troca foi feita na hora, sem perguntas. Vale a visita. (#135)"
+    },
+    {
+      "reviewId": "AbFvOq000139",
+      "starRating": "THREE",
+      "createTime": "2025-11-20T12:00:00.000Z",
+      "updateTime": "2025-11-20T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Elisa",
+        "isAnonymous": false
+      },
+      "comment": "Estive na loja no sábado e a variedade de opções é ótima e os preços são justos. Já indiquei para amigos. (#139) Estive na loja no sábado e a variedade de opções é ótima e os preços são justos. Já indiquei para amigos. (#139) Estive na loja no sábado e a variedade de opções é ótima e os preços são justos. Já indiquei para amigos. (#139) Estive na loja no sábado e a variedade de opções é ótima e os preços são justos. Já indiquei para amigos. (#139) Estive na loja no sábado e a variedade de opções é ótima e os preços são justos. Já indiquei para amigos. (#139) Estive na loja no sábado e a variedade de opções é ótima e os preços são justos. Já indiquei para amigos. (#139) Estive na loja no sábado e a variedade de opções é ótima e os preços são justos. Já indiquei para amigos. (#139) Estive na loja no sábado e a variedade de opções é ótima e os preços são justos. Já indiquei para amigos. (#139) Estive na loja no sábado e a variedade de opções é ótima e os preços são justos. Já indiquei para amigos. (#139) Estive na loja no sábado e a variedade de opções é ótima e os preços são justos. Já indiquei para amigos. (#139) Estive na loja no sábado e a variedade de opções é ótima e os preços são justos. Já indiquei para amigos. (#139) Estive na loja no sábado e a variedade de opções é ótima e os preços são justos. Já indiquei para amigos. (#139)"
+    },
+    {
+      "reviewId": "AbFvOq000140",
+      "starRating": "THREE",
+      "createTime": "2025-11-21T18:00:00.000Z",
+      "updateTime": "2025-11-21T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Heitor",
+        "isAnonymous": false
+      },
+      "comment": "Comprei pelo aplicativo e a troca foi feita na hora, sem perguntas. Vale a visita. (#140)"
+    },
+    {
+      "reviewId": "AbFvOq000141",
+      "starRating": "TWO",
+      "createTime": "2025-11-23T00:00:00.000Z",
+      "updateTime": "2025-11-23T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Gabi",
+        "isAnonymous": false
+      }
+    },
+    {
+      "reviewId": "AbFvOq000145",
+      "starRating": "FIVE",
+      "createTime": "2025-11-28T00:00:00.000Z",
+      "updateTime": "2025-11-28T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Irene",
+        "isAnonymous": false
+      },
+      "comment": "Meu pedido chegou e o entregador chegou no horário e foi educado. Espero que melhorem. (#145)"
+    },
+    {
+      "reviewId": "AbFvOq000146",
+      "starRating": "ONE",
+      "createTime": "2025-11-29T06:00:00.000Z",
+      "updateTime": "2025-11-29T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      },
+      "comment": "Estive na loja no sábado e a espera passou de quarenta minutos sem nenhum aviso. Já indiquei para amigos. (#146)"
+    },
+    {
+      "reviewId": "AbFvOq000147",
+      "starRating": "FOUR",
+      "createTime": "2025-11-30T12:00:00.000Z",
+      "updateTime": "2025-11-30T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Carla",
+        "isAnonymous": false
+      },
+      "comment": "Meu pedido chegou e o preço está acima do que vi em outros lugares. Nota máxima. (#147)"
+    },
+    {
+      "reviewId": "AbFvOq000151",
+      "starRating": "THREE",
+      "createTime": "2025-12-05T12:00:00.000Z",
+      "updateTime": "2025-12-05T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Fábio",
+        "isAnonymous": false
+      },
+      "comment": "Levei minha família e adorei a novidade do cardápio, volto com certeza. Recomendo. (#151)"
+    },
+    {
+      "reviewId": "AbFvOq000152",
+      "starRating": "FOUR",
+      "createTime": "2025-12-06T18:00:00.000Z",
+      "updateTime": "2025-12-06T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Carla",
+        "isAnonymous": false
+      },
+      "comment": "Precisei de ajuda com a troca e resolveram meu problema rápido, sem burocracia. Fiquei decepcionado. (#152)"
+    },
+    {
+      "reviewId": "AbFvOq000153",
+      "starRating": "TWO",
+      "createTime": "2025-12-08T00:00:00.000Z",
+      "updateTime": "2025-12-08T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Bruno",
+        "isAnonymous": false
+      },
+      "comment": "Precisei de ajuda com a troca e adorei a novidade do cardápio, volto com certeza. Já indiquei para amigos. (#153)"
+    },
+    {
+      "reviewId": "AbFvOq000157",
+      "starRating": "TWO",
+      "createTime": "2025-12-13T00:00:00.000Z",
+      "updateTime": "2025-12-13T00:00:00.000Z",
+      "reviewer": {
+        "isAnonymous": true
+      },
+      "comment": "Meu pedido chegou e demoraram para responder minha mensagem no chat. Podem melhorar nisso. (#157)"
+    },
+    {
+      "reviewId": "AbFvOq000158",
+      "starRating": "FOUR",
+      "createTime": "2025-12-14T06:00:00.000Z",
+      "updateTime": "2025-12-14T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      },
+      "comment": "Estive na loja no sábado e adorei a novidade do cardápio, volto com certeza. Vale a visita. (#158)"
+    },
+    {
+      "reviewId": "AbFvOq000159",
+      "starRating": "ONE",
+      "createTime": "2025-12-15T12:00:00.000Z",
+      "updateTime": "2025-12-15T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Bruno",
+        "isAnonymous": false
+      },
+      "comment": "Fiz a reserva por telefone e o site travou na hora de pagar e perdi a promoção. Espero que melhorem. (#159)"
+    },
+    {
+      "reviewId": "AbFvOq000163",
+      "starRating": "ONE",
+      "createTime": "2025-12-20T12:00:00.000Z",
+      "updateTime": "2025-12-20T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      },
+      "comment": "Passei na unidade do centro e cobraram um valor diferente do anunciado. Espero que melhorem. (#163)"
+    },
+    {
+      "reviewId": "AbFvOq000164",
+      "starRating": "TWO",
+      "createTime": "2025-12-21T18:00:00.000Z",
+      "updateTime": "2025-12-21T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Gabi",
+        "isAnonymous": false
+      },
+      "comment": "Fui atendido ontem e o preço está acima do que vi em outros lugares. Fiquei decepcionado. (#164)"
+    },
+    {
+      "reviewId": "AbFvOq000165",
+      "starRating": "ONE",
+      "createTime": "2025-12-23T00:00:00.000Z",
+      "updateTime": "2025-12-23T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Fábio",
+        "isAnonymous": false
+      },
+      "comment": "Fiz a reserva por telefone e o sistema estava fora do ar e não puderam finalizar a compra. Não volto mais. (#165)"
+    },
+    {
+      "reviewId": "AbFvOq000169",
+      "starRating": "TWO",
+      "createTime": "2025-12-28T00:00:00.000Z",
+      "updateTime": "2025-12-28T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Fábio",
+        "isAnonymous": false
+      }
+    },
+    {
+      "reviewId": "AbFvOq000170",
+      "starRating": "THREE",
+      "createTime": "2025-12-29T06:00:00.000Z",
+      "updateTime": "2025-12-29T06:00:00.000Z",
+      "reviewer": {
+        "isAnonymous": true
+      },
+      "comment": "Meu pedido chegou e a embalagem veio amassada, mas o produto estava intacto. Recomendo. (#170)"
+    },
+    {
+      "reviewId": "AbFvOq000171",
+      "starRating": "FIVE",
+      "createTime": "2025-12-30T12:00:00.000Z",
+      "updateTime": "2025-12-30T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      },
+      "comment": "Fui atendido ontem e o preço está acima do que vi em outros lugares. Não volto mais. (#171)"
+    },
+    {
+      "reviewId": "AbFvOq000175",
+      "starRating": "FIVE",
+      "createTime": "2026-01-04T12:00:00.000Z",
+      "updateTime": "2026-01-04T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Gabi",
+        "isAnonymous": false
+      },
+      "comment": "Fiz a reserva por telefone e cobraram um valor diferente do anunciado. Recomendo. (#175)"
+    },
+    {
+      "reviewId": "AbFvOq000176",
+      "starRating": "FOUR",
+      "createTime": "2026-01-05T18:00:00.000Z",
+      "updateTime": "2026-01-05T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Bruno",
+        "isAnonymous": false
+      }
+    },
+    {
+      "reviewId": "AbFvOq000177",
+      "starRating": "ONE",
+      "createTime": "2026-01-07T00:00:00.000Z",
+      "updateTime": "2026-01-10T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Elisa",
+        "isAnonymous": false
+      },
+      "comment": "Fiz a reserva por telefone e a atendente foi grosseira quando pedi uma segunda via. Fiquei decepcionado. (#177)"
+    },
+    {
+      "reviewId": "AbFvOq000181",
+      "starRating": "FIVE",
+      "createTime": "2026-01-12T00:00:00.000Z",
+      "updateTime": "2026-01-12T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Ana",
+        "isAnonymous": false
+      },
+      "comment": "Precisei de ajuda com a troca e a limpeza do ambiente estava impecável. Podem melhorar nisso. (#181)"
+    },
+    {
+      "reviewId": "AbFvOq000182",
+      "starRating": "THREE",
+      "createTime": "2026-01-13T06:00:00.000Z",
+      "updateTime": "2026-01-13T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Elisa",
+        "isAnonymous": false
+      },
+      "comment": "Levei minha família e resolveram meu problema rápido, sem burocracia. Podem melhorar nisso. (#182)"
+    },
+    {
+      "reviewId": "AbFvOq000183",
+      "starRating": "THREE",
+      "createTime": "2026-01-14T12:00:00.000Z",
+      "updateTime": "2026-01-14T12:00:00.000Z",
+      "reviewer": {
+        "isAnonymous": true
+      }
+    },
+    {
+      "reviewId": "AbFvOq000187",
+      "starRating": "FIVE",
+      "createTime": "2026-01-19T12:00:00.000Z",
+      "updateTime": "2026-01-19T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Gabi",
+        "isAnonymous": false
+      },
+      "comment": "Liguei para a central e o preço está acima do que vi em outros lugares. Não volto mais. (#187)"
+    },
+    {
+      "reviewId": "AbFvOq000188",
+      "starRating": "THREE",
+      "createTime": "2026-01-20T18:00:00.000Z",
+      "updateTime": "2026-01-23T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Irene",
+        "isAnonymous": false
+      },
+      "comment": "Comprei pelo aplicativo e a loja estava desorganizada e não achei o que procurava. Podem melhorar nisso. (#188)"
+    },
+    {
+      "reviewId": "AbFvOq000189",
+      "starRating": "FIVE",
+      "createTime": "2026-01-22T00:00:00.000Z",
+      "updateTime": "2026-01-22T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      },
+      "comment": "Fui atendido ontem e ninguém soube explicar a política de devolução. Vale a visita. (#189)"
+    },
+    {
+      "reviewId": "AbFvOq000193",
+      "starRating": "TWO",
+      "createTime": "2026-01-27T00:00:00.000Z",
+      "updateTime": "2026-01-27T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Irene",
+        "isAnonymous": false
+      },
+      "comment": "Comprei pelo aplicativo e o produto veio com defeito e ninguém quis trocar. Já indiquei para amigos. (#193)"
+    },
+    {
+      "reviewId": "AbFvOq000194",
+      "starRating": "TWO",
+      "createTime": "2026-01-28T06:00:00.000Z",
+      "updateTime": "2026-01-28T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Heitor",
+        "isAnonymous": false
+      },
+      "comment": "Passei na unidade do centro e a loja estava desorganizada e não achei o que procurava. Vale a visita. (#194)"
+    },
+    {
+      "reviewId": "AbFvOq000195",
+      "starRating": "ONE",
+      "createTime": "2026-01-29T12:00:00.000Z",
+      "updateTime": "2026-01-29T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Ana",
+        "isAnonymous": false
+      },
+      "comment": "Meu pedido chegou e a comida chegou fria e faltou um item. Recomendo. (#195)"
+    },
+    {
+      "reviewId": "AbFvOq000199",
+      "starRating": "FIVE",
+      "createTime": "2026-02-03T12:00:00.000Z",
+      "updateTime": "2026-02-06T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Carla",
+        "isAnonymous": false
+      },
+      "comment": "Liguei para a central e o ambiente estava barulhento e desconfortável. Nota máxima. (#199)"
+    },
+    {
+      "reviewId": "AbFvOq000200",
+      "starRating": "ONE",
+      "createTime": "2026-02-04T18:00:00.000Z",
+      "updateTime": "2026-02-04T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Heitor",
+        "isAnonymous": false
+      },
+      "comment": "Fiz a reserva por telefone e o estacionamento é pequeno e difícil de manobrar. Podem melhorar nisso. (#200)"
+    }
+  ],
+  "accounts/1000000001/locations/2000000002": [
+    {
+      "reviewId": "AbFvOq000004",
+      "starRating": "THREE",
+      "createTime": "2025-06-04T18:00:00.000Z",
+      "updateTime": "2025-06-04T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Carla",
+        "isAnonymous": false
+      },
+      "comment": "Fui atendido ontem e o gerente me recebeu bem e ouviu minha reclamação. Nota máxima. (#4)"
+    },
+    {
+      "reviewId": "AbFvOq000010",
+      "starRating": "FOUR",
+      "createTime": "2025-06-12T06:00:00.000Z",
+      "updateTime": "2025-06-12T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Irene",
+        "isAnonymous": false
+      },
+      "comment": "Comprei pelo aplicativo e o produto veio com defeito e ninguém quis trocar. Nota máxima. (#10)"
+    },
+    {
+      "reviewId": "AbFvOq000016",
+      "starRating": "THREE",
+      "createTime": "2025-06-19T18:00:00.000Z",
+      "updateTime": "2025-06-19T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Heitor",
+        "isAnonymous": false
+      },
+      "comment": "Fiz a reserva por telefone e a fila no caixa estava enorme e só havia um atendente. Recomendo. (#16)"
+    },
+    {
+      "reviewId": "AbFvOq000022",
+      "starRating": "FOUR",
+      "createTime": "2025-06-27T06:00:00.000Z",
+      "updateTime": "2025-06-27T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Irene",
+        "isAnonymous": false
+      }
+    },
+    {
+      "reviewId": "AbFvOq000028",
+      "starRating": "ONE",
+      "createTime": "2025-07-04T18:00:00.000Z",
+      "updateTime": "2025-07-04T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      },
+      "comment": "Meu pedido chegou e a troca foi feita na hora, sem perguntas. Já indiquei para amigos. (#28)"
+    },
+    {
+      "reviewId": "AbFvOq000034",
+      "starRating": "ONE",
+      "createTime": "2025-07-12T06:00:00.000Z",
+      "updateTime": "2025-07-15T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Ana",
+        "isAnonymous": false
+      },
+      "comment": "Passei na unidade do centro e o ambiente estava barulhento e desconfortável. Podem melhorar nisso. (#34)"
+    },
+    {
+      "reviewId": "AbFvOq000040",
+      "starRating": "TWO",
+      "createTime": "2025-07-19T18:00:00.000Z",
+      "updateTime": "2025-07-19T18:00:00.000Z",
+      "reviewer": {
+        "isAnonymous": true
+      },
+      "comment": "Precisei de ajuda com a troca e a loja estava desorganizada e não achei o que procurava. Nota máxima. (#40)"
+    },
+    {
+      "reviewId": "AbFvOq000046",
+      "starRating": "FIVE",
+      "createTime": "2025-07-27T06:00:00.000Z",
+      "updateTime": "2025-07-27T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Carla",
+        "isAnonymous": false
+      },
+      "comment": "Passei na unidade do centro e o aplicativo é simples e funciona bem. Espero que melhorem. (#46)"
+    },
+    {
+      "reviewId": "AbFvOq000052",
+      "starRating": "TWO",
+      "createTime": "2025-08-03T18:00:00.000Z",
+      "updateTime": "2025-08-03T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Carla",
+        "isAnonymous": false
+      },
+      "comment": "Passei na unidade do centro e a embalagem veio amassada, mas o produto estava intacto. Fiquei decepcionado. (#52)"
+    },
+    {
+      "reviewId": "AbFvOq000058",
+      "starRating": "FIVE",
+      "createTime": "2025-08-11T06:00:00.000Z",
+      "updateTime": "2025-08-11T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Irene",
+        "isAnonymous": false
+      },
+      "comment": "Resolvi voltar depois de meses e adorei a novidade do cardápio, volto com certeza. Nota máxima. (#58)"
+    },
+    {
+      "reviewId": "AbFvOq000064",
+      "starRating": "ONE",
+      "createTime": "2025-08-18T18:00:00.000Z",
+      "updateTime": "2025-08-18T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Ana",
+        "isAnonymous": false
+      }
+    },
+    {
+      "reviewId": "AbFvOq000070",
+      "starRating": "THREE",
+      "createTime": "2025-08-26T06:00:00.000Z",
+      "updateTime": "2025-08-26T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Heitor",
+        "isAnonymous": false
+      },
+      "comment": "Liguei para a central e o ambiente estava barulhento e desconfortável. Vale a visita. (#70) Liguei para a central e o ambiente estava barulhento e desconfortável. Vale a visita. (#70) Liguei para a central e o ambiente estava barulhento e desconfortável. Vale a visita. (#70) Liguei para a central e o ambiente estava barulhento e desconfortável. Vale a visita. (#70) Liguei para a central e o ambiente estava barulhento e desconfortável. Vale a visita. (#70) Liguei para a central e o ambiente estava barulhento e desconfortável. Vale a visita. (#70) Liguei para a central e o ambiente estava barulhento e desconfortável. Vale a visita. (#70) Liguei para a central e o ambiente estava barulhento e desconfortável. Vale a visita. (#70) Liguei para a central e o ambiente estava barulhento e desconfortável. Vale a visita. (#70) Liguei para a central e o ambiente estava barulhento e desconfortável. Vale a visita. (#70) Liguei para a central e o ambiente estava barulhento e desconfortável. Vale a visita. (#70) Liguei para a central e o ambiente estava barulhento e desconfortável. Vale a visita. (#70)"
+    },
+    {
+      "reviewId": "AbFvOq000076",
+      "starRating": "FOUR",
+      "createTime": "2025-09-02T18:00:00.000Z",
+      "updateTime": "2025-09-02T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      },
+      "comment": "Meu pedido chegou e o aplicativo é simples e funciona bem. Nota máxima. (#76)"
+    },
+    {
+      "reviewId": "AbFvOq000082",
+      "starRating": "THREE",
+      "createTime": "2025-09-10T06:00:00.000Z",
+      "updateTime": "2025-09-10T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Gabi",
+        "isAnonymous": false
+      },
+      "comment": "Resolvi voltar depois de meses e a limpeza do ambiente estava impecável. Vale a visita. (#82)"
+    },
+    {
+      "reviewId": "AbFvOq000088",
+      "starRating": "FIVE",
+      "createTime": "2025-09-17T18:00:00.000Z",
+      "updateTime": "2025-09-17T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Elisa",
+        "isAnonymous": false
+      },
+      "comment": "Meu pedido chegou e a atendente foi grosseira quando pedi uma segunda via. Recomendo. (#88)"
+    },
+    {
+      "reviewId": "AbFvOq000094",
+      "starRating": "FOUR",
+      "createTime": "2025-09-25T06:00:00.000Z",
+      "updateTime": "2025-09-25T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Gabi",
+        "isAnonymous": false
+      },
+      "comment": "Resolvi voltar depois de meses e a embalagem veio amassada, mas o produto estava intacto. Vale a visita. (#94)"
+    },
+    {
+      "reviewId": "AbFvOq000100",
+      "starRating": "FIVE",
+      "createTime": "2025-10-02T18:00:00.000Z",
+      "updateTime": "2025-10-05T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Ana",
+        "isAnonymous": false
+      },
+      "comment": "Liguei para a central e cobraram um valor diferente do anunciado. Podem melhorar nisso. (#100)"
+    },
+    {
+      "reviewId": "AbFvOq000106",
+      "starRating": "TWO",
+      "createTime": "2025-10-10T06:00:00.000Z",
+      "updateTime": "2025-10-10T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Heitor",
+        "isAnonymous": false
+      }
+    },
+    {
+      "reviewId": "AbFvOq000112",
+      "starRating": "FIVE",
+      "createTime": "2025-10-17T18:00:00.000Z",
+      "updateTime": "2025-10-17T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Bruno",
+        "isAnonymous": false
+      },
+      "comment": "Comprei pelo aplicativo e a troca foi feita na hora, sem perguntas. Podem melhorar nisso. (#112)"
+    },
+    {
+      "reviewId": "AbFvOq000118",
+      "starRating": "FOUR",
+      "createTime": "2025-10-25T06:00:00.000Z",
+      "updateTime": "2025-10-25T06:00:00.000Z",
+      "reviewer": {
+        "isAnonymous": true
+      },
+      "comment": "Precisei de ajuda com a troca e adorei a novidade do cardápio, volto com certeza. Já indiquei para amigos. (#118)"
+    },
+    {
+      "reviewId": "AbFvOq000124",
+      "starRating": "FOUR",
+      "createTime": "2025-11-01T18:00:00.000Z",
+      "updateTime": "2025-11-01T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Gabi",
+        "isAnonymous": false
+      },
+      "comment": "Fiz a reserva por telefone e adorei a novidade do cardápio, volto com certeza. Podem melhorar nisso. (#124)"
+    },
+    {
+      "reviewId": "AbFvOq000130",
+      "starRating": "FOUR",
+      "createTime": "2025-11-09T06:00:00.000Z",
+      "updateTime": "2025-11-09T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Ana",
+        "isAnonymous": false
+      },
+      "comment": "Estive na loja no sábado e o ambiente estava barulhento e desconfortável. Recomendo. (#130)"
+    },
+    {
+      "reviewId": "AbFvOq000136",
+      "starRating": "ONE",
+      "createTime": "2025-11-16T18:00:00.000Z",
+      "updateTime": "2025-11-16T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Heitor",
+        "isAnonymous": false
+      },
+      "comment": "Levei minha família e adorei a novidade do cardápio, volto com certeza. Espero que melhorem. (#136)"
+    },
+    {
+      "reviewId": "AbFvOq000142",
+      "starRating": "THREE",
+      "createTime": "2025-11-24T06:00:00.000Z",
+      "updateTime": "2025-11-24T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Bruno",
+        "isAnonymous": false
+      },
+      "comment": "Liguei para a central e o atendimento foi excelente, equipe muito atenciosa. Fiquei decepcionado. (#142)"
+    },
+    {
+      "reviewId": "AbFvOq000148",
+      "starRating": "FIVE",
+      "createTime": "2025-12-01T18:00:00.000Z",
+      "updateTime": "2025-12-01T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Irene",
+        "isAnonymous": false
+      }
+    },
+    {
+      "reviewId": "AbFvOq000154",
+      "starRating": "ONE",
+      "createTime": "2025-12-09T06:00:00.000Z",
+      "updateTime": "2025-12-09T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Irene",
+        "isAnonymous": false
+      },
+      "comment": "Fui atendido ontem e a variedade de opções é ótima e os preços são justos. Nota máxima. (#154)"
+    },
+    {
+      "reviewId": "AbFvOq000160",
+      "starRating": "TWO",
+      "createTime": "2025-12-16T18:00:00.000Z",
+      "updateTime": "2025-12-16T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Fábio",
+        "isAnonymous": false
+      },
+      "comment": "Fui atendido ontem e a espera passou de quarenta minutos sem nenhum aviso. Nota máxima. (#160)"
+    },
+    {
+      "reviewId": "AbFvOq000166",
+      "starRating": "FIVE",
+      "createTime": "2025-12-24T06:00:00.000Z",
+      "updateTime": "2025-12-27T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Fábio",
+        "isAnonymous": false
+      },
+      "comment": "Passei na unidade do centro e a limpeza do ambiente estava impecável. Vale a visita. (#166)"
+    },
+    {
+      "reviewId": "AbFvOq000172",
+      "starRating": "ONE",
+      "createTime": "2025-12-31T18:00:00.000Z",
+      "updateTime": "2025-12-31T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Gabi",
+        "isAnonymous": false
+      },
+      "comment": "Meu pedido chegou e a limpeza do ambiente estava impecável. Espero que melhorem. (#172)"
+    },
+    {
+      "reviewId": "AbFvOq000178",
+      "starRating": "TWO",
+      "createTime": "2026-01-08T06:00:00.000Z",
+      "updateTime": "2026-01-08T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Fábio",
+        "isAnonymous": false
+      },
+      "comment": "Levei minha família e o estacionamento é pequeno e difícil de manobrar. Não volto mais. (#178)"
+    },
+    {
+      "reviewId": "AbFvOq000184",
+      "starRating": "TWO",
+      "createTime": "2026-01-15T18:00:00.000Z",
+      "updateTime": "2026-01-15T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Irene",
+        "isAnonymous": false
+      },
+      "comment": "Resolvi voltar depois de meses e o aplicativo é simples e funciona bem. Nota máxima. (#184)"
+    },
+    {
+      "reviewId": "AbFvOq000190",
+      "starRating": "THREE",
+      "createTime": "2026-01-23T06:00:00.000Z",
+      "updateTime": "2026-01-23T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      }
+    },
+    {
+      "reviewId": "AbFvOq000196",
+      "starRating": "ONE",
+      "createTime": "2026-01-30T18:00:00.000Z",
+      "updateTime": "2026-01-30T18:00:00.000Z",
+      "reviewer": {
+        "isAnonymous": true
+      },
+      "comment": "Estive na loja no sábado e adorei a novidade do cardápio, volto com certeza. Vale a visita. (#196)"
+    }
+  ],
+  "accounts/1000000001/locations/2000000003": [
+    {
+      "reviewId": "AbFvOq000005",
+      "starRating": "FOUR",
+      "createTime": "2025-06-06T00:00:00.000Z",
+      "updateTime": "2025-06-06T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Irene",
+        "isAnonymous": false
+      },
+      "comment": "Fiz a reserva por telefone e a loja estava desorganizada e não achei o que procurava. Fiquei decepcionado. (#5)"
+    },
+    {
+      "reviewId": "AbFvOq000011",
+      "starRating": "THREE",
+      "createTime": "2025-06-13T12:00:00.000Z",
+      "updateTime": "2025-06-13T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Elisa",
+        "isAnonymous": false
+      },
+      "comment": "Liguei para a central e a embalagem veio amassada, mas o produto estava intacto. Já indiquei para amigos. (#11)"
+    },
+    {
+      "reviewId": "AbFvOq000017",
+      "starRating": "ONE",
+      "createTime": "2025-06-21T00:00:00.000Z",
+      "updateTime": "2025-06-21T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Irene",
+        "isAnonymous": false
+      },
+      "comment": "Fiz a reserva por telefone e demoraram para responder minha mensagem no chat. Não volto mais. (#17)"
+    },
+    {
+      "reviewId": "AbFvOq000023",
+      "starRating": "FIVE",
+      "createTime": "2025-06-28T12:00:00.000Z",
+      "updateTime": "2025-07-01T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Elisa",
+        "isAnonymous": false
+      },
+      "comment": "Liguei para a central e ninguém soube explicar a política de devolução. Podem melhorar nisso. (#23)"
+    },
+    {
+      "reviewId": "AbFvOq000029",
+      "starRating": "TWO",
+      "createTime": "2025-07-06T00:00:00.000Z",
+      "updateTime": "2025-07-06T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      }
+    },
+    {
+      "reviewId": "AbFvOq000035",
+      "starRating": "THREE",
+      "createTime": "2025-07-13T12:00:00.000Z",
+      "updateTime": "2025-07-13T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      },
+      "comment": "Passei na unidade do centro e a espera passou de quarenta minutos sem nenhum aviso. Vale a visita. (#35)"
+    },
+    {
+      "reviewId": "AbFvOq000041",
+      "starRating": "FIVE",
+      "createTime": "2025-07-21T00:00:00.000Z",
+      "updateTime": "2025-07-21T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Bruno",
+        "isAnonymous": false
+      },
+      "comment": "Estive na loja no sábado e a variedade de opções é ótima e os preços são justos. Nota máxima. (#41)"
+    },
+    {
+      "reviewId": "AbFvOq000047",
+      "starRating": "TWO",
+      "createTime": "2025-07-28T12:00:00.000Z",
+      "updateTime": "2025-07-28T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Elisa",
+        "isAnonymous": false
+      },
+      "comment": "Fui atendido ontem e cobraram um valor diferente do anunciado. Recomendo. (#47) Fui atendido ontem e cobraram um valor diferente do anunciado. Recomendo. (#47) Fui atendido ontem e cobraram um valor diferente do anunciado. Recomendo. (#47) Fui atendido ontem e cobraram um valor diferente do anunciado. Recomendo. (#47) Fui atendido ontem e cobraram um valor diferente do anunciado. Recomendo. (#47) Fui atendido ontem e cobraram um valor diferente do anunciado. Recomendo. (#47) Fui atendido ontem e cobraram um valor diferente do anunciado. Recomendo. (#47) Fui atendido ontem e cobraram um valor diferente do anunciado. Recomendo. (#47) Fui atendido ontem e cobraram um valor diferente do anunciado. Recomendo. (#47) Fui atendido ontem e cobraram um valor diferente do anunciado. Recomendo. (#47) Fui atendido ontem e cobraram um valor diferente do anunciado. Recomendo. (#47) Fui atendido ontem e cobraram um valor diferente do anunciado. Recomendo. (#47)"
+    },
+    {
+      "reviewId": "AbFvOq000053",
+      "starRating": "FIVE",
+      "createTime": "2025-08-05T00:00:00.000Z",
+      "updateTime": "2025-08-05T00:00:00.000Z",
+      "reviewer": {
+        "isAnonymous": true
+      },
+      "comment": "Precisei de ajuda com a troca e cobraram um valor diferente do anunciado. Fiquei decepcionado. (#53)"
+    },
+    {
+      "reviewId": "AbFvOq000059",
+      "starRating": "FOUR",
+      "createTime": "2025-08-12T12:00:00.000Z",
+      "updateTime": "2025-08-12T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Heitor",
+        "isAnonymous": false
+      },
+      "comment": "Comprei pelo aplicativo e o sistema estava fora do ar e não puderam finalizar a compra. Fiquei decepcionado. (#59)"
+    },
+    {
+      "reviewId": "AbFvOq000065",
+      "starRating": "ONE",
+      "createTime": "2025-08-20T00:00:00.000Z",
+      "updateTime": "2025-08-20T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      },
+      "comment": "Estive na loja no sábado e o entregador chegou no horário e foi educado. Recomendo. (#65)"
+    },
+    {
+      "reviewId": "AbFvOq000071",
+      "starRating": "TWO",
+      "createTime": "2025-08-27T12:00:00.000Z",
+      "updateTime": "2025-08-27T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Ana",
+        "isAnonymous": false
+      }
+    },
+    {
+      "reviewId": "AbFvOq000077",
+      "starRating": "THREE",
+      "createTime": "2025-09-04T00:00:00.000Z",
+      "updateTime": "2025-09-04T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Bruno",
+        "isAnonymous": false
+      },
+      "comment": "Liguei para a central e o estacionamento é pequeno e difícil de manobrar. Nota máxima. (#77)"
+    },
+    {
+      "reviewId": "AbFvOq000083",
+      "starRating": "TWO",
+      "createTime": "2025-09-11T12:00:00.000Z",
+      "updateTime": "2025-09-11T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Carla",
+        "isAnonymous": false
+      },
+      "comment": "Fui atendido ontem e o estacionamento é pequeno e difícil de manobrar. Fiquei decepcionado. (#83)"
+    },
+    {
+      "reviewId": "AbFvOq000089",
+      "starRating": "TWO",
+      "createTime": "2025-09-19T00:00:00.000Z",
+      "updateTime": "2025-09-22T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Heitor",
+        "isAnonymous": false
+      },
+      "comment": "Comprei pelo aplicativo e a comida chegou fria e faltou um item. Podem melhorar nisso. (#89)"
+    },
+    {
+      "reviewId": "AbFvOq000095",
+      "starRating": "FOUR",
+      "createTime": "2025-09-26T12:00:00.000Z",
+      "updateTime": "2025-09-26T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Bruno",
+        "isAnonymous": false
+      },
+      "comment": "Fiz a reserva por telefone e a entrega atrasou três dias e ninguém avisou. Fiquei decepcionado. (#95)"
+    },
+    {
+      "reviewId": "AbFvOq000101",
+      "starRating": "TWO",
+      "createTime": "2025-10-04T00:00:00.000Z",
+      "updateTime": "2025-10-04T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Irene",
+        "isAnonymous": false
+      },
+      "comment": "Levei minha família e o sistema estava fora do ar e não puderam finalizar a compra. Recomendo. (#101)"
+    },
+    {
+      "reviewId": "AbFvOq000107",
+      "starRating": "TWO",
+      "createTime": "2025-10-11T12:00:00.000Z",
+      "updateTime": "2025-10-11T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      },
+      "comment": "Resolvi voltar depois de meses e o site travou na hora de pagar e perdi a promoção. Já indiquei para amigos. (#107)"
+    },
+    {
+      "reviewId": "AbFvOq000113",
+      "starRating": "FOUR",
+      "createTime": "2025-10-19T00:00:00.000Z",
+      "updateTime": "2025-10-19T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Carla",
+        "isAnonymous": false
+      }
+    },
+    {
+      "reviewId": "AbFvOq000119",
+      "starRating": "TWO",
+      "createTime": "2025-10-26T12:00:00.000Z",
+      "updateTime": "2025-10-26T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Carla",
+        "isAnonymous": false
+      },
+      "comment": "Meu pedido chegou e o site travou na hora de pagar e perdi a promoção. Vale a visita. (#119)"
+    },
+    {
+      "reviewId": "AbFvOq000125",
+      "starRating": "FIVE",
+      "createTime": "2025-11-03T00:00:00.000Z",
+      "updateTime": "2025-11-03T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Irene",
+        "isAnonymous": false
+      },
+      "comment": "Estive na loja no sábado e o ambiente estava barulhento e desconfortável. Nota máxima. (#125)"
+    },
+    {
+      "reviewId": "AbFvOq000131",
+      "starRating": "TWO",
+      "createTime": "2025-11-10T12:00:00.000Z",
+      "updateTime": "2025-11-10T12:00:00.000Z",
+      "reviewer": {
+        "isAnonymous": true
+      },
+      "comment": "Liguei para a central e o sistema estava fora do ar e não puderam finalizar a compra. Já indiquei para amigos. (#131)"
+    },
+    {
+      "reviewId": "AbFvOq000137",
+      "starRating": "FOUR",
+      "createTime": "2025-11-18T00:00:00.000Z",
+      "updateTime": "2025-11-18T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Elisa",
+        "isAnonymous": false
+      },
+      "comment": "Precisei de ajuda com a troca e o preço está acima do que vi em outros lugares. Não volto mais. (#137)"
+    },
+    {
+      "reviewId": "AbFvOq000143",
+      "starRating": "ONE",
+      "createTime": "2025-11-25T12:00:00.000Z",
+      "updateTime": "2025-11-25T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Ana",
+        "isAnonymous": false
+      },
+      "comment": "Levei minha família e o atendimento foi excelente, equipe muito atenciosa. Espero que melhorem. (#143)"
+    },
+    {
+      "reviewId": "AbFvOq000149",
+      "starRating": "FOUR",
+      "createTime": "2025-12-03T00:00:00.000Z",
+      "updateTime": "2025-12-03T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Carla",
+        "isAnonymous": false
+      },
+      "comment": "Meu pedido chegou e cobraram um valor diferente do anunciado. Vale a visita. (#149)"
+    },
+    {
+      "reviewId": "AbFvOq000155",
+      "starRating": "THREE",
+      "createTime": "2025-12-10T12:00:00.000Z",
+      "updateTime": "2025-12-13T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Carla",
+        "isAnonymous": false
+      }
+    },
+    {
+      "reviewId": "AbFvOq000161",
+      "starRating": "THREE",
+      "createTime": "2025-12-18T00:00:00.000Z",
+      "updateTime": "2025-12-18T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Heitor",
+        "isAnonymous": false
+      },
+      "comment": "Fiz a reserva por telefone e o entregador chegou no horário e foi educado. Vale a visita. (#161)"
+    },
+    {
+      "reviewId": "AbFvOq000167",
+      "starRating": "FOUR",
+      "createTime": "2025-12-25T12:00:00.000Z",
+      "updateTime": "2025-12-25T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Heitor",
+        "isAnonymous": false
+      },
+      "comment": "Levei minha família e demoraram para responder minha mensagem no chat. Fiquei decepcionado. (#167)"
+    },
+    {
+      "reviewId": "AbFvOq000173",
+      "starRating": "TWO",
+      "createTime": "2026-01-02T00:00:00.000Z",
+      "updateTime": "2026-01-02T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Heitor",
+        "isAnonymous": false
+      },
+      "comment": "Passei na unidade do centro e o site travou na hora de pagar e perdi a promoção. Podem melhorar nisso. (#173)"
+    },
+    {
+      "reviewId": "AbFvOq000179",
+      "starRating": "ONE",
+      "createTime": "2026-01-09T12:00:00.000Z",
+      "updateTime": "2026-01-09T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Bruno",
+        "isAnonymous": false
+      },
+      "comment": "Resolvi voltar depois de meses e o preço está acima do que vi em outros lugares. Não volto mais. (#179)"
+    },
+    {
+      "reviewId": "AbFvOq000185",
+      "starRating": "TWO",
+      "createTime": "2026-01-17T00:00:00.000Z",
+      "updateTime": "2026-01-17T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Gabi",
+        "isAnonymous": false
+      },
+      "comment": "Comprei pelo aplicativo e o produto veio com defeito e ninguém quis trocar. Não volto mais. (#185) Comprei pelo aplicativo e o produto veio com defeito e ninguém quis trocar. Não volto mais. (#185) Comprei pelo aplicativo e o produto veio com defeito e ninguém quis trocar. Não volto mais. (#185) Comprei pelo aplicativo e o produto veio com defeito e ninguém quis trocar. Não volto mais. (#185) Comprei pelo aplicativo e o produto veio com defeito e ninguém quis trocar. Não volto mais. (#185) Comprei pelo aplicativo e o produto veio com defeito e ninguém quis trocar. Não volto mais. (#185) Comprei pelo aplicativo e o produto veio com defeito e ninguém quis trocar. Não volto mais. (#185) Comprei pelo aplicativo e o produto veio com defeito e ninguém quis trocar. Não volto mais. (#185) Comprei pelo aplicativo e o produto veio com defeito e ninguém quis trocar. Não volto mais. (#185) Comprei pelo aplicativo e o produto veio com defeito e ninguém quis trocar. Não volto mais. (#185) Comprei pelo aplicativo e o produto veio com defeito e ninguém quis trocar. Não volto mais. (#185) Comprei pelo aplicativo e o produto veio com defeito e ninguém quis trocar. Não volto mais. (#185)"
+    },
+    {
+      "reviewId": "AbFvOq000191",
+      "starRating": "TWO",
+      "createTime": "2026-01-24T12:00:00.000Z",
+      "updateTime": "2026-01-24T12:00:00.000Z",
+      "reviewer": {
+        "displayName": "Ana",
+        "isAnonymous": false
+      },
+      "comment": "Passei na unidade do centro e o gerente me recebeu bem e ouviu minha reclamação. Nota máxima. (#191)"
+    },
+    {
+      "reviewId": "AbFvOq000197",
+      "starRating": "FOUR",
+      "createTime": "2026-02-01T00:00:00.000Z",
+      "updateTime": "2026-02-01T00:00:00.000Z",
+      "reviewer": {
+        "displayName": "Fábio",
+        "isAnonymous": false
+      }
+    }
+  ],
+  "accounts/1000000002/locations/2000000004": [
+    {
+      "reviewId": "AbFvOq000006",
+      "starRating": "TWO",
+      "createTime": "2025-06-07T06:00:00.000Z",
+      "updateTime": "2025-06-07T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Fábio",
+        "isAnonymous": false
+      },
+      "comment": "Passei na unidade do centro e a atendente foi grosseira quando pedi uma segunda via. Vale a visita. (#6)"
+    },
+    {
+      "reviewId": "AbFvOq000012",
+      "starRating": "ONE",
+      "createTime": "2025-06-14T18:00:00.000Z",
+      "updateTime": "2025-06-17T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Fábio",
+        "isAnonymous": false
+      },
+      "comment": "Resolvi voltar depois de meses e a espera passou de quarenta minutos sem nenhum aviso. Vale a visita. (#12)"
+    },
+    {
+      "reviewId": "AbFvOq000018",
+      "starRating": "TWO",
+      "createTime": "2025-06-22T06:00:00.000Z",
+      "updateTime": "2025-06-22T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      },
+      "comment": "Fui atendido ontem e o ambiente estava barulhento e desconfortável. Vale a visita. (#18)"
+    },
+    {
+      "reviewId": "AbFvOq000024",
+      "starRating": "THREE",
+      "createTime": "2025-06-29T18:00:00.000Z",
+      "updateTime": "2025-06-29T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      },
+      "comment": "Resolvi voltar depois de meses e o atendimento foi excelente, equipe muito atenciosa. Podem melhorar nisso. (#24) Resolvi voltar depois de meses e o atendimento foi excelente, equipe muito atenciosa. Podem melhorar nisso. (#24) Resolvi voltar depois de meses e o atendimento foi excelente, equipe muito atenciosa. Podem melhorar nisso. (#24) Resolvi voltar depois de meses e o atendimento foi excelente, equipe muito atenciosa. Podem melhorar nisso. (#24) Resolvi voltar depois de meses e o atendimento foi excelente, equipe muito atenciosa. Podem melhorar nisso. (#24) Resolvi voltar depois de meses e o atendimento foi excelente, equipe muito atenciosa. Podem melhorar nisso. (#24) Resolvi voltar depois de meses e o atendimento foi excelente, equipe muito atenciosa. Podem melhorar nisso. (#24) Resolvi voltar depois de meses e o atendimento foi excelente, equipe muito atenciosa. Podem melhorar nisso. (#24) Resolvi voltar depois de meses e o atendimento foi excelente, equipe muito atenciosa. Podem melhorar nisso. (#24) Resolvi voltar depois de meses e o atendimento foi excelente, equipe muito atenciosa. Podem melhorar nisso. (#24) Resolvi voltar depois de meses e o atendimento foi excelente, equipe muito atenciosa. Podem melhorar nisso. (#24) Resolvi voltar depois de meses e o atendimento foi excelente, equipe muito atenciosa. Podem melhorar nisso. (#24)"
+    },
+    {
+      "reviewId": "AbFvOq000030",
+      "starRating": "THREE",
+      "createTime": "2025-07-07T06:00:00.000Z",
+      "updateTime": "2025-07-07T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Carla",
+        "isAnonymous": false
+      },
+      "comment": "Resolvi voltar depois de meses e a comida chegou fria e faltou um item. Fiquei decepcionado. (#30)"
+    },
+    {
+      "reviewId": "AbFvOq000036",
+      "starRating": "ONE",
+      "createTime": "2025-07-14T18:00:00.000Z",
+      "updateTime": "2025-07-14T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Carla",
+        "isAnonymous": false
+      }
+    },
+    {
+      "reviewId": "AbFvOq000042",
+      "starRating": "FOUR",
+      "createTime": "2025-07-22T06:00:00.000Z",
+      "updateTime": "2025-07-22T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Elisa",
+        "isAnonymous": false
+      },
+      "comment": "Fui atendido ontem e o sistema estava fora do ar e não puderam finalizar a compra. Fiquei decepcionado. (#42)"
+    },
+    {
+      "reviewId": "AbFvOq000048",
+      "starRating": "FOUR",
+      "createTime": "2025-07-29T18:00:00.000Z",
+      "updateTime": "2025-07-29T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Irene",
+        "isAnonymous": false
+      },
+      "comment": "Fui atendido ontem e a limpeza do ambiente estava impecável. Espero que melhorem. (#48)"
+    },
+    {
+      "reviewId": "AbFvOq000054",
+      "starRating": "FIVE",
+      "createTime": "2025-08-06T06:00:00.000Z",
+      "updateTime": "2025-08-06T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Gabi",
+        "isAnonymous": false
+      },
+      "comment": "Levei minha família e a fila no caixa estava enorme e só havia um atendente. Não volto mais. (#54)"
+    },
+    {
+      "reviewId": "AbFvOq000060",
+      "starRating": "ONE",
+      "createTime": "2025-08-13T18:00:00.000Z",
+      "updateTime": "2025-08-13T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      },
+      "comment": "Meu pedido chegou e adorei a novidade do cardápio, volto com certeza. Podem melhorar nisso. (#60)"
+    },
+    {
+      "reviewId": "AbFvOq000066",
+      "starRating": "THREE",
+      "createTime": "2025-08-21T06:00:00.000Z",
+      "updateTime": "2025-08-21T06:00:00.000Z",
+      "reviewer": {
+        "isAnonymous": true
+      },
+      "comment": "Comprei pelo aplicativo e o site travou na hora de pagar e perdi a promoção. Fiquei decepcionado. (#66)"
+    },
+    {
+      "reviewId": "AbFvOq000072",
+      "starRating": "ONE",
+      "createTime": "2025-08-28T18:00:00.000Z",
+      "updateTime": "2025-08-28T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Fábio",
+        "isAnonymous": false
+      },
+      "comment": "Passei na unidade do centro e a variedade de opções é ótima e os preços são justos. Recomendo. (#72)"
+    },
+    {
+      "reviewId": "AbFvOq000078",
+      "starRating": "THREE",
+      "createTime": "2025-09-05T06:00:00.000Z",
+      "updateTime": "2025-09-08T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Carla",
+        "isAnonymous": false
+      }
+    },
+    {
+      "reviewId": "AbFvOq000084",
+      "starRating": "TWO",
+      "createTime": "2025-09-12T18:00:00.000Z",
+      "updateTime": "2025-09-12T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Bruno",
+        "isAnonymous": false
+      },
+      "comment": "Fui atendido ontem e resolveram meu problema rápido, sem burocracia. Fiquei decepcionado. (#84)"
+    },
+    {
+      "reviewId": "AbFvOq000090",
+      "starRating": "TWO",
+      "createTime": "2025-09-20T06:00:00.000Z",
+      "updateTime": "2025-09-20T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Ana",
+        "isAnonymous": false
+      },
+      "comment": "Levei minha família e o aplicativo é simples e funciona bem. Nota máxima. (#90)"
+    },
+    {
+      "reviewId": "AbFvOq000096",
+      "starRating": "THREE",
+      "createTime": "2025-09-27T18:00:00.000Z",
+      "updateTime": "2025-09-27T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Carla",
+        "isAnonymous": false
+      },
+      "comment": "Fui atendido ontem e demoraram para responder minha mensagem no chat. Recomendo. (#96)"
+    },
+    {
+      "reviewId": "AbFvOq000102",
+      "starRating": "FIVE",
+      "createTime": "2025-10-05T06:00:00.000Z",
+      "updateTime": "2025-10-05T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Fábio",
+        "isAnonymous": false
+      },
+      "comment": "Comprei pelo aplicativo e adorei a novidade do cardápio, volto com certeza. Não volto mais. (#102)"
+    },
+    {
+      "reviewId": "AbFvOq000108",
+      "starRating": "FIVE",
+      "createTime": "2025-10-12T18:00:00.000Z",
+      "updateTime": "2025-10-12T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Gabi",
+        "isAnonymous": false
+      },
+      "comment": "Comprei pelo aplicativo e a troca foi feita na hora, sem perguntas. Nota máxima. (#108)"
+    },
+    {
+      "reviewId": "AbFvOq000114",
+      "starRating": "FOUR",
+      "createTime": "2025-10-20T06:00:00.000Z",
+      "updateTime": "2025-10-20T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Gabi",
+        "isAnonymous": false
+      },
+      "comment": "Liguei para a central e a atendente foi grosseira quando pedi uma segunda via. Já indiquei para amigos. (#114)"
+    },
+    {
+      "reviewId": "AbFvOq000120",
+      "starRating": "ONE",
+      "createTime": "2025-10-27T18:00:00.000Z",
+      "updateTime": "2025-10-27T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Ana",
+        "isAnonymous": false
+      }
+    },
+    {
+      "reviewId": "AbFvOq000126",
+      "starRating": "FIVE",
+      "createTime": "2025-11-04T06:00:00.000Z",
+      "updateTime": "2025-11-04T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Elisa",
+        "isAnonymous": false
+      },
+      "comment": "Fui atendido ontem e o atendimento foi excelente, equipe muito atenciosa. Não volto mais. (#126)"
+    },
+    {
+      "reviewId": "AbFvOq000132",
+      "starRating": "TWO",
+      "createTime": "2025-11-11T18:00:00.000Z",
+      "updateTime": "2025-11-11T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Carla",
+        "isAnonymous": false
+      },
+      "comment": "Estive na loja no sábado e o sistema estava fora do ar e não puderam finalizar a compra. Já indiquei para amigos. (#132)"
+    },
+    {
+      "reviewId": "AbFvOq000138",
+      "starRating": "FIVE",
+      "createTime": "2025-11-19T06:00:00.000Z",
+      "updateTime": "2025-11-19T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      },
+      "comment": "Liguei para a central e a troca foi feita na hora, sem perguntas. Já indiquei para amigos. (#138)"
+    },
+    {
+      "reviewId": "AbFvOq000144",
+      "starRating": "FIVE",
+      "createTime": "2025-11-26T18:00:00.000Z",
+      "updateTime": "2025-11-29T18:00:00.000Z",
+      "reviewer": {
+        "isAnonymous": true
+      },
+      "comment": "Levei minha família e o ambiente estava barulhento e desconfortável. Podem melhorar nisso. (#144)"
+    },
+    {
+      "reviewId": "AbFvOq000150",
+      "starRating": "THREE",
+      "createTime": "2025-12-04T06:00:00.000Z",
+      "updateTime": "2025-12-04T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      },
+      "comment": "Levei minha família e o ambiente estava barulhento e desconfortável. Podem melhorar nisso. (#150)"
+    },
+    {
+      "reviewId": "AbFvOq000156",
+      "starRating": "ONE",
+      "createTime": "2025-12-11T18:00:00.000Z",
+      "updateTime": "2025-12-11T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Gabi",
+        "isAnonymous": false
+      },
+      "comment": "Estive na loja no sábado e adorei a novidade do cardápio, volto com certeza. Vale a visita. (#156)"
+    },
+    {
+      "reviewId": "AbFvOq000162",
+      "starRating": "ONE",
+      "createTime": "2025-12-19T06:00:00.000Z",
+      "updateTime": "2025-12-19T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Irene",
+        "isAnonymous": false
+      }
+    },
+    {
+      "reviewId": "AbFvOq000168",
+      "starRating": "ONE",
+      "createTime": "2025-12-26T18:00:00.000Z",
+      "updateTime": "2025-12-26T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      },
+      "comment": "Resolvi voltar depois de meses e demoraram para responder minha mensagem no chat. Já indiquei para amigos. (#168)"
+    },
+    {
+      "reviewId": "AbFvOq000174",
+      "starRating": "THREE",
+      "createTime": "2026-01-03T06:00:00.000Z",
+      "updateTime": "2026-01-03T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Heitor",
+        "isAnonymous": false
+      },
+      "comment": "Fiz a reserva por telefone e adorei a novidade do cardápio, volto com certeza. Espero que melhorem. (#174)"
+    },
+    {
+      "reviewId": "AbFvOq000180",
+      "starRating": "FIVE",
+      "createTime": "2026-01-10T18:00:00.000Z",
+      "updateTime": "2026-01-10T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Heitor",
+        "isAnonymous": false
+      },
+      "comment": "Fui atendido ontem e o preço está acima do que vi em outros lugares. Recomendo. (#180)"
+    },
+    {
+      "reviewId": "AbFvOq000186",
+      "starRating": "ONE",
+      "createTime": "2026-01-18T06:00:00.000Z",
+      "updateTime": "2026-01-18T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Diego",
+        "isAnonymous": false
+      },
+      "comment": "Fui atendido ontem e o atendimento foi excelente, equipe muito atenciosa. Vale a visita. (#186)"
+    },
+    {
+      "reviewId": "AbFvOq000192",
+      "starRating": "THREE",
+      "createTime": "2026-01-25T18:00:00.000Z",
+      "updateTime": "2026-01-25T18:00:00.000Z",
+      "reviewer": {
+        "displayName": "Elisa",
+        "isAnonymous": false
+      },
+      "comment": "Comprei pelo aplicativo e o aplicativo é simples e funciona bem. Vale a visita. (#192)"
+    },
+    {
+      "reviewId": "AbFvOq000198",
+      "starRating": "THREE",
+      "createTime": "2026-02-02T06:00:00.000Z",
+      "updateTime": "2026-02-02T06:00:00.000Z",
+      "reviewer": {
+        "displayName": "Heitor",
+        "isAnonymous": false
+      },
+      "comment": "Meu pedido chegou e resolveram meu problema rápido, sem burocracia. Vale a visita. (#198)"
+    }
+  ]
+}

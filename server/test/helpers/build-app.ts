@@ -11,6 +11,7 @@ import { aplicarMigracoes } from '../../src/db/migrar.js';
 import type { ClassificadorDeComentarios } from '../../src/integrations/jev/classificador-comentarios.js';
 import type { OpcoesDoExecutor } from '../../src/jobs/executor-trabalhos.js';
 import type { GanchoDeRecuperacao, MapaDeManipuladores } from '../../src/jobs/trabalhos.tipos.js';
+import type { FonteDeAvaliacoes } from '../../src/integrations/google/fonte-avaliacoes.js';
 import type { EnviadorDeEmail } from '../../src/integrations/mail/enviador-email.js';
 import type { PassoAntesDeEncerrarConta } from '../../src/modules/data-deletion/exclusao-dados.servico.js';
 import { criarRegistrador, type Registrador } from '../../src/shared/logger.js';
@@ -26,6 +27,7 @@ export interface OpcoesAppDeTeste {
   ganchosDeRecuperacao?: GanchoDeRecuperacao[];
   diretorioDeEnvios?: string;
   classificadorDeComentarios?: ClassificadorDeComentarios;
+  fonteDeAvaliacoes?: FonteDeAvaliacoes;
   ajustesDoExecutor?: Partial<OpcoesDoExecutor>;
   /** Padrão true; false testa o app sem banco. */
   prepararBanco?: boolean;
