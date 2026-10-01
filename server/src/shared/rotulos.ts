@@ -1,4 +1,4 @@
-// Rótulos em português só para o CSV; a interface usa os do i18n do web, indexados pelos mesmos ids.
+// Rótulos em português para o CSV e para o resumo executivo; a interface usa os do i18n do web, indexados pelos mesmos ids.
 export const ROTULOS_DE_TEMA: Record<string, string> = {
   service: 'Atendimento',
   wait_time: 'Tempo de espera',

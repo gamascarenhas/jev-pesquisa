@@ -25,6 +25,7 @@ const MIGRATIONS_ATUAIS = [
   '0011_alertas_consumo.sql',
   '0012_execucoes_agendadas.sql',
   '0013_conexoes_google.sql',
+  '0014_resumos_tema.sql',
 ];
 const bancos: Banco[] = [];
 const diretorios: string[] = [];

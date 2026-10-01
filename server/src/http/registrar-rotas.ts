@@ -23,6 +23,8 @@ import { registrarRotasDeClassificacao } from '../modules/classification/classif
 import type { ClassificacaoServico } from '../modules/classification/classificacao.servico.js';
 import { registrarRotasDeComentarios } from '../modules/comments/comentarios.rotas.js';
 import type { ComentariosServico } from '../modules/comments/comentarios.servico.js';
+import { registrarRotasDeResumos } from '../modules/summaries/resumos.rotas.js';
+import type { ResumosServico } from '../modules/summaries/resumos.servico.js';
 import { registrarRotasDoGoogle } from '../modules/google-business/google.rotas.js';
 import type { GoogleOauthServico } from '../modules/google-business/google-oauth.servico.js';
 import type { GoogleUnidadesServico } from '../modules/google-business/google-unidades.servico.js';
@@ -57,6 +59,7 @@ export interface ServicosDaAplicacao {
   exclusao: ExclusaoDadosServico;
   googleOauth: GoogleOauthServico;
   googleUnidades: GoogleUnidadesServico;
+  resumos: ResumosServico;
 }
 
 export interface DependenciasRotas extends DependenciasSaude {
@@ -97,6 +100,11 @@ function registrarRotasDeNegocio(api: FastifyInstance, dependencias: Dependencia
     painel: servicos.painel,
     exportacao: servicos.exportacao,
     exigirAutenticacao,
+  });
+  registrarRotasDeResumos(api, {
+    servico: servicos.resumos,
+    exigirAutenticacao,
+    exigirEmailConfirmado,
   });
   registrarRotasDoGoogle(api, {
     oauth: servicos.googleOauth,

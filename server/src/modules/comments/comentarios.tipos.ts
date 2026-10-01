@@ -71,3 +71,35 @@ export interface ResultadoDaSincronizacao {
   atualizados: number;
   semTexto: number;
 }
+
+export interface FiltroDoResumo {
+  tema: string;
+  unidade?: string | undefined;
+  de?: Date | undefined;
+  ateExclusivo?: Date | undefined;
+}
+
+export interface AgregadoDoTema {
+  volume: number;
+  negativos: number;
+  somaDaGravidade: number;
+  precisamDeAcao: number;
+  unidadesPrincipais: { unidade: string; total: number }[];
+}
+
+export interface CandidatoDoResumo {
+  id: string;
+  textoMascarado: string;
+  comentadoEm: Date | null;
+  unidade: string | null;
+  gravidade: number;
+  confiancaDoTema: number;
+}
+
+export interface ComentarioCitado {
+  id: string;
+  texto: string | null;
+  nota: number | null;
+  unidade: string | null;
+  comentadoEm: Date | null;
+}

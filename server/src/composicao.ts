@@ -8,18 +8,14 @@ import type { Banco } from './db/conexoes.js';
 import type { ArmazenamentoDeSessao } from './http/plugins/sessao.plugin.js';
 import type { ServicosDaAplicacao } from './http/registrar-rotas.js';
 import type { EnviadorDeEmail } from './integrations/mail/enviador-email.js';
-import {
-  criarExecutorTrabalhos,
-  type ExecutorTrabalhos,
-  type OpcoesDoExecutor,
-} from './jobs/executor-trabalhos.js';
+import type { ExecutorTrabalhos, OpcoesDoExecutor } from './jobs/executor-trabalhos.js';
 import { criarFilaTrabalhos, type FilaTrabalhos } from './jobs/fila-trabalhos.js';
-import { criarManipuladorClassificar } from './jobs/handlers/classificar.manipulador.js';
-import { criarManipuladorImportarEnvio } from './jobs/handlers/importar-envio.manipulador.js';
-import { criarRecuperacaoTrabalhos } from './jobs/recuperacao-trabalhos.js';
 import { criarTrabalhosRepositorio } from './jobs/trabalhos.repositorio.js';
 import { criarTrabalhosServico } from './jobs/trabalhos.servico.js';
 import type { GanchoDeRecuperacao, MapaDeManipuladores } from './jobs/trabalhos.tipos.js';
+import type { ProvedorLlm } from './integrations/llm/provedor-llm.js';
+import { montarExecutor } from './composicao-executor.js';
+import { montarResumos, type Resumos } from './composicao-resumos.js';
 import type { FonteDeAvaliacoes } from './integrations/google/fonte-avaliacoes.js';
 import { montarGoogle, sincronizarGoogleAgendado, type Google } from './composicao-google.js';
 import type { ClassificadorDeComentarios } from './integrations/jev/classificador-comentarios.js';
@@ -35,6 +31,7 @@ import { criarConvitesServico } from './modules/auth/convites.servico.js';
 import { criarPerfilServico } from './modules/auth/perfil.servico.js';
 import { criarUsuariosServico } from './modules/auth/usuarios.servico.js';
 import { criarComentariosRepositorio } from './modules/comments/comentarios.repositorio.js';
+import { criarConsultasResumoRepositorio } from './modules/comments/consultas-resumo.repositorio.js';
 import { criarConsultasComentariosRepositorio } from './modules/comments/consultas-comentarios.repositorio.js';
 import {
   criarComentariosServico,
@@ -79,6 +76,7 @@ export interface OpcoesDeComposicao {
   diretorioDeEnvios?: string;
   classificadorDeComentarios?: ClassificadorDeComentarios;
   fonteDeAvaliacoes?: FonteDeAvaliacoes;
+  provedorLlm?: ProvedorLlm;
   ajustesDoExecutor?: Partial<OpcoesDoExecutor>;
 }
 
@@ -128,12 +126,13 @@ function montarUploads(
   };
 }
 
-interface Nucleo {
+export interface Nucleo {
   fila: FilaTrabalhos;
   uploads: Uploads;
   custo: ControleDeCusto;
   classificacao: ClassificacaoServico;
   comentarios: ComentariosServico;
+  classificador: ClassificadorDeComentarios;
 }
 
 function montarNucleo(
@@ -154,19 +153,21 @@ function montarNucleo(
     relogio,
     retomarJob: (trabalhoId, agora) => fila.retomarPausado(trabalhoId, agora),
   });
+  const classificador = criarClassificador(entrada);
   const classificacao = criarClassificacaoServico({
     classificacoes: criarClassificacoesRepositorio(banco),
     revisoes: criarRevisoesRepositorio(banco),
     projetos,
     trabalhos,
     controleDeCusto: custo,
-    classificador: criarClassificador(entrada),
+    classificador,
     registrador,
     concorrencia: configuracao.jev.concorrencia,
   });
   const comentarios = criarComentariosServico({
     repositorio: criarComentariosRepositorio(banco),
     consultas: criarConsultasComentariosRepositorio(banco),
+    consultasResumo: criarConsultasResumoRepositorio(banco),
     projetos,
     classificacao,
   });
@@ -176,46 +177,8 @@ function montarNucleo(
     custo,
     classificacao,
     comentarios,
+    classificador,
   };
-}
-
-function montarExecutor(
-  entrada: EntradaDaComposicao,
-  nucleo: Nucleo,
-  google: Google,
-): ExecutorTrabalhos {
-  const { registrador, relogio, opcoes } = entrada;
-  const { fila, uploads, custo, classificacao } = nucleo;
-  const recuperacao = criarRecuperacaoTrabalhos({
-    fila,
-    ganchos: [
-      { nome: 'limpeza-envios', executar: uploads.limpeza },
-      {
-        nome: 'liberar-reservas-antigas',
-        executar: () => custo.liberarReservasAntigas().then(() => undefined),
-      },
-      {
-        nome: 'reavaliar-jobs-pausados',
-        executar: () => custo.reavaliarJobsPausados().then(() => undefined),
-      },
-      ...(opcoes.ganchosDeRecuperacao ?? []),
-    ],
-    relogio,
-    registrador,
-  });
-  return criarExecutorTrabalhos({
-    fila,
-    recuperacao,
-    manipuladores: {
-      import_upload: criarManipuladorImportarEnvio(uploads.importacao),
-      classify: criarManipuladorClassificar(classificacao),
-      google_sync: google.manipulador,
-      ...opcoes.manipuladoresDeTrabalho,
-    },
-    relogio,
-    registrador,
-    ...opcoes.ajustesDoExecutor,
-  });
 }
 
 function montarExclusao(
@@ -243,20 +206,32 @@ function montarExclusao(
   });
 }
 
+function montarIntegracoes(
+  entrada: EntradaDaComposicao,
+  projetos: ServicosDaAplicacao['projetos'],
+  trabalhos: ServicosDaAplicacao['trabalhos'],
+  nucleo: Nucleo,
+): { google: Google; resumos: Resumos } {
+  const { comentarios, custo, classificador } = nucleo;
+  return {
+    google: montarGoogle(entrada, { projetos, trabalhos, comentarios }),
+    resumos: montarResumos(entrada, { projetos, trabalhos, comentarios, custo, classificador }),
+  };
+}
+
 export function compor(base: EntradaBase): Composicao {
   const entrada: EntradaDaComposicao = {
     ...base,
     enviador: base.opcoes.enviadorDeEmail ?? criarEnviador(base.configuracao, base.registrador),
   };
   const { banco, registrador } = entrada;
-  const provedorDeCobranca = escolherProvedorDeCobranca(entrada.configuracao.cobrancaAtivada);
   const dependenciasDeAuth = montarDependenciasDeAuth(entrada);
   const contas = criarContasServico(criarContasRepositorio(banco));
   const usuarios = criarUsuariosServico(dependenciasDeAuth);
   const projetos = criarProjetosServico(criarProjetosRepositorio(banco));
   const trabalhos = criarTrabalhosServico(criarTrabalhosRepositorio(banco));
   const nucleo = montarNucleo(entrada, projetos, trabalhos, usuarios);
-  const google = montarGoogle(entrada, { projetos, trabalhos, comentarios: nucleo.comentarios });
+  const { google, resumos } = montarIntegracoes(entrada, projetos, trabalhos, nucleo);
   const servicos: ServicosDaAplicacao = {
     autenticacao: criarAutenticacaoServico(dependenciasDeAuth),
     convites: criarConvitesServico(dependenciasDeAuth, contas),
@@ -279,6 +254,7 @@ export function compor(base: EntradaBase): Composicao {
     exclusao: montarExclusao(entrada, { contas, usuarios, projetos }, nucleo, google),
     googleOauth: google.oauth,
     googleUnidades: google.unidades,
+    resumos: resumos.servico,
   };
   const agendador = montarAgendadorDoSistema({
     ...entrada,
@@ -288,8 +264,8 @@ export function compor(base: EntradaBase): Composicao {
   });
   return {
     servicos,
-    executorDeTrabalhos: montarExecutor(entrada, nucleo, google),
+    executorDeTrabalhos: montarExecutor(entrada, nucleo, google, resumos),
     agendador,
-    provedorDeCobranca,
+    provedorDeCobranca: escolherProvedorDeCobranca(entrada.configuracao.cobrancaAtivada),
   };
 }

@@ -224,3 +224,40 @@ export interface ContaDoGoogle {
 export interface InicioDaSincronizacao {
   trabalhoId: string;
 }
+
+export type NivelDeAlerta = 'critical' | 'attention' | 'stable';
+export type StatusDoResumo = 'ready' | 'numbers_only' | 'too_few_comments';
+
+export interface ResumoDoTema {
+  id: string;
+  tema: string;
+  periodo: { inicio: string; fim: string };
+  unidade: string | null;
+  status: StatusDoResumo;
+  nivelDeAlerta: NivelDeAlerta;
+  titulo: string | null;
+  achados: { texto: string; evidencias: string[] }[];
+  numeros: {
+    volume: number;
+    percentualNegativo: number;
+    gravidadeMedia: number;
+    percentualPrecisaAcao: number;
+    variacaoDoVolume: number | null;
+    variacaoDoPercentualNegativo: number | null;
+    unidadesPrincipais: { unidade: string; participacao: number }[];
+  };
+  criadoEm: string;
+}
+
+export interface ListaDeResumos {
+  emAndamento: boolean;
+  itens: ResumoDoTema[];
+}
+
+export interface ComentarioCitado {
+  id: string;
+  texto: string | null;
+  nota: number | null;
+  unidade: string | null;
+  comentadoEm: string | null;
+}

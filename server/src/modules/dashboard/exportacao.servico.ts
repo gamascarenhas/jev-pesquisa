@@ -9,7 +9,7 @@ import type {
   FiltrosDeComentarios,
 } from '../comments/comentarios.servico.js';
 import type { ProjetosServico } from '../projects/projetos.servico.js';
-import { ROTULOS_DE_SENTIMENTO, ROTULOS_DE_TEMA } from './rotulos-exportacao.js';
+import { ROTULOS_DE_SENTIMENTO, ROTULOS_DE_TEMA } from '../../shared/rotulos.js';
 
 export const TAMANHO_DO_LOTE_DE_EXPORTACAO = 1_000;
 const CASAS_DECIMAIS = 100;

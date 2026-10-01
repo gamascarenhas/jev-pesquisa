@@ -11,6 +11,7 @@ import { Paginacao } from '@/components/ui/Paginacao';
 import { botaoVariantes } from '@/components/ui/variants';
 import { TabelaDeComentarios } from '@/features/comments/components/TabelaDeComentarios';
 import { useComentarios } from '@/features/comments/hooks/use-comentarios';
+import { SecaoDeResumos } from '@/features/summaries/components/SecaoDeResumos';
 import { textos } from '@/i18n/pt-BR';
 
 import { AcoesDoPainel } from '../components/AcoesDoPainel';
@@ -106,6 +107,10 @@ export function PainelPage() {
         <EstadoSemClassificacao projetoId={projetoId} />
       ) : (
         <>
+          <SecaoDeResumos
+            projetoId={projetoId}
+            podeGerar={(painel.data?.resumo.classificados ?? 0) > 0}
+          />
           <BarraDeFiltros opcoes={opcoes.data} filtros={filtros} aoMudar={setFiltros} />
           {painel.data && <CartoesDeResumo resumo={painel.data.resumo} />}
           {painel.data && <Graficos dados={painel.data} />}

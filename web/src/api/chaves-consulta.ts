@@ -3,6 +3,9 @@ export const chavesConsulta = {
   eu: ['auth', 'eu'] as const,
   conta: ['conta'] as const,
   consumo: ['consumo'] as const,
+  resumos: (projetoId: string) => ['resumos', projetoId] as const,
+  comentariosDoAchado: (resumoId: string, indice: number) =>
+    ['resumos', 'achado', resumoId, indice] as const,
   google: (projetoId: string) => ['google', projetoId] as const,
   unidadesDoGoogle: (projetoId: string) => ['google', projetoId, 'unidades'] as const,
   planos: ['planos'] as const,

@@ -10,6 +10,10 @@ import type { ProjetosServico } from '../projects/projetos.servico.js';
 import { mascararTexto } from './anonimizador.js';
 import type { ComentariosRepositorio } from './comentarios.repositorio.js';
 import type {
+  AgregadoDoTema,
+  CandidatoDoResumo,
+  ComentarioCitado,
+  FiltroDoResumo,
   ComentarioListado,
   ComentarioExterno,
   ComentarioParaImportar,
@@ -20,6 +24,7 @@ import type {
   ResultadoDoLote,
   ResumoDoPainel,
 } from './comentarios.tipos.js';
+import type { ConsultasResumoRepositorio } from './consultas-resumo.repositorio.js';
 import type { ConsultasComentariosRepositorio } from './consultas-comentarios.repositorio.js';
 import type { FiltrosDeComentarios } from './filtros-comentarios.js';
 
@@ -27,6 +32,10 @@ export { converterFiltros, esquemaFiltrosDeComentarios } from './filtros-comenta
 import { calcularHashDeUpload, calcularHashDoGoogle } from './hash-conteudo.js';
 
 export type {
+  AgregadoDoTema,
+  CandidatoDoResumo,
+  ComentarioCitado,
+  FiltroDoResumo,
   ComentarioExterno,
   ResultadoDaSincronizacao,
   ComentarioListado,
@@ -53,6 +62,23 @@ export interface ComentariosServico {
     fonteId: FonteId,
     comentarios: ComentarioExterno[],
   ): Promise<ResultadoDaSincronizacao>;
+  agregarParaResumo(
+    contaId: ContaId,
+    projetoId: ProjetoId,
+    filtro: FiltroDoResumo,
+  ): Promise<AgregadoDoTema>;
+  primeiraDataComentada(contaId: ContaId, projetoId: ProjetoId): Promise<Date | null>;
+  candidatosParaResumo(
+    contaId: ContaId,
+    projetoId: ProjetoId,
+    filtro: FiltroDoResumo,
+  ): Promise<CandidatoDoResumo[]>;
+  impressaoParaResumo(
+    contaId: ContaId,
+    projetoId: ProjetoId,
+    filtro: FiltroDoResumo,
+  ): Promise<string>;
+  citados(contaId: ContaId, projetoId: ProjetoId, ids: string[]): Promise<ComentarioCitado[]>;
   resumo(
     contaId: ContaId,
     projetoId: ProjetoId,
@@ -100,6 +126,7 @@ export interface ComentariosServico {
 export interface DependenciasDeComentarios {
   repositorio: ComentariosRepositorio;
   consultas: ConsultasComentariosRepositorio;
+  consultasResumo: ConsultasResumoRepositorio;
   projetos: ProjetosServico;
   classificacao: Pick<ClassificacaoServico, 'corrigir'>;
 }
@@ -167,6 +194,27 @@ class ComentariosServicoImpl implements ComentariosServico {
       hashConteudo: calcularHashDoGoogle(comentario.idExterno),
     }));
     return this.dep.repositorio.sincronizarExternos(contaId, projetoId, fonteId, linhas);
+  }
+
+  agregarParaResumo(contaId: ContaId, projetoId: ProjetoId, filtro: FiltroDoResumo) {
+    return this.dep.consultasResumo.agregar(contaId, projetoId, filtro);
+  }
+
+  primeiraDataComentada(contaId: ContaId, projetoId: ProjetoId) {
+    return this.dep.consultasResumo.primeiraDataComentada(contaId, projetoId);
+  }
+
+  candidatosParaResumo(contaId: ContaId, projetoId: ProjetoId, filtro: FiltroDoResumo) {
+    return this.dep.consultasResumo.candidatos(contaId, projetoId, filtro);
+  }
+
+  impressaoParaResumo(contaId: ContaId, projetoId: ProjetoId, filtro: FiltroDoResumo) {
+    return this.dep.consultasResumo.impressaoDigital(contaId, projetoId, filtro);
+  }
+
+  async citados(contaId: ContaId, projetoId: ProjetoId, ids: string[]) {
+    await this.dep.projetos.obter(contaId, projetoId);
+    return this.dep.consultasResumo.citados(contaId, projetoId, ids);
   }
 
   async resumo(contaId: ContaId, projetoId: ProjetoId, filtros: FiltrosDeComentarios) {
