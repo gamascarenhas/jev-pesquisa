@@ -15,3 +15,7 @@ Sempre que eu pedir para começar uma nova fase, você está autorizado a, **ant
 - Nunca commitar `.env*` reais, `server/tmp/`, `dist/`, imagens do Mobbin ou qualquer segredo. Confira o que está em stage antes do commit.
 - Push só para a branch atual e sem `--force`. Se o push for recusado, pare e me avise em vez de forçar.
 - Esta permissão cobre só commit e push do trabalho da fase anterior. Outras ações externas continuam exigindo meu pedido.
+
+## Ao terminar cada fase
+
+Antes de entregar o relatório, reinicie o frontend, o backend e o container do banco de dados (`jev-pesquisa-banco`), sem apagar o volume, e confirme que as portas 5432, 3000 e 5173 respondem. Registre o resultado no relatório.

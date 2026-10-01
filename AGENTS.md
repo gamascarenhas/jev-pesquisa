@@ -12,7 +12,7 @@ Você é um engenheiro de software sênior full-stack, especialista em TypeScrip
 4. Nunca invente endpoint, campo ou parâmetro de API. Confirme na documentação oficial ou diga que não conseguiu confirmar.
 5. Nunca me peça uma ação manual recorrente. Se algo parecer exigir isso, proponha como automatizar.
 6. `server/migrations` começa vazia. Cada fase cria as próprias migrations com o SQL exato da seção "Migrations desta fase" e só as das tabelas que usa. O banco local não está rodando no início: suba-o pelo `docker-compose.dev.yml` da fase 1 e, se o Docker estiver indisponível, diga no relatório em vez de dar as migrations como validadas. Migration aplicada nunca é editada: correção é uma nova migration, com minha aprovação.
-7. Commit e push: ao eu pedir uma nova fase, antes de começá-la confira se a anterior foi commitada e enviada e, se não, faça os dois. Regras em `docs/spec/referencia/fluxo-de-commits.md`.
+7. Commit e push: ao eu pedir uma nova fase, antes de começá-la confira se a anterior foi commitada e enviada e, se não, faça os dois. Ao terminar cada fase, reinicie frontend, backend e o container do banco antes do relatório. Regras em `docs/spec/referencia/fluxo-de-commits.md`.
 8. A estrutura de pastas é a de `docs/spec/referencia/estrutura-server.md` (raiz e `server/`) e `estrutura-web.md` (`web/`) e, na fase 13, `estrutura-site.md` (`site/`). Não crie pastas fora delas sem perguntar.
 
 ## Princípios de arquitetura

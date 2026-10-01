@@ -52,6 +52,7 @@ Execute na ordem da tabela. Cada fase é uma sessão própria do agente.
 | 11 | Resumo executivo por tema | `docs/spec/fases/fase-11-resumo-executivo.md` | 3 |
 | 12 | Perguntar ao Jev | `docs/spec/fases/fase-12-perguntar-ao-jev.md` | 3 |
 | 13 | Landing page e blog | `docs/spec/fases/fase-13-landing-e-blog.md` | 4 |
+| 14 | Revisão completa do frontend | `docs/spec/fases/fase-14-revisao-do-frontend.md` | 5 |
 
 O número da fase é a ordem de execução, e o mesmo número aparece nas referências entre arquivos e na ordem das migrations.
 
@@ -62,6 +63,7 @@ As migrations do banco não existem no início: cada fase cria as suas, com o SQ
 - **Entrega 3, diferenciais** (fases 10 a 12): Google, resumo executivo e perguntas livres. O resumo precisa do painel; as perguntas precisam do resumo, porque reutilizam o `ProvedorLlm`.
 
 - **Entrega 4, aquisição** (fase 13): landing page e blog em Markdown, pré-renderizados para SEO, depois de o produto inteiro estar pronto.
+- **Entrega 5, polimento** (fase 14): revisão completa e integrada do frontend, a última fase do projeto, depois de tudo pronto, inclusive o site.
 
 ## Arquivos de referência
 
