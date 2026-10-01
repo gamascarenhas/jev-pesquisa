@@ -3,9 +3,14 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import type { Banco } from '../../src/db/conexoes.js';
 import { montarAppDeTeste, type AppDeTeste } from '../helpers/build-app.js';
 import {
+  criarClassificacaoDeTeste,
+  criarComentarioDeTeste,
   criarContaDeTeste,
+  criarFonteDeTeste,
+  criarLancamentoDeConsumoDeTeste,
   criarProjetoDeTeste,
   criarRegistradorCapturado,
+  criarTrabalhoDeTeste,
   criarUsuarioDeTeste,
   type UsuarioDeTeste,
 } from '../helpers/factories.js';
@@ -83,6 +88,16 @@ describe('isolamento entre contas e exclusão de dados', () => {
       nome: nomeProjeto,
       criadoPor: dono.id,
     });
+    await criarTrabalhoDeTeste(aplicacao.banco, contaId, {
+      projetoId,
+      tipo: 'classify',
+      status: 'paused_limit',
+    });
+    const fonteId = await criarFonteDeTeste(aplicacao.banco, contaId, projetoId);
+    const comentarioId = await criarComentarioDeTeste(aplicacao.banco, contaId, projetoId, fonteId);
+    await criarComentarioDeTeste(aplicacao.banco, contaId, projetoId, fonteId);
+    await criarClassificacaoDeTeste(aplicacao.banco, contaId, comentarioId, dono.id);
+    await criarLancamentoDeConsumoDeTeste(aplicacao.banco, contaId);
     return {
       dono,
       membro,
@@ -283,6 +298,7 @@ describe('isolamento entre contas e exclusão de dados', () => {
         nome: 'Projeto que fica',
       });
 
+      expect(await contarLinhasDoProjeto(aplicacao.banco, conta.projetoId)).toBe(5);
       const nomeErrado = await chamar(aplicacao, {
         metodo: 'DELETE',
         url: `/api/projetos/${conta.projetoId}`,
@@ -303,6 +319,13 @@ describe('isolamento entre contas e exclusão de dados', () => {
       expect(correto.statusCode).toBe(204);
       expect(await contarLinhasDoProjeto(aplicacao.banco, conta.projetoId)).toBe(0);
       expect(await contarLinhasDoProjeto(aplicacao.banco, outro)).toBe(1);
+      for (const tabela of ['classificacoes', 'revisoes_classificacao']) {
+        const restantes = await aplicacao.banco.query(
+          `SELECT 1 FROM ${tabela} WHERE conta_id = $1`,
+          [conta.dono.contaId],
+        );
+        expect(restantes.rowCount).toBe(0);
+      }
       const evento = captura.linhas().find((l) => l.acao === 'projeto_apagado');
       expect(evento).toMatchObject({ categoria: 'auditoria', alvoId: conta.projetoId });
     });
@@ -340,6 +363,7 @@ describe('isolamento entre contas e exclusão de dados', () => {
         corpo: { email: `pendente-${alvo.dono.id}@exemplo.com.br` },
       });
       const antes = await contarLinhasDaConta(aplicacao.banco, alvo.dono.contaId);
+      const trabalhosDoAlvoAntes = antes.trabalhos;
       const vizinhaAntes = await contarLinhasDaConta(aplicacao.banco, vizinha.dono.contaId);
 
       const resposta = await chamar(aplicacao, {
@@ -352,6 +376,12 @@ describe('isolamento entre contas e exclusão de dados', () => {
       expect(antes.usuarios).toBe(2);
       expect(antes.projetos).toBe(1);
       expect(antes.tokens_autenticacao).toBe(1);
+      expect(trabalhosDoAlvoAntes).toBe(1);
+      expect(antes.fontes).toBe(1);
+      expect(antes.comentarios).toBe(2);
+      expect(antes.livro_razao_consumo).toBe(1);
+      expect(antes.classificacoes).toBe(1);
+      expect(antes.revisoes_classificacao).toBe(1);
       expect(resposta.statusCode).toBe(204);
       const depois = await contarLinhasDaConta(aplicacao.banco, alvo.dono.contaId);
       expect(Object.values(depois).every((total) => total === 0)).toBe(true);

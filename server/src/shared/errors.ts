@@ -69,3 +69,17 @@ export function montarCorpoDeErro(
 ): CorpoDeErro {
   return { erro: { codigo, mensagem, idRequisicao } };
 }
+
+export class ErroLimiteDeCustoAtingido extends ErroDeDominio {
+  constructor(
+    mensagem = 'O limite de uso do plano foi atingido.',
+    codigo = 'limite_de_custo_atingido',
+  ) {
+    super(codigo, 402, mensagem);
+  }
+}
+
+// A mensagem de um erro pode carregar dado de comentário; log e `ultimo_erro` levam só o nome.
+export function nomeSeguroDoErro(erro: unknown): string {
+  return erro instanceof Error ? erro.name : 'ErroDesconhecido';
+}

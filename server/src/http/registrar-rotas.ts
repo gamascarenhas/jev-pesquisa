@@ -16,10 +16,24 @@ import type { PlanosServico } from '../modules/plans/planos.servico.js';
 import { registrarRotasDePlanos } from '../modules/plans/planos.rotas.js';
 import { registrarRotasDeProjetos } from '../modules/projects/projetos.rotas.js';
 import type { ProjetosServico } from '../modules/projects/projetos.servico.js';
+import { registrarRotasDeTrabalhos } from '../jobs/trabalhos.rotas.js';
+import type { TrabalhosServico } from '../jobs/trabalhos.servico.js';
+import { registrarRotasDeConsumo } from '../modules/usage/consumo.rotas.js';
+import { registrarRotasDeClassificacao } from '../modules/classification/classificacao.rotas.js';
+import type { ClassificacaoServico } from '../modules/classification/classificacao.servico.js';
+import { registrarRotasDeComentarios } from '../modules/comments/comentarios.rotas.js';
+import type { ComentariosServico } from '../modules/comments/comentarios.servico.js';
+import type { ExportacaoServico } from '../modules/dashboard/exportacao.servico.js';
+import type { PainelServico } from '../modules/dashboard/painel.servico.js';
+import { registrarRotasDoPainel } from '../modules/dashboard/painel.rotas.js';
+import { registrarRotasDeEnvios } from '../modules/uploads/envios.rotas.js';
+import type { EnviosServico } from '../modules/uploads/envios.servico.js';
+import type { ControleDeCusto } from '../modules/usage/controle-custo.servico.js';
 import type { Relogio } from '../shared/clock.js';
 import { registrarRotaConfiguracaoPublica } from './configuracao-publica.rotas.js';
 import { criarExigirAutenticacao } from './guards/exigir-autenticacao.js';
 import { exigirDono } from './guards/exigir-dono.js';
+import { exigirEmailConfirmado } from './guards/exigir-email-confirmado.js';
 import { registrarRotaSaude, type DependenciasSaude } from './saude.rotas.js';
 
 export interface ServicosDaAplicacao {
@@ -30,11 +44,19 @@ export interface ServicosDaAplicacao {
   contas: ContasServico;
   planos: PlanosServico;
   projetos: ProjetosServico;
+  trabalhos: TrabalhosServico;
+  envios: EnviosServico;
+  controleDeCusto: ControleDeCusto;
+  classificacao: ClassificacaoServico;
+  comentarios: ComentariosServico;
+  painel: PainelServico;
+  exportacao: ExportacaoServico;
   exclusao: ExclusaoDadosServico;
 }
 
 export interface DependenciasRotas extends DependenciasSaude {
   nomeNegocio: string;
+  cobrancaAtivada: boolean;
   relogio: Relogio;
   servicos: ServicosDaAplicacao;
 }
@@ -58,6 +80,20 @@ function registrarRotasDeNegocio(api: FastifyInstance, dependencias: Dependencia
   registrarRotasDeContas(api, { servico: servicos.contas, exigirAutenticacao });
   registrarRotasDePlanos(api, { servico: servicos.planos, exigirAutenticacao });
   registrarRotasDeProjetos(api, { servico: servicos.projetos, exigirAutenticacao });
+  registrarRotasDeClassificacao(api, {
+    servico: servicos.classificacao,
+    exigirAutenticacao,
+    exigirEmailConfirmado,
+  });
+  registrarRotasDeConsumo(api, { servico: servicos.controleDeCusto, exigirAutenticacao });
+  registrarRotasDeComentarios(api, { servico: servicos.comentarios, exigirAutenticacao });
+  registrarRotasDoPainel(api, {
+    painel: servicos.painel,
+    exportacao: servicos.exportacao,
+    exigirAutenticacao,
+  });
+  registrarRotasDeEnvios(api, { servico: servicos.envios, exigirAutenticacao });
+  registrarRotasDeTrabalhos(api, { servico: servicos.trabalhos, exigirAutenticacao });
   registrarRotasDeExclusao(api, { servico: servicos.exclusao, exigirAutenticacao, exigirDono });
 }
 
@@ -67,7 +103,10 @@ export async function registrarRotas(
 ): Promise<void> {
   await app.register(
     (api, _opcoes, pronto) => {
-      registrarRotaConfiguracaoPublica(api, { nomeNegocio: dependencias.nomeNegocio });
+      registrarRotaConfiguracaoPublica(api, {
+        nomeNegocio: dependencias.nomeNegocio,
+        cobrancaAtivada: dependencias.cobrancaAtivada,
+      });
       registrarRotaSaude(api, { verificarBanco: dependencias.verificarBanco });
       registrarRotasDeNegocio(api, dependencias);
       pronto();

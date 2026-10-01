@@ -85,3 +85,17 @@
     color: var(--cor-acao-hover);
   }
 }
+
+@layer components {
+  .texto-grafico text {
+    font-family: var(--fonte-corpo);
+    font-size: var(--tamanho-auxiliar);
+    fill: var(--cor-texto-secundario);
+  }
+
+  .texto-grafico .recharts-legend-item-text {
+    color: var(--cor-texto-secundario);
+    font-family: var(--fonte-corpo);
+    font-size: var(--tamanho-auxiliar);
+  }
+}

@@ -46,3 +46,47 @@
     z-index: var(--camada-aviso);
   }
 }
+
+@layer components {
+  .area-envio {
+    border: var(--largura-borda) dashed var(--cor-borda-forte);
+    border-radius: var(--raio-cartao);
+    background-color: var(--cor-superficie-sutil);
+  }
+
+  .area-envio-ativa {
+    border-color: var(--cor-acao);
+    background-color: var(--cor-acao-sutil);
+  }
+
+  .barra-progresso {
+    appearance: none;
+    width: 100%;
+    height: calc(var(--espaco-base) * 2);
+    border: 0;
+    border-radius: var(--raio-pilula);
+    background-color: var(--cor-superficie-sutil);
+    overflow: hidden;
+  }
+
+  .barra-progresso::-webkit-progress-bar {
+    background-color: var(--cor-superficie-sutil);
+  }
+
+  .barra-progresso::-webkit-progress-value {
+    background-color: var(--cor-acao);
+    border-radius: var(--raio-pilula);
+  }
+
+  .barra-progresso::-moz-progress-bar {
+    background-color: var(--cor-acao);
+    border-radius: var(--raio-pilula);
+  }
+}
+
+@layer components {
+  .borda-passo-atual {
+    border-color: var(--cor-acao);
+    background-color: var(--cor-acao-sutil);
+  }
+}

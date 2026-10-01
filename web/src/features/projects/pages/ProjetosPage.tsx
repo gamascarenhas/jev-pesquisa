@@ -4,11 +4,11 @@ import type { Pagina, Projeto } from '@/api/types';
 import { Alerta } from '@/components/ui/Alerta';
 import { Botao } from '@/components/ui/Botao';
 import { EstadoVazio } from '@/components/ui/EstadoVazio';
+import { Paginacao } from '@/components/ui/Paginacao';
 import { useUsuarioAtual } from '@/hooks/use-usuario-atual';
 import { textos } from '@/i18n/pt-BR';
 
 import { ModaisDeProjeto, type EdicaoDeProjeto } from '../components/ModaisDeProjeto';
-import { PaginacaoDeProjetos } from '../components/PaginacaoDeProjetos';
 import { TabelaDeProjetos } from '../components/TabelaDeProjetos';
 import { useProjetos } from '../hooks/use-projetos';
 
@@ -33,7 +33,8 @@ function ListaDeProjetos({ dados, pagina, aoMudarPagina, aoEditar }: ListaDeProj
           aoEditar({ tipo: 'apagar', projeto });
         }}
       />
-      <PaginacaoDeProjetos
+      <Paginacao
+        rotulo={textos.projetos.titulo}
         pagina={pagina}
         totalDePaginas={Math.max(1, Math.ceil(dados.total / dados.tamanhoPagina))}
         aoMudar={aoMudarPagina}

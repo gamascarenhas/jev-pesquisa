@@ -10,7 +10,8 @@ export type AcaoDeAuditoria =
   | 'convite_revogado'
   | 'usuario_removido'
   | 'projeto_apagado'
-  | 'conta_encerrada';
+  | 'conta_encerrada'
+  | 'exportacao';
 
 export interface IdsDeAuditoria {
   contaId?: string;

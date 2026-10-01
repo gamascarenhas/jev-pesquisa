@@ -1,4 +1,13 @@
-import { FolderOpen, Mail, ShieldAlert, User, Users, type LucideIcon } from 'lucide-react';
+import {
+  Compass,
+  FolderOpen,
+  Gauge,
+  Mail,
+  ShieldAlert,
+  User,
+  Users,
+  type LucideIcon,
+} from 'lucide-react';
 import { NavLink } from 'react-router';
 
 import { cn } from '@/lib/cn';
@@ -15,6 +24,12 @@ interface ItemDeNavegacao {
 
 const ITENS_PRINCIPAIS: ItemDeNavegacao[] = [
   {
+    caminho: '/comecar',
+    rotulo: textos.navegacao.primeirosPassos,
+    icone: Compass,
+    somenteDono: false,
+  },
+  {
     caminho: '/projetos',
     rotulo: textos.navegacao.projetos,
     icone: FolderOpen,
@@ -23,6 +38,12 @@ const ITENS_PRINCIPAIS: ItemDeNavegacao[] = [
 ];
 
 const ITENS_DE_CONFIGURACAO: ItemDeNavegacao[] = [
+  {
+    caminho: '/configuracoes/plano',
+    rotulo: textos.navegacao.planoEConsumo,
+    icone: Gauge,
+    somenteDono: false,
+  },
   {
     caminho: '/configuracoes/perfil',
     rotulo: textos.navegacao.perfil,

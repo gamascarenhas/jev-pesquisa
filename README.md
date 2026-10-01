@@ -29,6 +29,9 @@ Por padrão o exemplo de desenvolvimento liga todos os modos simulados (Jev, Goo
 | --- | --- |
 | `npm run dev` | sobe o banco local, a API e o front com recarga automática |
 | `npm test` | roda os testes contra `URL_BANCO_TESTES` |
+| `npm run dev:semear-demo` | cria a conta `demo@exemplo.com.br` (senha `demonstracao-123`) com um projeto e 1.000 comentários fictícios, classificados com o Jev simulado; só em desenvolvimento e repetível sem duplicar |
+| `npm run dev:avancar-ciclo [-- email]` | vence e vira o ciclo da conta do usuário (padrão `demo@exemplo.com.br`), zerando o consumo e devolvendo à fila os jobs pausados por limite; recusa-se a rodar em produção |
+| `npm run fixtures:gerar` | regenera `web/public/exemplo-comentarios.csv` (100 comentários fictícios, semente fixa, `;` e UTF-8 com BOM) |
 | `npm run typecheck` | checagem de tipos |
 | `npm run lint` | ESLint |
 | `npm run stylelint` | stylelint dos CSS do `web` |

@@ -8,6 +8,7 @@ export interface OpcoesDeRequisicao {
   url: string;
   cookie?: string;
   corpo?: unknown;
+  corpoBruto?: Buffer;
   ip?: string;
   cabecalhos?: Record<string, string>;
 }
@@ -25,6 +26,7 @@ export async function chamar(
       ...opcoes.cabecalhos,
     },
     ...(opcoes.corpo === undefined ? {} : { payload: opcoes.corpo as object }),
+    ...(opcoes.corpoBruto === undefined ? {} : { payload: opcoes.corpoBruto }),
     ...(opcoes.ip === undefined ? {} : { remoteAddress: opcoes.ip }),
   });
 }

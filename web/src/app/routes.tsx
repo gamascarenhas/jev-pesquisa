@@ -10,7 +10,13 @@ import { LoginPage } from '@/features/auth/pages/LoginPage';
 import { RedefinirSenhaPage } from '@/features/auth/pages/RedefinirSenhaPage';
 import { PrivacidadePage } from '@/features/legal/pages/PrivacidadePage';
 import { TermosPage } from '@/features/legal/pages/TermosPage';
+import { ClassificacaoPage } from '@/features/dashboard/pages/ClassificacaoPage';
+import { PainelPage } from '@/features/dashboard/pages/PainelPage';
+import { PlanosPage } from '@/features/plans/pages/PlanosPage';
+import { PrimeirosPassosPage } from '@/features/onboarding/pages/PrimeirosPassosPage';
+import { FilaDeRevisaoPage } from '@/features/review-queue/pages/FilaDeRevisaoPage';
 import { ProjetosPage } from '@/features/projects/pages/ProjetosPage';
+import { UploadPage } from '@/features/upload/pages/UploadPage';
 import { ConvitesPage } from '@/features/settings/pages/ConvitesPage';
 import { DadosEContaPage } from '@/features/settings/pages/DadosEContaPage';
 import { PerfilPage } from '@/features/settings/pages/PerfilPage';
@@ -44,6 +50,12 @@ export const rotas: RouteObject[] = [
     element: <ExigirAutenticacao />,
     children: [
       { path: '/projetos', element: <ProjetosPage /> },
+      { path: '/comecar', element: <PrimeirosPassosPage /> },
+      { path: '/projetos/:projetoId/importar', element: <UploadPage /> },
+      { path: '/projetos/:projetoId/classificar', element: <ClassificacaoPage /> },
+      { path: '/projetos/:projetoId/painel', element: <PainelPage /> },
+      { path: '/projetos/:projetoId/revisao', element: <FilaDeRevisaoPage /> },
+      { path: '/configuracoes/plano', element: <PlanosPage /> },
       { path: '/configuracoes/perfil', element: <PerfilPage /> },
       { path: '/configuracoes/usuarios', element: <UsuariosPage /> },
       { path: '/configuracoes/convites', element: <ConvitesPage /> },

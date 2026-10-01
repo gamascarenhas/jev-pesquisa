@@ -12,14 +12,14 @@ describe('GET /api/configuracao-publica', () => {
     await aplicacao.encerrar();
   });
 
-  it('devolve só { nomeNegocio }', async () => {
+  it('devolve só o nome do negócio e se a cobrança está ativada', async () => {
     const resposta = await aplicacao.app.inject({
       method: 'GET',
       url: '/api/configuracao-publica',
     });
 
     expect(resposta.statusCode).toBe(200);
-    expect(resposta.json()).toEqual({ nomeNegocio: 'Escuta' });
+    expect(resposta.json()).toEqual({ nomeNegocio: 'Escuta', cobrancaAtivada: false });
   });
 
   it('não vaza nenhum segredo nem URL de banco', async () => {

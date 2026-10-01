@@ -22,6 +22,8 @@ async function iniciar(): Promise<void> {
   try {
     await preparar(aplicacao);
     await aplicacao.app.listen({ port: configuracao.porta, host: ENDERECO_DE_ESCUTA });
+    await aplicacao.executorDeTrabalhos.iniciar();
+    aplicacao.agendador.iniciar();
   } catch (erro) {
     await aplicacao.banco.end();
     throw erro;

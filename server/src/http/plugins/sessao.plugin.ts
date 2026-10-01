@@ -69,6 +69,13 @@ export class ArmazenamentoDeSessao implements EncerradorDeSessoes {
     concluir(this.destruir(idSessao), retorno);
   }
 
+  async apagarExpiradas(): Promise<number> {
+    const resultado = await this.banco.query('DELETE FROM sessoes WHERE expira_em <= $1', [
+      this.relogio.agora(),
+    ]);
+    return resultado.rowCount ?? 0;
+  }
+
   async encerrarDoUsuario(usuarioId: UsuarioId, exceto?: string): Promise<void> {
     await this.banco.query(
       'DELETE FROM sessoes WHERE usuario_id = $1 AND ($2::text IS NULL OR id_sessao <> $2)',

@@ -8,6 +8,7 @@ import type { Usuario } from '@/api/types';
 import { textos } from '@/i18n/pt-BR';
 
 import { Botao } from '../ui/Botao';
+import { BarraConsumo } from './BarraConsumo';
 import { Logotipo } from './Logotipo';
 
 interface BarraSuperiorProps {
@@ -47,6 +48,7 @@ export function BarraSuperior({ usuario, menuAberto, aoAlternarMenu }: BarraSupe
         <Logotipo />
       </div>
       <div className="pilha-horizontal">
+        <BarraConsumo />
         <span className="texto-corpo texto-secundario hidden md:inline">{usuario.nome}</span>
         <Botao
           variante="secundario"

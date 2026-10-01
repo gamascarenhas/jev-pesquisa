@@ -22,7 +22,10 @@
     "build": "npm run build -w server && npm run build -w web",
     "start": "cross-env AMBIENTE_APP=production NODE_ENV=production npm run start -w server",
     "verificar": "npm run typecheck && npm run lint && npm run stylelint && npm run test",
-    "auditoria": "npm audit --omit=dev --audit-level=high"
+    "auditoria": "npm audit --omit=dev --audit-level=high",
+    "dev:semear-demo": "cross-env AMBIENTE_APP=development NODE_ENV=development npm run dev:semear-demo -w server",
+    "fixtures:gerar": "npm run fixtures:gerar -w server",
+    "dev:avancar-ciclo": "cross-env AMBIENTE_APP=development NODE_ENV=development npm run dev:avancar-ciclo -w server --"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

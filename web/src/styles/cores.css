@@ -124,6 +124,12 @@
   --cor-sentimento-negativo: var(--paleta-laranja-600);
   --cor-sentimento-neutro: var(--paleta-grafite-300);
   --cor-sentimento-positivo: var(--paleta-azul-600);
+  --cor-sentimento-misto: var(--paleta-categorica-2);
+
+  --cor-gravidade-0: var(--paleta-grafite-300);
+  --cor-gravidade-1: var(--paleta-azul-600);
+  --cor-gravidade-2: var(--paleta-categorica-2);
+  --cor-gravidade-3: var(--paleta-carmim-600);
 
   --cor-sombra: var(--paleta-sombra);
   --cor-sombra-forte: var(--paleta-sombra-forte);

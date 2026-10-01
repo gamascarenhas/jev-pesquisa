@@ -4,30 +4,11 @@ import { fileURLToPath } from 'node:url';
 
 import Fastify, { LogController, type FastifyInstance } from 'fastify';
 
+import { compor, type OpcoesDeComposicao } from './composicao.js';
 import type { Configuracao } from './config/config.js';
 import { criarBanco, verificarBanco, type Banco } from './db/conexoes.js';
-import { criarEnviadorLog } from './integrations/mail/enviador-log.js';
-import { criarEnviadorSmtp, criarTransporteSmtp } from './integrations/mail/enviador-smtp.js';
-import type { EnviadorDeEmail } from './integrations/mail/enviador-email.js';
-import { criarContasRepositorio } from './modules/accounts/contas.repositorio.js';
-import { criarContasServico } from './modules/accounts/contas.servico.js';
-import { criarAutenticacaoServico } from './modules/auth/autenticacao.servico.js';
-import { criarAutenticacaoSistemaRepositorio } from './modules/auth/autenticacao.sistema.repositorio.js';
-import { criarConvitesServico } from './modules/auth/convites.servico.js';
-import type { DependenciasDeAuth } from './modules/auth/dependencias.js';
-import { criarGestorDeTokens } from './modules/auth/gestor-tokens.js';
-import { criarPerfilServico } from './modules/auth/perfil.servico.js';
-import { criarTokensAutenticacaoRepositorio } from './modules/auth/tokens-autenticacao.repositorio.js';
-import { criarUsuariosRepositorio } from './modules/auth/usuarios.repositorio.js';
-import { criarUsuariosServico } from './modules/auth/usuarios.servico.js';
-import {
-  criarExclusaoDadosServico,
-  type PassoAntesDeEncerrarConta,
-} from './modules/data-deletion/exclusao-dados.servico.js';
-import { criarPlanosServico } from './modules/plans/planos.servico.js';
-import { criarPlanosSistemaRepositorio } from './modules/plans/planos.sistema.repositorio.js';
-import { criarProjetosRepositorio } from './modules/projects/projetos.repositorio.js';
-import { criarProjetosServico } from './modules/projects/projetos.servico.js';
+import type { ExecutorTrabalhos } from './jobs/executor-trabalhos.js';
+import type { Agendador } from './scheduler/agendador.js';
 import { prepararEstaticos, type EstaticosPreparados } from './http/plugins/estaticos.plugin.js';
 import { registrarCabecalhosDeSeguranca } from './http/plugins/cabecalhos-seguranca.plugin.js';
 import { registrarLimiteDeRequisicoes } from './http/plugins/limite-requisicoes.plugin.js';
@@ -47,11 +28,9 @@ const LIMITE_CORPO_PADRAO_BYTES = 1_048_576;
 const INTERVALO_VARREDURA_OCIOSAS_MS = 100;
 const DIRETORIO_DO_BUILD_WEB = resolve(dirname(fileURLToPath(import.meta.url)), '../../web/dist');
 
-export interface OpcoesAplicacao {
+export interface OpcoesAplicacao extends OpcoesDeComposicao {
   registrador?: Registrador;
   relogio?: Relogio;
-  enviadorDeEmail?: EnviadorDeEmail;
-  passosAntesDeEncerrarConta?: PassoAntesDeEncerrarConta[];
   /** Só em produção o servidor serve o build do web; os testes informam o diretório. */
   diretorioWeb?: string;
 }
@@ -63,6 +42,8 @@ export interface Aplicacao {
   relogio: Relogio;
   configuracao: Readonly<Configuracao>;
   servicos: ServicosDaAplicacao;
+  executorDeTrabalhos: ExecutorTrabalhos;
+  agendador: Agendador;
 }
 
 type SinalDeEncerramento = 'SIGTERM' | 'SIGINT';
@@ -83,8 +64,62 @@ export async function criarAplicacao(
     });
   const relogio = opcoes.relogio ?? relogioDoSistema;
   const banco = criarBanco(configuracao.urlBanco);
+  const app = criarServidor(configuracao, registrador);
+  const armazenamentoDeSessao = criarArmazenamentoDeSessao(banco, relogio);
+  const { servicos, executorDeTrabalhos, agendador } = compor({
+    banco,
+    configuracao,
+    registrador,
+    relogio,
+    armazenamentoDeSessao,
+    opcoes,
+  });
 
-  const app = Fastify({
+  const front = await prepararFront(configuracao, opcoes.diretorioWeb);
+  await registrarPlugins(app, configuracao, armazenamentoDeSessao, front?.tratarRotaDoFront);
+  await registrarRotas(app, {
+    nomeNegocio: configuracao.nomeNegocio,
+    cobrancaAtivada: configuracao.cobrancaAtivada,
+    verificarBanco: () => verificarBanco(banco),
+    relogio,
+    servicos,
+  });
+  await front?.registrar(app);
+
+  return {
+    app,
+    banco,
+    registrador,
+    relogio,
+    configuracao,
+    servicos,
+    executorDeTrabalhos,
+    agendador,
+  };
+}
+
+async function registrarPlugins(
+  app: FastifyInstance,
+  configuracao: Readonly<Configuracao>,
+  armazenamento: ArmazenamentoDeSessao,
+  tratarRotaDoFront: Parameters<typeof registrarManipuladorDeErros>[2],
+): Promise<void> {
+  registrarManipuladorDeErros(app, configuracao.estaEmProducao, tratarRotaDoFront);
+  await registrarCabecalhosDeSeguranca(app, configuracao);
+  await registrarSessao(app, {
+    armazenamento,
+    segredo: configuracao.segredoSessao,
+    estaEmProducao: configuracao.estaEmProducao,
+  });
+  await registrarLimiteDeRequisicoes(app);
+  registrarProtecaoCsrf(app, configuracao.origemApp);
+}
+
+function criarServidor(
+  configuracao: Readonly<Configuracao>,
+  registrador: Registrador,
+): FastifyInstance {
+  return Fastify({
     loggerInstance: registrador,
     logController: new LogController({ requestIdLogLabel: 'idRequisicao' }),
     requestIdHeader: false,
@@ -92,37 +127,6 @@ export async function criarAplicacao(
     trustProxy: configuracao.confiarProxy,
     bodyLimit: LIMITE_CORPO_PADRAO_BYTES,
   });
-
-  const armazenamentoDeSessao = criarArmazenamentoDeSessao(banco, relogio);
-  const servicos = montarServicos({
-    banco,
-    configuracao,
-    registrador,
-    relogio,
-    armazenamentoDeSessao,
-    enviador: opcoes.enviadorDeEmail ?? criarEnviador(configuracao, registrador),
-    passosAntesDeEncerrarConta: opcoes.passosAntesDeEncerrarConta ?? [],
-  });
-
-  const front = await prepararFront(configuracao, opcoes.diretorioWeb);
-  registrarManipuladorDeErros(app, configuracao.estaEmProducao, front?.tratarRotaDoFront);
-  await registrarCabecalhosDeSeguranca(app, configuracao);
-  await registrarSessao(app, {
-    armazenamento: armazenamentoDeSessao,
-    segredo: configuracao.segredoSessao,
-    estaEmProducao: configuracao.estaEmProducao,
-  });
-  await registrarLimiteDeRequisicoes(app);
-  registrarProtecaoCsrf(app, configuracao.origemApp);
-  await registrarRotas(app, {
-    nomeNegocio: configuracao.nomeNegocio,
-    verificarBanco: () => verificarBanco(banco),
-    relogio,
-    servicos,
-  });
-  await front?.registrar(app);
-
-  return { app, banco, registrador, relogio, configuracao, servicos };
 }
 
 async function prepararFront(
@@ -136,87 +140,11 @@ async function prepararFront(
     : prepararEstaticos({ diretorio, nomeNegocio: configuracao.nomeNegocio });
 }
 
-function criarEnviador(
-  configuracao: Readonly<Configuracao>,
-  registrador: Registrador,
-): EnviadorDeEmail {
-  const { email, nomeNegocio } = configuracao;
-  if (email.provedor === 'log') {
-    return criarEnviadorLog(registrador);
-  }
-  // O esquema garante os cinco campos quando PROVEDOR_EMAIL=smtp.
-  const transporte = criarTransporteSmtp({
-    servidor: email.servidor ?? '',
-    porta: email.porta ?? 0,
-    usuario: email.usuario ?? '',
-    senha: email.senha ?? '',
-  });
-  return criarEnviadorSmtp(transporte, { nome: nomeNegocio, endereco: email.remetente ?? '' });
-}
-
-interface EntradaDosServicos {
-  banco: Banco;
-  configuracao: Readonly<Configuracao>;
-  registrador: Registrador;
-  relogio: Relogio;
-  armazenamentoDeSessao: ArmazenamentoDeSessao;
-  enviador: EnviadorDeEmail;
-  passosAntesDeEncerrarConta: PassoAntesDeEncerrarConta[];
-}
-
-function montarServicos(entrada: EntradaDosServicos): ServicosDaAplicacao {
-  const { banco, configuracao, registrador, relogio } = entrada;
-  const usuarios = criarUsuariosRepositorio(banco);
-  const tokens = criarTokensAutenticacaoRepositorio(banco);
-  const sistema = criarAutenticacaoSistemaRepositorio(banco);
-  const dependenciasDeAuth: DependenciasDeAuth = {
-    banco,
-    usuarios,
-    tokens,
-    sistema,
-    gestorDeTokens: criarGestorDeTokens({
-      tokens,
-      sistema,
-      enviador: entrada.enviador,
-      relogio,
-      registrador,
-      urlApp: configuracao.origemApp,
-      nomeNegocio: configuracao.nomeNegocio,
-    }),
-    encerradorDeSessoes: entrada.armazenamentoDeSessao,
-    relogio,
-    registrador,
-    configuracao: {
-      nomeNegocio: configuracao.nomeNegocio,
-      urlApp: configuracao.origemApp,
-      versaoTermos: configuracao.versaoTermos,
-      planoPadraoId: configuracao.planoPadraoId,
-    },
-  };
-  const contas = criarContasServico(criarContasRepositorio(banco));
-  const usuariosServico = criarUsuariosServico(dependenciasDeAuth);
-  const projetos = criarProjetosServico(criarProjetosRepositorio(banco));
-  return {
-    autenticacao: criarAutenticacaoServico(dependenciasDeAuth),
-    convites: criarConvitesServico(dependenciasDeAuth, contas),
-    perfil: criarPerfilServico(dependenciasDeAuth),
-    usuarios: usuariosServico,
-    contas,
-    planos: criarPlanosServico(criarPlanosSistemaRepositorio(banco)),
-    projetos,
-    exclusao: criarExclusaoDadosServico({
-      projetos,
-      contas,
-      usuarios: usuariosServico,
-      encerradorDeSessoes: entrada.armazenamentoDeSessao,
-      registrador,
-      passosAntesDeEncerrarConta: entrada.passosAntesDeEncerrarConta,
-    }),
-  };
-}
+type AlvoDoDesligamento = Pick<Aplicacao, 'app' | 'banco' | 'registrador'> &
+  Partial<Pick<Aplicacao, 'executorDeTrabalhos' | 'agendador'>>;
 
 export function criarDesligamento(
-  aplicacao: Pick<Aplicacao, 'app' | 'banco' | 'registrador'>,
+  aplicacao: AlvoDoDesligamento,
   tempoLimiteMs: number = TEMPO_LIMITE_DESLIGAMENTO_MS,
 ): () => Promise<void> {
   let emAndamento: Promise<void> | undefined;
@@ -227,10 +155,12 @@ export function criarDesligamento(
 }
 
 async function encerrar(
-  { app, banco, registrador }: Pick<Aplicacao, 'app' | 'banco' | 'registrador'>,
+  { app, banco, registrador, executorDeTrabalhos, agendador }: AlvoDoDesligamento,
   tempoLimiteMs: number,
 ): Promise<void> {
   registrador.info('encerrando o servidor');
+  const paradaDoAgendador = agendador?.parar();
+  const paradaDoExecutor = executorDeTrabalhos?.parar();
   let temporizador: NodeJS.Timeout | undefined;
   const estouro = new Promise<'tempo_esgotado'>((resolver) => {
     temporizador = setTimeout(() => {
@@ -247,6 +177,8 @@ async function encerrar(
   if (resultado === 'tempo_esgotado') {
     registrador.warn('requisições em andamento não terminaram a tempo; encerrando mesmo assim');
   }
+  await paradaDoAgendador;
+  await paradaDoExecutor;
   await banco.end();
   registrador.info('servidor encerrado');
 }

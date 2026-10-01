@@ -1,17 +1,19 @@
-import { Botao } from '@/components/ui/Botao';
 import { textos } from '@/i18n/pt-BR';
 import { interpolar } from '@/lib/format';
 
-interface PaginacaoDeProjetosProps {
+import { Botao } from './Botao';
+
+interface PaginacaoProps {
+  rotulo: string;
   pagina: number;
   totalDePaginas: number;
   aoMudar: (pagina: number) => void;
 }
 
-export function PaginacaoDeProjetos({ pagina, totalDePaginas, aoMudar }: PaginacaoDeProjetosProps) {
+export function Paginacao({ rotulo, pagina, totalDePaginas, aoMudar }: PaginacaoProps) {
   const valores = { pagina: String(pagina), total: String(totalDePaginas) };
   return (
-    <nav className="pilha-horizontal" aria-label={textos.projetos.titulo}>
+    <nav className="pilha-horizontal" aria-label={rotulo}>
       <Botao
         variante="secundario"
         tamanho="sm"

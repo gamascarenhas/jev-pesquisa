@@ -17,6 +17,13 @@ const MIGRATIONS_ATUAIS = [
   '0003_contas_usuarios.sql',
   '0004_tokens_autenticacao_sessoes.sql',
   '0005_projetos.sql',
+  '0006_trabalhos.sql',
+  '0007_fontes.sql',
+  '0008_comentarios.sql',
+  '0009_livro_razao_consumo.sql',
+  '0010_classificacoes_revisoes.sql',
+  '0011_alertas_consumo.sql',
+  '0012_execucoes_agendadas.sql',
 ];
 const bancos: Banco[] = [];
 const diretorios: string[] = [];

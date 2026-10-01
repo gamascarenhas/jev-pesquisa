@@ -43,6 +43,15 @@ export class AutenticacaoSistemaRepositorio {
     return linha && mapearToken(linha);
   }
 
+  // Atravessa contas: a limpeza agendada apaga tokens vencidos de todas as contas.
+  async apagarTokensExpirados(agora: Date): Promise<number> {
+    const resultado = await this.banco.query(
+      'DELETE FROM tokens_autenticacao WHERE expira_em <= $1',
+      [agora],
+    );
+    return resultado.rowCount ?? 0;
+  }
+
   // Cria a própria conta, que ainda não existe, então não há contaId a filtrar.
   async criarConta(
     dados: { nome: string; planoId: string },

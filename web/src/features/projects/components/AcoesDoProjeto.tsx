@@ -1,5 +1,8 @@
+import { Link } from 'react-router';
+
 import type { Projeto } from '@/api/types';
 import { Botao } from '@/components/ui/Botao';
+import { botaoVariantes } from '@/components/ui/variants';
 import { textos } from '@/i18n/pt-BR';
 import { interpolar } from '@/lib/format';
 
@@ -17,6 +20,24 @@ export function AcoesDoProjeto({ projeto, ehDono, aoRenomear, aoApagar }: AcoesD
       role="group"
       aria-label={interpolar(textos.projetos.acoesDo, { nome: projeto.nome })}
     >
+      <Link
+        to={`/projetos/${projeto.id}/painel`}
+        className={botaoVariantes({ variante: 'primario', tamanho: 'sm' })}
+      >
+        {textos.projetos.painel}
+      </Link>
+      <Link
+        to={`/projetos/${projeto.id}/classificar`}
+        className={botaoVariantes({ variante: 'secundario', tamanho: 'sm' })}
+      >
+        {textos.projetos.classificar}
+      </Link>
+      <Link
+        to={`/projetos/${projeto.id}/importar`}
+        className={botaoVariantes({ variante: 'secundario', tamanho: 'sm' })}
+      >
+        {textos.projetos.importar}
+      </Link>
       <Botao
         variante="secundario"
         tamanho="sm"

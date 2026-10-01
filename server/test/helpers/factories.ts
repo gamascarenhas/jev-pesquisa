@@ -9,13 +9,20 @@ import type {
   EnviadorDeEmail,
   MensagemDeEmail,
 } from '../../src/integrations/mail/enviador-email.js';
+import type { StatusDeTrabalho, TipoDeTrabalho } from '../../src/jobs/trabalhos.tipos.js';
 import { gerarHashDeSenha } from '../../src/modules/auth/senha.js';
 import {
   comoContaId,
+  comoComentarioId,
+  comoFonteId,
   comoProjetoId,
+  comoTrabalhoId,
   comoUsuarioId,
+  type ComentarioId,
   type ContaId,
+  type FonteId,
   type ProjetoId,
+  type TrabalhoId,
   type UsuarioId,
 } from '../../src/shared/ids.js';
 import { criarRegistrador, type Registrador } from '../../src/shared/logger.js';
@@ -78,17 +85,23 @@ export function gerarUuid(): string {
 
 export async function criarPlanoDeTeste(
   banco: Banco,
-  sobrescritas: { nome?: string; precoMensalCentavos?: number; limiteCustoIaUsd?: string } = {},
+  sobrescritas: {
+    nome?: string;
+    precoMensalCentavos?: number;
+    limiteCustoIaUsd?: string;
+    ativo?: boolean;
+  } = {},
 ): Promise<string> {
   const id = `plano-teste-${gerarUuid()}`;
   await banco.query(
-    `INSERT INTO planos (id, nome, preco_mensal_centavos, limite_custo_ia_usd)
-     VALUES ($1, $2, $3, $4)`,
+    `INSERT INTO planos (id, nome, preco_mensal_centavos, limite_custo_ia_usd, ativo)
+     VALUES ($1, $2, $3, $4, $5)`,
     [
       id,
       sobrescritas.nome ?? 'Plano de teste',
       sobrescritas.precoMensalCentavos ?? 0,
       sobrescritas.limiteCustoIaUsd ?? '1.000000',
+      sobrescritas.ativo ?? true,
     ],
   );
   return id;
@@ -173,6 +186,145 @@ export async function criarProjetoDeTeste(
     [contaId, sobrescritas.nome ?? 'Projeto de teste', sobrescritas.criadoPor ?? null],
   );
   return comoProjetoId(resultado.rows[0]?.id ?? '');
+}
+
+export async function criarTrabalhoDeTeste(
+  banco: Banco,
+  contaId: ContaId,
+  sobrescritas: {
+    projetoId?: ProjetoId;
+    tipo?: TipoDeTrabalho;
+    status?: StatusDeTrabalho;
+    carga?: Record<string, unknown>;
+    maxTentativas?: number;
+    executarApos?: Date;
+  } = {},
+): Promise<TrabalhoId> {
+  const resultado = await banco.query<{ id: string }>(
+    `INSERT INTO trabalhos (conta_id, projeto_id, tipo, status, carga, max_tentativas, executar_apos)
+     VALUES ($1, $2, $3, $4, $5, $6, COALESCE($7, now())) RETURNING id`,
+    [
+      contaId,
+      sobrescritas.projetoId ?? null,
+      sobrescritas.tipo ?? 'summarize',
+      sobrescritas.status ?? 'pending',
+      JSON.stringify(sobrescritas.carga ?? {}),
+      sobrescritas.maxTentativas ?? 5,
+      sobrescritas.executarApos ?? null,
+    ],
+  );
+  return comoTrabalhoId(resultado.rows[0]?.id ?? '');
+}
+
+export async function criarFonteDeTeste(
+  banco: Banco,
+  contaId: ContaId,
+  projetoId: ProjetoId,
+  nome = 'planilha.csv',
+): Promise<FonteId> {
+  const resultado = await banco.query<{ id: string }>(
+    "INSERT INTO fontes (conta_id, projeto_id, tipo, nome) VALUES ($1, $2, 'upload', $3) RETURNING id",
+    [contaId, projetoId, nome],
+  );
+  return comoFonteId(resultado.rows[0]?.id ?? '');
+}
+
+export async function criarComentarioDeTeste(
+  banco: Banco,
+  contaId: ContaId,
+  projetoId: ProjetoId,
+  fonteId: FonteId,
+  texto = `Comentário ${gerarUuid()}`,
+  extras: {
+    unidade?: string;
+    autor?: string;
+    nota?: number;
+    comentadoEm?: Date;
+  } = {},
+): Promise<ComentarioId> {
+  const resultado = await banco.query<{ id: string }>(
+    `INSERT INTO comentarios (conta_id, projeto_id, fonte_id, texto_original, texto_mascarado, hash_conteudo,
+                             nome_unidade, nome_autor, nota, comentado_em)
+     VALUES ($1, $2, $3, $4, $4, $5, $6, $7, $8, $9) RETURNING id`,
+    [
+      contaId,
+      projetoId,
+      fonteId,
+      texto,
+      gerarUuid(),
+      extras.unidade ?? null,
+      extras.autor ?? null,
+      extras.nota ?? null,
+      extras.comentadoEm ?? null,
+    ],
+  );
+  return comoComentarioId(resultado.rows[0]?.id ?? '');
+}
+
+export async function criarClassificacaoDeTeste(
+  banco: Banco,
+  contaId: ContaId,
+  comentarioId: ComentarioId,
+  usuarioId?: UsuarioId,
+  sobrescritas: {
+    tema?: string;
+    sentimento?: string;
+    gravidadePontuacao?: number;
+    precisaAcao?: number;
+    precisaRevisao?: boolean;
+    temaConfianca?: number;
+  } = {},
+): Promise<void> {
+  await banco.query(
+    `INSERT INTO classificacoes
+       (comentario_id, conta_id, modelo, tema, tema_confianca, tema_probabilidades, sentimento,
+        sentimento_confianca, sentimento_probabilidades, gravidade_pontuacao, gravidade_normalizada,
+        gravidade_confianca, gravidade_probabilidades, precisa_acao, precisa_revisao)
+     VALUES ($1, $2, 'jev-teste', $3, $4, '{}', $5, 0.9, '{}', $6, $7, 0.8, '{}', $8, $9)`,
+    [
+      comentarioId,
+      contaId,
+      sobrescritas.tema ?? 'price',
+      sobrescritas.temaConfianca ?? 0.9,
+      sobrescritas.sentimento ?? 'negative',
+      sobrescritas.gravidadePontuacao ?? 2,
+      Math.min(1, (sobrescritas.gravidadePontuacao ?? 2) / 3),
+      sobrescritas.precisaAcao ?? 0.8,
+      sobrescritas.precisaRevisao ?? false,
+    ],
+  );
+  await banco.query("UPDATE comentarios SET status_classificacao = 'done' WHERE id = $1", [
+    comentarioId,
+  ]);
+  if (usuarioId !== undefined) {
+    await banco.query(
+      `INSERT INTO revisoes_classificacao (comentario_id, conta_id, tema, sentimento, revisado_por)
+       VALUES ($1, $2, 'service', 'positive', $3)`,
+      [comentarioId, contaId, usuarioId],
+    );
+  }
+}
+
+export async function criarLancamentoDeConsumoDeTeste(
+  banco: Banco,
+  contaId: ContaId,
+  sobrescritas: {
+    status?: 'reserved' | 'settled' | 'released';
+    usd?: string;
+    idadeEmMinutos?: number;
+  } = {},
+): Promise<void> {
+  const status = sobrescritas.status ?? 'settled';
+  const usd = sobrescritas.usd ?? '0.01000000';
+  await banco.query(
+    `INSERT INTO livro_razao_consumo
+       (conta_id, conta_ref, ciclo_iniciado_em, provedor, operacao, tokens_entrada_estimados,
+        reservado_usd, status, real_usd, criado_em)
+     SELECT c.id, c.id, c.ciclo_iniciado_em, 'jev', 'classify', 100, $2::numeric, $3,
+            CASE WHEN $3 = 'settled' THEN $2::numeric END, now() - make_interval(mins => $4)
+       FROM contas c WHERE c.id = $1`,
+    [contaId, usd, status, sobrescritas.idadeEmMinutos ?? 0],
+  );
 }
 
 export interface EnviadorEmMemoria extends EnviadorDeEmail {

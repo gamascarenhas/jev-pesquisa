@@ -1,9 +1,16 @@
+import { mkdtemp, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+
 import type { FastifyInstance } from 'fastify';
 
 import { criarAplicacao, type Aplicacao } from '../../src/app.js';
 import { carregarConfiguracao, type Configuracao } from '../../src/config/config.js';
 import { semearPlanos } from '../../src/db/dados-iniciais.js';
 import { aplicarMigracoes } from '../../src/db/migrar.js';
+import type { ClassificadorDeComentarios } from '../../src/integrations/jev/classificador-comentarios.js';
+import type { OpcoesDoExecutor } from '../../src/jobs/executor-trabalhos.js';
+import type { GanchoDeRecuperacao, MapaDeManipuladores } from '../../src/jobs/trabalhos.tipos.js';
 import type { EnviadorDeEmail } from '../../src/integrations/mail/enviador-email.js';
 import type { PassoAntesDeEncerrarConta } from '../../src/modules/data-deletion/exclusao-dados.servico.js';
 import { criarRegistrador, type Registrador } from '../../src/shared/logger.js';
@@ -15,6 +22,11 @@ export interface OpcoesAppDeTeste {
   relogio?: Relogio;
   enviadorDeEmail?: EnviadorDeEmail;
   passosAntesDeEncerrarConta?: PassoAntesDeEncerrarConta[];
+  manipuladoresDeTrabalho?: MapaDeManipuladores;
+  ganchosDeRecuperacao?: GanchoDeRecuperacao[];
+  diretorioDeEnvios?: string;
+  classificadorDeComentarios?: ClassificadorDeComentarios;
+  ajustesDoExecutor?: Partial<OpcoesDoExecutor>;
   /** Padrão true; false testa o app sem banco. */
   prepararBanco?: boolean;
   diretorioWeb?: string;
@@ -22,6 +34,7 @@ export interface OpcoesAppDeTeste {
 }
 
 export interface AppDeTeste extends Aplicacao {
+  diretorioDeEnvios: string;
   encerrar: () => Promise<void>;
 }
 
@@ -40,14 +53,12 @@ export function carregarConfiguracaoDeTeste(
 
 export async function montarAppDeTeste(opcoes: OpcoesAppDeTeste = {}): Promise<AppDeTeste> {
   const configuracao = carregarConfiguracaoDeTeste(opcoes.configuracao);
+  const diretorioDeEnvios =
+    opcoes.diretorioDeEnvios ?? (await mkdtemp(join(tmpdir(), 'envios-teste-')));
   const aplicacao = await criarAplicacao(configuracao, {
+    ...opcoes,
+    diretorioDeEnvios,
     registrador: opcoes.registrador ?? criarRegistrador({ nivel: 'silent', legivel: false }),
-    ...(opcoes.relogio ? { relogio: opcoes.relogio } : {}),
-    ...(opcoes.enviadorDeEmail ? { enviadorDeEmail: opcoes.enviadorDeEmail } : {}),
-    ...(opcoes.diretorioWeb ? { diretorioWeb: opcoes.diretorioWeb } : {}),
-    ...(opcoes.passosAntesDeEncerrarConta
-      ? { passosAntesDeEncerrarConta: opcoes.passosAntesDeEncerrarConta }
-      : {}),
   });
   if (opcoes.prepararBanco !== false) {
     await aplicarMigracoes(aplicacao.banco, aplicacao.registrador);
@@ -62,8 +73,10 @@ export async function montarAppDeTeste(opcoes: OpcoesAppDeTeste = {}): Promise<A
       return;
     }
     encerrado = true;
+    await aplicacao.executorDeTrabalhos.parar();
     await aplicacao.app.close();
     await aplicacao.banco.end();
+    await rm(diretorioDeEnvios, { recursive: true, force: true });
   };
-  return { ...aplicacao, encerrar };
+  return { ...aplicacao, diretorioDeEnvios, encerrar };
 }
