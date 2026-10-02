@@ -11,3 +11,4 @@ coverage/
 server/tmp/
 
 .DS_Store
+dist-ssr/

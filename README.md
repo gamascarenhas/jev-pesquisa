@@ -51,7 +51,7 @@ O sistema **recusa iniciar** e lista cada problema se: alguma variável obrigat�
 
 Ao iniciar, o servidor aplica as migrations pendentes e cria os planos iniciais, de forma idempotente. Ele recusa subir se uma migration já aplicada foi alterada: migration aplicada nunca é editada, a correção é uma nova migration.
 
-Atrás de proxy reverso, use `CONFIAR_PROXY=true` e faça o proxy repassar o `Host` original, para o limite de requisições por IP enxergar o IP real.
+Atrás de proxy reverso, use `CONFIAR_PROXY=true` e faça o proxy repassar o `Host` original (o servidor escolhe entre o site e o app por ele; `X-Forwarded-Host` é ignorado), para o limite de requisições por IP enxergar o IP real.
 
 ### Banco em produção
 

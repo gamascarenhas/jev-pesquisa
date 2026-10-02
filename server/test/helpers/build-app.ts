@@ -34,6 +34,7 @@ export interface OpcoesAppDeTeste {
   /** Padrão true; false testa o app sem banco. */
   prepararBanco?: boolean;
   diretorioWeb?: string;
+  diretorioSite?: string;
   rotasExtras?: (app: FastifyInstance, aplicacao: Aplicacao) => void;
 }
 
@@ -55,6 +56,19 @@ export function carregarConfiguracaoDeTeste(
   return { ...base, urlBanco: base.urlBancoTestes, ...sobrescritas };
 }
 
+// O servidor escolhe o domínio pelo Host; sem isso os testes cairiam no domínio desconhecido.
+function definirHostPadrao(app: FastifyInstance, host: string): void {
+  const injetar = app.inject.bind(app) as (...argumentos: unknown[]) => unknown;
+  (app as { inject: unknown }).inject = (opcoes?: unknown, ...resto: unknown[]) => {
+    if (typeof opcoes !== 'object' || opcoes === null) {
+      return injetar(opcoes, ...resto);
+    }
+    const informado = (opcoes as { headers?: Record<string, unknown> }).headers ?? {};
+    const temHost = Object.keys(informado).some((nome) => nome.toLowerCase() === 'host');
+    return injetar(temHost ? opcoes : { ...opcoes, headers: { host, ...informado } }, ...resto);
+  };
+}
+
 export async function montarAppDeTeste(opcoes: OpcoesAppDeTeste = {}): Promise<AppDeTeste> {
   const configuracao = carregarConfiguracaoDeTeste(opcoes.configuracao);
   const diretorioDeEnvios =
@@ -70,6 +84,7 @@ export async function montarAppDeTeste(opcoes: OpcoesAppDeTeste = {}): Promise<A
   }
   opcoes.rotasExtras?.(aplicacao.app, aplicacao);
   await aplicacao.app.ready();
+  definirHostPadrao(aplicacao.app, new URL(configuracao.origemApp).host);
 
   let encerrado = false;
   const encerrar = async (): Promise<void> => {

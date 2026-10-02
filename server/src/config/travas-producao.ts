@@ -34,6 +34,10 @@ const TRAVAS: Trava[] = [
     problema: 'URL_APP: em produção precisa usar https',
   },
   {
+    violada: (v) => naoUsaHttps(v.URL_SITE),
+    problema: 'URL_SITE: em produção precisa usar https',
+  },
+  {
     violada: (v) => naoUsaHttps(v.GOOGLE_URI_REDIRECIONAMENTO),
     problema: 'GOOGLE_URI_REDIRECIONAMENTO: em produção precisa usar https',
   },

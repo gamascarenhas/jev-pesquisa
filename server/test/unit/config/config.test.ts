@@ -35,7 +35,7 @@ describe('configuração em desenvolvimento', () => {
     expect(config.chaveCriptografia).toHaveLength(32);
   });
 
-  it.each(['NOME_NEGOCIO', 'VERSAO_TERMOS', 'URL_APP', 'SEGREDO_SESSAO', 'URL_BANCO'])(
+  it.each(['NOME_NEGOCIO', 'VERSAO_TERMOS', 'URL_APP', 'URL_SITE', 'SEGREDO_SESSAO', 'URL_BANCO'])(
     'recusa iniciar sem %s, apontando a variável',
     (nome) => {
       const variaveis = semVariavel(lerExemploDeAmbiente('development'), nome);
@@ -140,6 +140,7 @@ describe('travas de produção', () => {
     ['LLM_PROVEDOR', { LLM_PROVEDOR: 'mock' }],
     ['PROVEDOR_EMAIL', { PROVEDOR_EMAIL: 'log' }],
     ['URL_APP', { URL_APP: 'http://app.exemplo.com.br' }],
+    ['URL_SITE', { URL_SITE: 'http://exemplo.com.br' }],
     [
       'GOOGLE_URI_REDIRECIONAMENTO',
       { GOOGLE_URI_REDIRECIONAMENTO: 'http://app.exemplo.com.br/cb' },
@@ -153,6 +154,24 @@ describe('travas de produção', () => {
     const problemas = problemasDe(() => validarConfiguracao('production', variaveis));
 
     expect(problemas.some((problema) => problema.startsWith(nome))).toBe(true);
+  });
+
+  it.each([
+    ['com caminho', 'http://localhost:3000/blog'],
+    ['com barra final', 'http://localhost:3000/'],
+    ['igual ao host do app', 'http://localhost:5173'],
+  ])('recusa URL_SITE %s', (_descricao, valor) => {
+    const variaveis = { ...lerExemploDeAmbiente('development'), URL_SITE: valor };
+
+    const problemas = problemasDe(() => validarConfiguracao('development', variaveis));
+
+    expect(problemas.some((problema) => problema.startsWith('URL_SITE'))).toBe(true);
+  });
+
+  it('expõe a origem do site', () => {
+    const config = validarConfiguracao('development', lerExemploDeAmbiente('development'));
+
+    expect(config.origemSite).toBe('http://localhost:3000');
   });
 
   it('recusa segredo de sessão curto', () => {

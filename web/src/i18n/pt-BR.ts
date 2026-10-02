@@ -93,6 +93,8 @@ export const textos = {
     abrirMenu: 'Abrir menu',
     fecharMenu: 'Fechar menu',
     sair: 'Sair',
+    usarTemaEscuro: 'Usar tema escuro',
+    usarTemaClaro: 'Usar tema claro',
     conta: 'Conta',
     logotipo: 'Logotipo de {nomeNegocio}',
   },

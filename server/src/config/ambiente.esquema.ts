@@ -47,6 +47,12 @@ export const esquemaAmbiente = z.object({
   URL_APP: obrigatoria().pipe(
     z.url({ protocol: /^https?$/, error: 'precisa ser uma URL http(s)' }),
   ),
+  URL_SITE: obrigatoria()
+    .pipe(z.url({ protocol: /^https?$/, error: 'precisa ser uma URL http(s)' }))
+    .refine(
+      (valor) => new URL(valor).origin === valor,
+      'use só a origem, sem barra final nem caminho',
+    ),
   NOME_NEGOCIO: obrigatoria(),
   VERSAO_TERMOS: obrigatoria(),
   PORT: z.coerce.number().int().min(1).max(65535).default(3000),

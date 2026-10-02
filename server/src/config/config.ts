@@ -20,6 +20,8 @@ export interface Configuracao {
   estaEmProducao: boolean;
   urlApp: string;
   origemApp: string;
+  urlSite: string;
+  origemSite: string;
   nomeNegocio: string;
   versaoTermos: string;
   porta: number;
@@ -124,6 +126,8 @@ function montarConfiguracao(ambiente: AmbienteApp, v: VariaveisAmbiente): Config
     estaEmProducao: ambiente === 'production',
     urlApp: v.URL_APP,
     origemApp: new URL(v.URL_APP).origin,
+    urlSite: v.URL_SITE,
+    origemSite: new URL(v.URL_SITE).origin,
     nomeNegocio: v.NOME_NEGOCIO,
     versaoTermos: v.VERSAO_TERMOS,
     porta: v.PORT,
@@ -141,13 +145,20 @@ function montarConfiguracao(ambiente: AmbienteApp, v: VariaveisAmbiente): Config
   };
 }
 
+// O servidor escolhe o domínio pelo Host (com porta): os dois não podem ser iguais.
+function verificarHostsDistintos(v: VariaveisAmbiente): string[] {
+  return new URL(v.URL_SITE).host === new URL(v.URL_APP).host
+    ? ['URL_SITE: precisa ter um host diferente de URL_APP (o site e o app são domínios distintos)']
+    : [];
+}
+
 function descreverProblemasDoEsquema(variaveis: Record<string, string>): {
   dados: VariaveisAmbiente | undefined;
   problemas: string[];
 } {
   const resultado = esquemaAmbiente.safeParse(variaveis);
   if (resultado.success) {
-    return { dados: resultado.data, problemas: [] };
+    return { dados: resultado.data, problemas: verificarHostsDistintos(resultado.data) };
   }
   const problemas = resultado.error.issues.map(
     (problema) => `${String(problema.path[0] ?? 'configuração')}: ${problema.message}`,

@@ -1,4 +1,5 @@
 import { EventEmitter } from 'node:events';
+import { request } from 'node:http';
 import type { AddressInfo } from 'node:net';
 import { setTimeout as esperar } from 'node:timers/promises';
 
@@ -7,9 +8,32 @@ import { describe, expect, it } from 'vitest';
 
 import { criarDesligamento, registrarSinaisDeEncerramento } from '../../../src/app.js';
 import { criarRegistradorCapturado } from '../../helpers/factories.js';
-import { montarAppDeTeste, type AppDeTeste } from '../../helpers/build-app.js';
+import {
+  carregarConfiguracaoDeTeste,
+  montarAppDeTeste,
+  type AppDeTeste,
+} from '../../helpers/build-app.js';
 
 const DURACAO_DA_REQUISICAO_LENTA_MS = 400;
+const HOST_DO_APP = new URL(carregarConfiguracaoDeTeste().origemApp).host;
+
+// fetch não deixa trocar o Host, e o servidor escolhe o domínio por ele.
+function buscar(url: string): Promise<{ status: number; json: () => unknown }> {
+  return new Promise((resolver, rejeitar) => {
+    const pedido = request(url, { headers: { host: HOST_DO_APP } }, (resposta) => {
+      const partes: Buffer[] = [];
+      resposta.on('data', (parte: Buffer) => partes.push(parte));
+      resposta.on('end', () => {
+        resolver({
+          status: resposta.statusCode ?? 0,
+          json: () => JSON.parse(Buffer.concat(partes).toString('utf8')) as unknown,
+        });
+      });
+    });
+    pedido.on('error', rejeitar);
+    pedido.end();
+  });
+}
 
 function registrarRotaLenta(app: FastifyInstance, aoIniciar: () => void): void {
   app.get('/teste/lenta', async () => {
@@ -40,15 +64,15 @@ describe('encerramento gracioso', () => {
     const base = await escutar(aplicacao);
     const desligar = criarDesligamento(aplicacao);
 
-    const emAndamento = fetch(`${base}/teste/lenta`);
+    const emAndamento = buscar(`${base}/teste/lenta`);
     await iniciou;
     const desligamento = desligar();
     const resposta = await emAndamento;
     await desligamento;
 
     expect(resposta.status).toBe(200);
-    expect(await resposta.json()).toEqual({ concluida: true });
-    await expect(fetch(`${base}/api/configuracao-publica`)).rejects.toThrow();
+    expect(resposta.json()).toEqual({ concluida: true });
+    await expect(buscar(`${base}/api/configuracao-publica`)).rejects.toThrow();
     await expect(aplicacao.banco.query('SELECT 1')).rejects.toThrow();
   });
 
@@ -75,7 +99,7 @@ describe('encerramento gracioso', () => {
     });
     const base = await escutar(aplicacao);
 
-    const pendente = fetch(`${base}/teste/lenta`).catch(() => undefined);
+    const pendente = buscar(`${base}/teste/lenta`).catch(() => undefined);
     await iniciou;
     await criarDesligamento(aplicacao, 50)();
     await pendente;

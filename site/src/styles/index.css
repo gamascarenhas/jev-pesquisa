@@ -1,0 +1,14 @@
+/* O @import externo de fontes.css precisa ser a primeira regra do CSS final. */
+@import '../../../web/src/styles/fontes.css';
+@import '../../../web/src/styles/cores.css';
+@import '../../../web/src/styles/tokens.css';
+@import 'tailwindcss';
+@source '../../../web/src/components/ui';
+@source '..';
+@import '../../../web/src/styles/global.css';
+@import '../../../web/src/styles/tipografia.css';
+@import '../../../web/src/styles/status.css';
+@import '../../../web/src/styles/layout.css';
+@import '../../../web/src/styles/superficies.css';
+@import '../../../web/src/styles/movimento.css';
+@import './site.css';

@@ -12,6 +12,10 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react(), tailwindcss()],
     resolve: { alias: { '@': resolve(import.meta.dirname, 'src') } },
-    server: { strictPort: true, proxy: { '/api': `http://localhost:${porta}` } },
+    server: {
+      strictPort: true,
+      // Mantém o Host do app: o servidor decide entre app e site pelo Host, e o site também usa esta porta.
+      proxy: { '/api': { target: `http://localhost:${porta}`, changeOrigin: false } },
+    },
   };
 });

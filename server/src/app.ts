@@ -11,6 +11,8 @@ import type { ExecutorTrabalhos } from './jobs/executor-trabalhos.js';
 import type { Agendador } from './scheduler/agendador.js';
 import { prepararEstaticos, type EstaticosPreparados } from './http/plugins/estaticos.plugin.js';
 import { registrarCabecalhosDeSeguranca } from './http/plugins/cabecalhos-seguranca.plugin.js';
+import { registrarDominios } from './http/plugins/dominios.plugin.js';
+import { prepararSiteDaConfiguracao, type SitePublico } from './http/publico.rotas.js';
 import { registrarLimiteDeRequisicoes } from './http/plugins/limite-requisicoes.plugin.js';
 import { registrarManipuladorDeErros } from './http/plugins/manipulador-erros.plugin.js';
 import { registrarProtecaoCsrf } from './http/plugins/protecao-csrf.plugin.js';
@@ -33,6 +35,8 @@ export interface OpcoesAplicacao extends OpcoesDeComposicao {
   relogio?: Relogio;
   /** Só em produção o servidor serve o build do web; os testes informam o diretório. */
   diretorioWeb?: string;
+  /** Build do site público; sem ele, fora de produção, o domínio do site responde 404. */
+  diretorioSite?: string;
 }
 
 export interface Aplicacao {
@@ -76,7 +80,11 @@ export async function criarAplicacao(
   });
 
   const front = await prepararFront(configuracao, opcoes.diretorioWeb);
-  await registrarPlugins(app, configuracao, armazenamentoDeSessao, front?.tratarRotaDoFront);
+  const site = await prepararSiteDaConfiguracao(configuracao, opcoes.diretorioSite);
+  await registrarPlugins(app, configuracao, armazenamentoDeSessao, {
+    tratarRotaDoFront: front?.tratarRotaDoFront,
+    site,
+  });
   await registrarRotas(app, {
     nomeNegocio: configuracao.nomeNegocio,
     urlApp: configuracao.origemApp,
@@ -103,10 +111,19 @@ async function registrarPlugins(
   app: FastifyInstance,
   configuracao: Readonly<Configuracao>,
   armazenamento: ArmazenamentoDeSessao,
-  tratarRotaDoFront: Parameters<typeof registrarManipuladorDeErros>[2],
+  front: {
+    tratarRotaDoFront: Parameters<typeof registrarManipuladorDeErros>[2];
+    site: SitePublico | undefined;
+  },
 ): Promise<void> {
-  registrarManipuladorDeErros(app, configuracao.estaEmProducao, tratarRotaDoFront);
+  registrarManipuladorDeErros(app, configuracao.estaEmProducao, front.tratarRotaDoFront);
   await registrarCabecalhosDeSeguranca(app, configuracao);
+  // Depois do helmet (que já pôs os cabeçalhos) e antes da sessão: página pública não cria cookie.
+  registrarDominios(app, {
+    origemApp: configuracao.origemApp,
+    origemSite: configuracao.origemSite,
+    site: front.site,
+  });
   await registrarSessao(app, {
     armazenamento,
     segredo: configuracao.segredoSessao,

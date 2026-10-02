@@ -8,18 +8,19 @@
   },
   "workspaces": [
     "server",
-    "web"
+    "web",
+    "site"
   ],
   "scripts": {
     "banco:subir": "docker compose -f docker-compose.dev.yml up -d --wait",
     "predev": "npm run banco:subir",
     "dev": "cross-env AMBIENTE_APP=development NODE_ENV=development npm run dev:completo -w server",
     "pretest": "npm run banco:subir",
-    "test": "cross-env AMBIENTE_APP=development NODE_ENV=development npm run test -w server && npm run test -w web",
-    "typecheck": "npm run typecheck -w server && npm run typecheck -w web",
+    "test": "cross-env AMBIENTE_APP=development NODE_ENV=development npm run test -w server && npm run test -w web && npm run test -w site",
+    "typecheck": "npm run typecheck -w server && npm run typecheck -w web && npm run typecheck -w site",
     "lint": "eslint .",
-    "stylelint": "npm run stylelint -w web",
-    "build": "npm run build -w server && npm run build -w web",
+    "stylelint": "npm run stylelint -w web && npm run stylelint -w site",
+    "build": "npm run build -w server && npm run build -w web && npm run build -w site",
     "start": "cross-env AMBIENTE_APP=production NODE_ENV=production npm run start -w server",
     "verificar": "npm run typecheck && npm run lint && npm run stylelint && npm run test",
     "auditoria": "npm audit --omit=dev --audit-level=high",

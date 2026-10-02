@@ -51,6 +51,7 @@ Variáveis mínimas, comuns aos dois arquivos, com os valores de referência de 
 
 ```bash
 # Aplicação
+URL_SITE=https://exemplo.com.br      # origem pública do site (landing e blog); host diferente de URL_APP
 URL_APP=https://app.exemplo.com.br   # origem pública do app, usada nos links de e-mail e na checagem de origem (CSRF); em desenvolvimento, a origem do Vite
 NOME_NEGOCIO=             # nome do negócio exibido aos clientes; obrigatório nos dois ambientes; no de desenvolvimento, o nome sugerido pelo agente na fase 3
 VERSAO_TERMOS=1           # versão dos termos de uso e da política de privacidade aceitos no cadastro; aumente quando o texto mudar; obrigatória nos dois ambientes

@@ -2,20 +2,31 @@
   /* Paleta primitiva */
   --paleta-branco: #ffffff;
 
-  --paleta-petroleo-50: #e8f4f4;
-  --paleta-petroleo-100: #cfe8e8;
-  --paleta-petroleo-200: #a0d0d1;
-  --paleta-petroleo-500: #1f7f82;
-  --paleta-petroleo-600: #0f6b6e;
-  --paleta-petroleo-700: #0a4a4d;
+  --paleta-eletrico-50: #eef4ff;
+  --paleta-eletrico-100: #dbe7ff;
+  --paleta-eletrico-200: #b6cdff;
+  --paleta-eletrico-300: #7eaaff;
+  --paleta-eletrico-400: #4c8dff;
+  --paleta-eletrico-500: #2f74f5;
+  --paleta-eletrico-600: #1f5fe0;
+  --paleta-eletrico-700: #1a4bb3;
 
-  --paleta-grafite-50: #f5f7f7;
-  --paleta-grafite-100: #eaeff0;
-  --paleta-grafite-200: #d8e0e2;
-  --paleta-grafite-300: #bac6c9;
-  --paleta-grafite-500: #66767a;
-  --paleta-grafite-600: #4b5a5e;
-  --paleta-grafite-900: #1b2528;
+  --paleta-grafite-50: #f6f7f9;
+  --paleta-grafite-100: #eef0f3;
+  --paleta-grafite-200: #dfe2e7;
+  --paleta-grafite-300: #c3c8d0;
+  --paleta-grafite-500: #6b7280;
+  --paleta-grafite-600: #4b5260;
+  --paleta-grafite-900: #14171c;
+
+  --paleta-noite-950: #08090b;
+  --paleta-noite-900: #0f1115;
+  --paleta-noite-800: #16191f;
+  --paleta-noite-700: #23272f;
+  --paleta-noite-600: #343a45;
+  --paleta-noite-400: #6e7685;
+  --paleta-noite-300: #a3aab7;
+  --paleta-noite-50: #f2f4f7;
 
   --paleta-verde-50: #ecfdf3;
   --paleta-verde-200: #a6e9bf;
@@ -27,14 +38,17 @@
 
   --paleta-carmim-50: #fef3f2;
   --paleta-carmim-200: #fdc5c0;
+  --paleta-carmim-400: #f07a70;
   --paleta-carmim-600: #b42318;
   --paleta-carmim-700: #912018;
 
   --paleta-azul-50: #eef5fc;
   --paleta-azul-200: #b9d4f0;
+  --paleta-azul-400: #6aa8eb;
   --paleta-azul-600: #1d5fa8;
   --paleta-azul-700: #164a85;
 
+  --paleta-laranja-400: #f5864a;
   --paleta-laranja-600: #c2410c;
 
   --paleta-categorica-1: #0072b2;
@@ -46,15 +60,37 @@
   --paleta-categorica-7: #f0e442;
   --paleta-categorica-8: #66767a;
 
-  --paleta-sombra: rgb(27 37 40 / 12%);
-  --paleta-sombra-forte: rgb(27 37 40 / 20%);
-  --paleta-sobreposicao: rgb(27 37 40 / 55%);
+  --paleta-eletrico-translucido: rgb(76 141 255 / 14%);
+  --paleta-eletrico-translucido-forte: rgb(76 141 255 / 26%);
+  --paleta-eletrico-brilho: rgb(76 141 255 / 12%);
+  --paleta-verde-translucido: rgb(74 222 128 / 12%);
+  --paleta-verde-translucido-forte: rgb(74 222 128 / 30%);
+  --paleta-ambar-translucido: rgb(251 191 36 / 12%);
+  --paleta-ambar-translucido-forte: rgb(251 191 36 / 30%);
+  --paleta-carmim-translucido: rgb(248 113 113 / 12%);
+  --paleta-carmim-translucido-forte: rgb(248 113 113 / 30%);
+  --paleta-azul-translucido: rgb(96 165 250 / 12%);
+  --paleta-azul-translucido-forte: rgb(96 165 250 / 30%);
 
-  /* Cores semânticas */
-  --cor-fundo: var(--paleta-grafite-50);
+  --paleta-sombra: rgb(20 23 28 / 10%);
+  --paleta-sombra-forte: rgb(20 23 28 / 18%);
+  --paleta-sobreposicao: rgb(20 23 28 / 55%);
+  --paleta-sombra-escura: rgb(0 0 0 / 35%);
+  --paleta-sombra-escura-forte: rgb(0 0 0 / 60%);
+  --paleta-branco-translucido: rgb(255 255 255 / 80%);
+  --paleta-noite-translucido: rgb(8 9 11 / 72%);
+}
+
+/* Cores semânticas do tema claro, padrão do app; a classe permite aplicá-lo num trecho da página. */
+:root,
+.tema-claro {
+  color-scheme: light;
+
+  --cor-fundo: var(--paleta-branco);
+  --cor-fundo-translucido: var(--paleta-branco-translucido);
   --cor-superficie: var(--paleta-branco);
-  --cor-superficie-sutil: var(--paleta-grafite-100);
-  --cor-superficie-selecionada: var(--paleta-petroleo-50);
+  --cor-superficie-sutil: var(--paleta-grafite-50);
+  --cor-superficie-selecionada: var(--paleta-eletrico-50);
   --cor-sobreposicao: var(--paleta-sobreposicao);
 
   --cor-texto: var(--paleta-grafite-900);
@@ -65,13 +101,14 @@
   --cor-borda-forte: var(--paleta-grafite-300);
   --cor-borda-campo: var(--paleta-grafite-500);
 
-  --cor-acao: var(--paleta-petroleo-600);
-  --cor-acao-hover: var(--paleta-petroleo-700);
+  --cor-acao: var(--paleta-eletrico-600);
+  --cor-acao-hover: var(--paleta-eletrico-700);
   --cor-acao-texto: var(--paleta-branco);
-  --cor-acao-sutil: var(--paleta-petroleo-50);
-  --cor-acao-sutil-hover: var(--paleta-petroleo-100);
-  --cor-link: var(--paleta-petroleo-600);
-  --cor-foco: var(--paleta-petroleo-500);
+  --cor-acao-sutil: var(--paleta-eletrico-50);
+  --cor-acao-sutil-hover: var(--paleta-eletrico-100);
+  --cor-acao-brilho: var(--paleta-eletrico-50);
+  --cor-link: var(--paleta-eletrico-600);
+  --cor-foco: var(--paleta-eletrico-500);
 
   --cor-perigo: var(--paleta-carmim-600);
   --cor-perigo-hover: var(--paleta-carmim-700);
@@ -92,12 +129,12 @@
   --cor-neutro-texto: var(--paleta-grafite-600);
   --cor-neutro-borda: var(--paleta-grafite-200);
 
-  --cor-faixa-alta-fundo: var(--paleta-petroleo-100);
-  --cor-faixa-alta-texto: var(--paleta-petroleo-700);
-  --cor-faixa-alta-borda: var(--paleta-petroleo-200);
-  --cor-faixa-media-fundo: var(--paleta-petroleo-50);
-  --cor-faixa-media-texto: var(--paleta-petroleo-700);
-  --cor-faixa-media-borda: var(--paleta-petroleo-100);
+  --cor-faixa-alta-fundo: var(--paleta-eletrico-100);
+  --cor-faixa-alta-texto: var(--paleta-eletrico-700);
+  --cor-faixa-alta-borda: var(--paleta-eletrico-200);
+  --cor-faixa-media-fundo: var(--paleta-eletrico-50);
+  --cor-faixa-media-texto: var(--paleta-eletrico-700);
+  --cor-faixa-media-borda: var(--paleta-eletrico-100);
   --cor-faixa-baixa-fundo: var(--paleta-grafite-100);
   --cor-faixa-baixa-texto: var(--paleta-grafite-600);
   --cor-faixa-baixa-borda: var(--paleta-grafite-200);
@@ -133,4 +170,83 @@
 
   --cor-sombra: var(--paleta-sombra);
   --cor-sombra-forte: var(--paleta-sombra-forte);
+}
+
+/* Tema escuro: sempre no site público e por escolha no app. */
+.tema-escuro {
+  color-scheme: dark;
+
+  --cor-fundo: var(--paleta-noite-950);
+  --cor-fundo-translucido: var(--paleta-noite-translucido);
+  --cor-superficie: var(--paleta-noite-900);
+  --cor-superficie-sutil: var(--paleta-noite-800);
+  --cor-superficie-selecionada: var(--paleta-eletrico-translucido);
+  --cor-sobreposicao: var(--paleta-sombra-escura-forte);
+
+  --cor-texto: var(--paleta-noite-50);
+  --cor-texto-secundario: var(--paleta-noite-300);
+  --cor-texto-invertido: var(--paleta-noite-950);
+
+  --cor-borda: var(--paleta-noite-700);
+  --cor-borda-forte: var(--paleta-noite-600);
+  --cor-borda-campo: var(--paleta-noite-400);
+
+  --cor-acao: var(--paleta-eletrico-400);
+  --cor-acao-hover: var(--paleta-eletrico-300);
+  --cor-acao-texto: var(--paleta-noite-950);
+  --cor-acao-sutil: var(--paleta-eletrico-translucido);
+  --cor-acao-sutil-hover: var(--paleta-eletrico-translucido-forte);
+  --cor-acao-brilho: var(--paleta-eletrico-brilho);
+  --cor-link: var(--paleta-eletrico-300);
+  --cor-foco: var(--paleta-eletrico-400);
+
+  --cor-perigo: var(--paleta-carmim-400);
+  --cor-perigo-hover: var(--paleta-carmim-200);
+
+  --cor-sucesso-fundo: var(--paleta-verde-translucido);
+  --cor-sucesso-texto: var(--paleta-verde-200);
+  --cor-sucesso-borda: var(--paleta-verde-translucido-forte);
+  --cor-atencao-fundo: var(--paleta-ambar-translucido);
+  --cor-atencao-texto: var(--paleta-ambar-200);
+  --cor-atencao-borda: var(--paleta-ambar-translucido-forte);
+  --cor-critico-fundo: var(--paleta-carmim-translucido);
+  --cor-critico-texto: var(--paleta-carmim-200);
+  --cor-critico-borda: var(--paleta-carmim-translucido-forte);
+  --cor-info-fundo: var(--paleta-azul-translucido);
+  --cor-info-texto: var(--paleta-azul-200);
+  --cor-info-borda: var(--paleta-azul-translucido-forte);
+  --cor-neutro-fundo: var(--paleta-noite-800);
+  --cor-neutro-texto: var(--paleta-noite-300);
+  --cor-neutro-borda: var(--paleta-noite-600);
+
+  --cor-faixa-alta-fundo: var(--paleta-eletrico-translucido-forte);
+  --cor-faixa-alta-texto: var(--paleta-eletrico-200);
+  --cor-faixa-alta-borda: var(--paleta-eletrico-translucido-forte);
+  --cor-faixa-media-fundo: var(--paleta-eletrico-translucido);
+  --cor-faixa-media-texto: var(--paleta-eletrico-200);
+  --cor-faixa-media-borda: var(--paleta-eletrico-translucido);
+  --cor-faixa-baixa-fundo: var(--paleta-noite-800);
+  --cor-faixa-baixa-texto: var(--paleta-noite-300);
+  --cor-faixa-baixa-borda: var(--paleta-noite-600);
+
+  /* Repetidas aqui porque variável derivada herdada não acompanha a troca de tema num trecho. */
+  --cor-alerta-baixo-fundo: var(--cor-info-fundo);
+  --cor-alerta-baixo-texto: var(--cor-info-texto);
+  --cor-alerta-baixo-borda: var(--cor-info-borda);
+  --cor-alerta-medio-fundo: var(--cor-atencao-fundo);
+  --cor-alerta-medio-texto: var(--cor-atencao-texto);
+  --cor-alerta-medio-borda: var(--cor-atencao-borda);
+  --cor-alerta-alto-fundo: var(--cor-critico-fundo);
+  --cor-alerta-alto-texto: var(--cor-critico-texto);
+  --cor-alerta-alto-borda: var(--cor-critico-borda);
+
+  --cor-sentimento-negativo: var(--paleta-laranja-400);
+  --cor-sentimento-neutro: var(--paleta-noite-400);
+  --cor-sentimento-positivo: var(--paleta-azul-400);
+  --cor-gravidade-0: var(--paleta-noite-400);
+  --cor-gravidade-1: var(--paleta-azul-400);
+  --cor-gravidade-3: var(--paleta-carmim-400);
+
+  --cor-sombra: var(--paleta-sombra-escura);
+  --cor-sombra-forte: var(--paleta-sombra-escura-forte);
 }

@@ -4,6 +4,7 @@ import jsxA11y from 'eslint-plugin-jsx-a11y';
 import tseslint from 'typescript-eslint';
 
 import raiz from '../eslint.config.js';
+import { IMPORTACOES_PROIBIDAS_NO_WEB } from '../eslint-restricoes.js';
 
 // O esquery não aceita barra invertida: classes de caracteres no lugar dos escapes.
 const COR_LITERAL = '^(#[0-9a-fA-F]{3,8}|(rgb|hsl|hwb|lab|lch|oklab|oklch)a?[(].*)$';
@@ -68,6 +69,10 @@ export default tseslint.config(
       'max-lines': ['error', { max: 300, skipBlankLines: true, skipComments: true }],
       'no-restricted-exports': ['error', { restrictDefaultExports: { direct: true } }],
     },
+  },
+  {
+    files: ['src/**/*.ts', 'src/**/*.tsx'],
+    rules: { 'no-restricted-imports': ['error', IMPORTACOES_PROIBIDAS_NO_WEB] },
   },
   {
     files: ['vite.config.ts', 'vitest.config.ts'],
