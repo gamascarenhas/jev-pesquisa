@@ -11,6 +11,7 @@ import { Paginacao } from '@/components/ui/Paginacao';
 import { botaoVariantes } from '@/components/ui/variants';
 import { TabelaDeComentarios } from '@/features/comments/components/TabelaDeComentarios';
 import { useComentarios } from '@/features/comments/hooks/use-comentarios';
+import { SecaoPerguntar } from '@/features/ask/components/SecaoPerguntar';
 import { SecaoDeResumos } from '@/features/summaries/components/SecaoDeResumos';
 import { textos } from '@/i18n/pt-BR';
 
@@ -114,6 +115,7 @@ export function PainelPage() {
           <BarraDeFiltros opcoes={opcoes.data} filtros={filtros} aoMudar={setFiltros} />
           {painel.data && <CartoesDeResumo resumo={painel.data.resumo} />}
           {painel.data && <Graficos dados={painel.data} />}
+          <SecaoPerguntar projetoId={projetoId} filtros={filtros} />
           <ListaDeComentarios
             key={JSON.stringify(filtros)}
             projetoId={projetoId}

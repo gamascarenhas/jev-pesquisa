@@ -1,4 +1,4 @@
-import type { FastifyInstance } from 'fastify';
+import type { FastifyInstance, preHandlerAsyncHookHandler } from 'fastify';
 
 import type { ContasServico } from '../modules/accounts/contas.servico.js';
 import { registrarRotasDeContas } from '../modules/accounts/contas.rotas.js';
@@ -23,6 +23,8 @@ import { registrarRotasDeClassificacao } from '../modules/classification/classif
 import type { ClassificacaoServico } from '../modules/classification/classificacao.servico.js';
 import { registrarRotasDeComentarios } from '../modules/comments/comentarios.rotas.js';
 import type { ComentariosServico } from '../modules/comments/comentarios.servico.js';
+import { registrarRotasDePerguntar } from '../modules/ask/perguntar.rotas.js';
+import type { PerguntarServico } from '../modules/ask/perguntar.servico.js';
 import { registrarRotasDeResumos } from '../modules/summaries/resumos.rotas.js';
 import type { ResumosServico } from '../modules/summaries/resumos.servico.js';
 import { registrarRotasDoGoogle } from '../modules/google-business/google.rotas.js';
@@ -60,6 +62,7 @@ export interface ServicosDaAplicacao {
   googleOauth: GoogleOauthServico;
   googleUnidades: GoogleUnidadesServico;
   resumos: ResumosServico;
+  perguntar: PerguntarServico;
 }
 
 export interface DependenciasRotas extends DependenciasSaude {
@@ -68,6 +71,32 @@ export interface DependenciasRotas extends DependenciasSaude {
   cobrancaAtivada: boolean;
   relogio: Relogio;
   servicos: ServicosDaAplicacao;
+}
+
+// Resumos, perguntas e Google: tudo que fala com serviços de IA ou externos.
+function registrarRotasDeIa(
+  api: FastifyInstance,
+  dependencias: DependenciasRotas,
+  exigirAutenticacao: preHandlerAsyncHookHandler,
+): void {
+  const { servicos } = dependencias;
+  registrarRotasDeResumos(api, {
+    servico: servicos.resumos,
+    exigirAutenticacao,
+    exigirEmailConfirmado,
+  });
+  registrarRotasDePerguntar(api, {
+    servico: servicos.perguntar,
+    exigirAutenticacao,
+    exigirEmailConfirmado,
+  });
+  registrarRotasDoGoogle(api, {
+    oauth: servicos.googleOauth,
+    unidades: servicos.googleUnidades,
+    urlApp: dependencias.urlApp,
+    exigirAutenticacao,
+    exigirDono,
+  });
 }
 
 function registrarRotasDeNegocio(api: FastifyInstance, dependencias: DependenciasRotas): void {
@@ -101,18 +130,7 @@ function registrarRotasDeNegocio(api: FastifyInstance, dependencias: Dependencia
     exportacao: servicos.exportacao,
     exigirAutenticacao,
   });
-  registrarRotasDeResumos(api, {
-    servico: servicos.resumos,
-    exigirAutenticacao,
-    exigirEmailConfirmado,
-  });
-  registrarRotasDoGoogle(api, {
-    oauth: servicos.googleOauth,
-    unidades: servicos.googleUnidades,
-    urlApp: dependencias.urlApp,
-    exigirAutenticacao,
-    exigirDono,
-  });
+  registrarRotasDeIa(api, dependencias, exigirAutenticacao);
   registrarRotasDeEnvios(api, { servico: servicos.envios, exigirAutenticacao });
   registrarRotasDeTrabalhos(api, { servico: servicos.trabalhos, exigirAutenticacao });
   registrarRotasDeExclusao(api, { servico: servicos.exclusao, exigirAutenticacao, exigirDono });

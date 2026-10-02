@@ -10,6 +10,12 @@ import type { ProjetosServico } from '../projects/projetos.servico.js';
 import { mascararTexto } from './anonimizador.js';
 import type { ComentariosRepositorio } from './comentarios.repositorio.js';
 import type {
+  AlvoDaPergunta,
+  ContagemPorFaixa,
+  FaixaDaPergunta,
+  LimiaresDeFaixa,
+  RespostaListada,
+  TextoParaPergunta,
   AgregadoDoTema,
   CandidatoDoResumo,
   ComentarioCitado,
@@ -24,14 +30,25 @@ import type {
   ResultadoDoLote,
   ResumoDoPainel,
 } from './comentarios.tipos.js';
-import type { ConsultasResumoRepositorio } from './consultas-resumo.repositorio.js';
+import {
+  ConsultasParaIaImpl,
+  type ConsultasParaIa,
+  type DependenciasParaIa,
+} from './consultas-para-ia.servico.js';
 import type { ConsultasComentariosRepositorio } from './consultas-comentarios.repositorio.js';
-import type { FiltrosDeComentarios } from './filtros-comentarios.js';
+import type { EntradaDosFiltros, FiltrosDeComentarios } from './filtros-comentarios.js';
 
 export { converterFiltros, esquemaFiltrosDeComentarios } from './filtros-comentarios.js';
+export { mascararTexto } from './anonimizador.js';
 import { calcularHashDeUpload, calcularHashDoGoogle } from './hash-conteudo.js';
 
 export type {
+  AlvoDaPergunta,
+  ContagemPorFaixa,
+  FaixaDaPergunta,
+  LimiaresDeFaixa,
+  RespostaListada,
+  TextoParaPergunta,
   AgregadoDoTema,
   CandidatoDoResumo,
   ComentarioCitado,
@@ -46,9 +63,9 @@ export type {
   ResultadoDoLote,
   ResumoDoPainel,
 };
-export type { FiltrosDeComentarios };
+export type { EntradaDosFiltros, FiltrosDeComentarios };
 
-export interface ComentariosServico {
+export interface ComentariosServico extends ConsultasParaIa {
   importarLote(
     contaId: ContaId,
     projetoId: ProjetoId,
@@ -62,23 +79,6 @@ export interface ComentariosServico {
     fonteId: FonteId,
     comentarios: ComentarioExterno[],
   ): Promise<ResultadoDaSincronizacao>;
-  agregarParaResumo(
-    contaId: ContaId,
-    projetoId: ProjetoId,
-    filtro: FiltroDoResumo,
-  ): Promise<AgregadoDoTema>;
-  primeiraDataComentada(contaId: ContaId, projetoId: ProjetoId): Promise<Date | null>;
-  candidatosParaResumo(
-    contaId: ContaId,
-    projetoId: ProjetoId,
-    filtro: FiltroDoResumo,
-  ): Promise<CandidatoDoResumo[]>;
-  impressaoParaResumo(
-    contaId: ContaId,
-    projetoId: ProjetoId,
-    filtro: FiltroDoResumo,
-  ): Promise<string>;
-  citados(contaId: ContaId, projetoId: ProjetoId, ids: string[]): Promise<ComentarioCitado[]>;
   resumo(
     contaId: ContaId,
     projetoId: ProjetoId,
@@ -123,10 +123,9 @@ export interface ComentariosServico {
   ): Promise<void>;
 }
 
-export interface DependenciasDeComentarios {
+export interface DependenciasDeComentarios extends DependenciasParaIa {
   repositorio: ComentariosRepositorio;
   consultas: ConsultasComentariosRepositorio;
-  consultasResumo: ConsultasResumoRepositorio;
   projetos: ProjetosServico;
   classificacao: Pick<ClassificacaoServico, 'corrigir'>;
 }
@@ -162,8 +161,10 @@ export function criarImportadorDeComentarios(
   };
 }
 
-class ComentariosServicoImpl implements ComentariosServico {
-  constructor(private readonly dep: DependenciasDeComentarios) {}
+class ComentariosServicoImpl extends ConsultasParaIaImpl implements ComentariosServico {
+  constructor(private readonly dependencias: DependenciasDeComentarios) {
+    super(dependencias);
+  }
 
   importarLote(
     contaId: ContaId,
@@ -172,7 +173,14 @@ class ComentariosServicoImpl implements ComentariosServico {
     comentarios: ComentarioParaImportar[],
     executor?: Executor,
   ): Promise<ResultadoDoLote> {
-    return importarLote(this.dep.repositorio, contaId, projetoId, fonteId, comentarios, executor);
+    return importarLote(
+      this.dependencias.repositorio,
+      contaId,
+      projetoId,
+      fonteId,
+      comentarios,
+      executor,
+    );
   }
 
   async sincronizarExternos(
@@ -193,48 +201,32 @@ class ComentariosServicoImpl implements ComentariosServico {
       atualizadoEm: comentario.atualizadoEm,
       hashConteudo: calcularHashDoGoogle(comentario.idExterno),
     }));
-    return this.dep.repositorio.sincronizarExternos(contaId, projetoId, fonteId, linhas);
-  }
-
-  agregarParaResumo(contaId: ContaId, projetoId: ProjetoId, filtro: FiltroDoResumo) {
-    return this.dep.consultasResumo.agregar(contaId, projetoId, filtro);
-  }
-
-  primeiraDataComentada(contaId: ContaId, projetoId: ProjetoId) {
-    return this.dep.consultasResumo.primeiraDataComentada(contaId, projetoId);
-  }
-
-  candidatosParaResumo(contaId: ContaId, projetoId: ProjetoId, filtro: FiltroDoResumo) {
-    return this.dep.consultasResumo.candidatos(contaId, projetoId, filtro);
-  }
-
-  impressaoParaResumo(contaId: ContaId, projetoId: ProjetoId, filtro: FiltroDoResumo) {
-    return this.dep.consultasResumo.impressaoDigital(contaId, projetoId, filtro);
-  }
-
-  async citados(contaId: ContaId, projetoId: ProjetoId, ids: string[]) {
-    await this.dep.projetos.obter(contaId, projetoId);
-    return this.dep.consultasResumo.citados(contaId, projetoId, ids);
+    return this.dependencias.repositorio.sincronizarExternos(contaId, projetoId, fonteId, linhas);
   }
 
   async resumo(contaId: ContaId, projetoId: ProjetoId, filtros: FiltrosDeComentarios) {
-    await this.dep.projetos.obter(contaId, projetoId);
-    return this.dep.consultas.resumo(contaId, projetoId, filtros);
+    await this.dependencias.projetos.obter(contaId, projetoId);
+    return this.dependencias.consultas.resumo(contaId, projetoId, filtros);
   }
 
   async porTemaESentimento(contaId: ContaId, projetoId: ProjetoId, filtros: FiltrosDeComentarios) {
-    await this.dep.projetos.obter(contaId, projetoId);
-    return this.dep.consultas.porTemaESentimento(contaId, projetoId, filtros);
+    await this.dependencias.projetos.obter(contaId, projetoId);
+    return this.dependencias.consultas.porTemaESentimento(contaId, projetoId, filtros);
   }
 
   async porGravidade(contaId: ContaId, projetoId: ProjetoId, filtros: FiltrosDeComentarios) {
-    await this.dep.projetos.obter(contaId, projetoId);
-    return this.dep.consultas.porGravidade(contaId, projetoId, filtros, NIVEL_MAXIMO_DE_GRAVIDADE);
+    await this.dependencias.projetos.obter(contaId, projetoId);
+    return this.dependencias.consultas.porGravidade(
+      contaId,
+      projetoId,
+      filtros,
+      NIVEL_MAXIMO_DE_GRAVIDADE,
+    );
   }
 
   async opcoesDeFiltro(contaId: ContaId, projetoId: ProjetoId) {
-    await this.dep.projetos.obter(contaId, projetoId);
-    return this.dep.consultas.opcoesDeFiltro(contaId, projetoId);
+    await this.dependencias.projetos.obter(contaId, projetoId);
+    return this.dependencias.consultas.opcoesDeFiltro(contaId, projetoId);
   }
 
   async listar(
@@ -243,8 +235,8 @@ class ComentariosServicoImpl implements ComentariosServico {
     filtros: FiltrosDeComentarios,
     paginacao: EntradaPaginacao,
   ) {
-    await this.dep.projetos.obter(contaId, projetoId);
-    const { comentarios, total } = await this.dep.consultas.listar(
+    await this.dependencias.projetos.obter(contaId, projetoId);
+    const { comentarios, total } = await this.dependencias.consultas.listar(
       contaId,
       projetoId,
       filtros,
@@ -255,8 +247,8 @@ class ComentariosServicoImpl implements ComentariosServico {
   }
 
   async listarFilaDeRevisao(contaId: ContaId, projetoId: ProjetoId, paginacao: EntradaPaginacao) {
-    await this.dep.projetos.obter(contaId, projetoId);
-    const { comentarios, total } = await this.dep.consultas.listar(
+    await this.dependencias.projetos.obter(contaId, projetoId);
+    const { comentarios, total } = await this.dependencias.consultas.listar(
       contaId,
       projetoId,
       {},
@@ -273,7 +265,13 @@ class ComentariosServicoImpl implements ComentariosServico {
     depoisDe: string | undefined,
     limite: number,
   ) {
-    return this.dep.consultas.lerLoteParaExportar(contaId, projetoId, filtros, depoisDe, limite);
+    return this.dependencias.consultas.lerLoteParaExportar(
+      contaId,
+      projetoId,
+      filtros,
+      depoisDe,
+      limite,
+    );
   }
 
   async corrigir(
@@ -284,11 +282,17 @@ class ComentariosServicoImpl implements ComentariosServico {
     tema: string,
     sentimento: string,
   ): Promise<void> {
-    await this.dep.projetos.obter(contaId, projetoId);
-    if (!(await this.dep.consultas.existeNoProjeto(contaId, projetoId, comentarioId))) {
+    await this.dependencias.projetos.obter(contaId, projetoId);
+    if (!(await this.dependencias.consultas.existeNoProjeto(contaId, projetoId, comentarioId))) {
       throw new ErroNaoEncontrado('Comentário não encontrado.', 'comentario_nao_encontrado');
     }
-    await this.dep.classificacao.corrigir(contaId, usuarioId, comentarioId, tema, sentimento);
+    await this.dependencias.classificacao.corrigir(
+      contaId,
+      usuarioId,
+      comentarioId,
+      tema,
+      sentimento,
+    );
   }
 }
 

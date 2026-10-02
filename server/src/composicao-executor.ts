@@ -1,5 +1,6 @@
 import type { EntradaDaComposicao, Nucleo } from './composicao.js';
 import type { Google } from './composicao-google.js';
+import type { Perguntar } from './composicao-perguntar.js';
 import type { Resumos } from './composicao-resumos.js';
 import { criarExecutorTrabalhos, type ExecutorTrabalhos } from './jobs/executor-trabalhos.js';
 import { criarManipuladorClassificar } from './jobs/handlers/classificar.manipulador.js';
@@ -11,6 +12,7 @@ export function montarExecutor(
   nucleo: Nucleo,
   google: Google,
   resumos: Resumos,
+  perguntar: Perguntar,
 ): ExecutorTrabalhos {
   const { registrador, relogio, opcoes } = entrada;
   const { fila, uploads, custo, classificacao } = nucleo;
@@ -39,6 +41,7 @@ export function montarExecutor(
       classify: criarManipuladorClassificar(classificacao),
       google_sync: google.manipulador,
       summarize: resumos.manipulador,
+      ask: perguntar.manipulador,
       ...opcoes.manipuladoresDeTrabalho,
     },
     relogio,

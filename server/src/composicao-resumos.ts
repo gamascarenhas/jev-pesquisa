@@ -17,7 +17,7 @@ export interface Resumos {
   manipulador: ManipuladorDeTrabalho;
 }
 
-function criarProvedorLlm(entrada: EntradaDaComposicao): ProvedorLlm {
+export function criarProvedorLlm(entrada: EntradaDaComposicao): ProvedorLlm {
   const { llm } = entrada.configuracao;
   return (
     entrada.opcoes.provedorLlm ??
@@ -35,6 +35,7 @@ export function montarResumos(
     comentarios: ComentariosServico;
     custo: ControleDeCusto;
     classificador: ClassificadorDeComentarios;
+    llm: ProvedorLlm;
   },
 ): Resumos {
   const { banco, configuracao, registrador, relogio } = entrada;
@@ -44,7 +45,7 @@ export function montarResumos(
     projetos: base.projetos,
     trabalhos: base.trabalhos,
     controleDeCusto: base.custo,
-    llm: criarProvedorLlm(entrada),
+    llm: base.llm,
     classificador: base.classificador,
     relogio,
     registrador,

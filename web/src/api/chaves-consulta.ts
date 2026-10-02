@@ -3,6 +3,11 @@ export const chavesConsulta = {
   eu: ['auth', 'eu'] as const,
   conta: ['conta'] as const,
   consumo: ['consumo'] as const,
+  perguntas: (projetoId: string) => ['perguntas', projetoId] as const,
+  pergunta: (projetoId: string, perguntaId: string) =>
+    ['perguntas', projetoId, perguntaId] as const,
+  resultadoDaPergunta: (perguntaId: string, filtros: object, faixa: string, pagina: number) =>
+    ['perguntas', 'resultado', perguntaId, filtros, faixa, { pagina }] as const,
   resumos: (projetoId: string) => ['resumos', projetoId] as const,
   comentariosDoAchado: (resumoId: string, indice: number) =>
     ['resumos', 'achado', resumoId, indice] as const,

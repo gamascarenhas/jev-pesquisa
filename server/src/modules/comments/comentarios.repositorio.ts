@@ -48,6 +48,10 @@ revisoes_apagadas AS (
   DELETE FROM revisoes_classificacao
    WHERE conta_id = $1 AND comentario_id IN (SELECT id FROM alterados)
 ),
+respostas_apagadas AS (
+  DELETE FROM respostas_perguntas_personalizadas
+   WHERE conta_id = $1 AND comentario_id IN (SELECT id FROM alterados)
+),
 novos AS (
   INSERT INTO comentarios (conta_id, projeto_id, fonte_id, id_externo, texto_original,
                            texto_mascarado, nota, nome_unidade, nome_autor, comentado_em,

@@ -103,3 +103,33 @@ export interface ComentarioCitado {
   unidade: string | null;
   comentadoEm: Date | null;
 }
+
+export type FaixaDaPergunta = 'yes' | 'uncertain' | 'no';
+
+export interface LimiaresDeFaixa {
+  provavelmenteSim: number;
+  provavelmenteNao: number;
+}
+
+export interface ContagemPorFaixa {
+  sim: number;
+  incerto: number;
+  nao: number;
+}
+
+export interface AlvoDaPergunta {
+  id: string;
+  /** Tamanho do texto mascarado, já limitado, para estimar o consumo antes de confirmar. */
+  tamanho: number;
+}
+
+export interface TextoParaPergunta {
+  id: string;
+  textoMascarado: string;
+  nota: number | null;
+  unidade: string | null;
+}
+
+export interface RespostaListada extends ComentarioListado {
+  probabilidade: number;
+}

@@ -19,7 +19,7 @@ import {
 
 const LIMITE_DE_UNIDADES_NO_FILTRO = 200;
 
-interface LinhaListada {
+export interface LinhaListada {
   id: string;
   texto_original: string | null;
   fonte: string;
@@ -40,7 +40,7 @@ interface LinhaListada {
   status_classificacao: string;
 }
 
-const COLUNAS_DA_LISTA = `c.id, c.texto_original, f.nome AS fonte, c.nome_unidade, c.nome_autor,
+export const COLUNAS_DA_LISTA = `c.id, c.texto_original, f.nome AS fonte, c.nome_unidade, c.nome_autor,
   c.comentado_em, c.nota, ${TEMA_EFETIVO} AS tema, ${SENTIMENTO_EFETIVO} AS sentimento,
   cl.tema AS tema_modelo, cl.sentimento AS sentimento_modelo,
   cl.tema_confianca::text, cl.sentimento_confianca::text, cl.gravidade_normalizada::text AS gravidade,
@@ -51,7 +51,7 @@ function numeroOuNulo(valor: string | null): number | null {
   return valor === null ? null : Number(valor);
 }
 
-function mapear(linha: LinhaListada): ComentarioListado {
+export function mapear(linha: LinhaListada): ComentarioListado {
   return {
     id: linha.id,
     textoOriginal: linha.texto_original,

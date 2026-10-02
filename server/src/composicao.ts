@@ -15,7 +15,8 @@ import { criarTrabalhosServico } from './jobs/trabalhos.servico.js';
 import type { GanchoDeRecuperacao, MapaDeManipuladores } from './jobs/trabalhos.tipos.js';
 import type { ProvedorLlm } from './integrations/llm/provedor-llm.js';
 import { montarExecutor } from './composicao-executor.js';
-import { montarResumos, type Resumos } from './composicao-resumos.js';
+import { montarPerguntar, type Perguntar } from './composicao-perguntar.js';
+import { criarProvedorLlm, montarResumos, type Resumos } from './composicao-resumos.js';
 import type { FonteDeAvaliacoes } from './integrations/google/fonte-avaliacoes.js';
 import { montarGoogle, sincronizarGoogleAgendado, type Google } from './composicao-google.js';
 import type { ClassificadorDeComentarios } from './integrations/jev/classificador-comentarios.js';
@@ -31,6 +32,7 @@ import { criarConvitesServico } from './modules/auth/convites.servico.js';
 import { criarPerfilServico } from './modules/auth/perfil.servico.js';
 import { criarUsuariosServico } from './modules/auth/usuarios.servico.js';
 import { criarComentariosRepositorio } from './modules/comments/comentarios.repositorio.js';
+import { criarConsultasPerguntaRepositorio } from './modules/comments/consultas-pergunta.repositorio.js';
 import { criarConsultasResumoRepositorio } from './modules/comments/consultas-resumo.repositorio.js';
 import { criarConsultasComentariosRepositorio } from './modules/comments/consultas-comentarios.repositorio.js';
 import {
@@ -168,6 +170,7 @@ function montarNucleo(
     repositorio: criarComentariosRepositorio(banco),
     consultas: criarConsultasComentariosRepositorio(banco),
     consultasResumo: criarConsultasResumoRepositorio(banco),
+    consultasPergunta: criarConsultasPerguntaRepositorio(banco),
     projetos,
     classificacao,
   });
@@ -211,11 +214,14 @@ function montarIntegracoes(
   projetos: ServicosDaAplicacao['projetos'],
   trabalhos: ServicosDaAplicacao['trabalhos'],
   nucleo: Nucleo,
-): { google: Google; resumos: Resumos } {
+): { google: Google; resumos: Resumos; perguntar: Perguntar } {
   const { comentarios, custo, classificador } = nucleo;
+  const llm = criarProvedorLlm(entrada);
+  const base = { projetos, trabalhos, comentarios, custo, classificador, llm };
   return {
     google: montarGoogle(entrada, { projetos, trabalhos, comentarios }),
-    resumos: montarResumos(entrada, { projetos, trabalhos, comentarios, custo, classificador }),
+    resumos: montarResumos(entrada, base),
+    perguntar: montarPerguntar(entrada, base),
   };
 }
 
@@ -231,7 +237,8 @@ export function compor(base: EntradaBase): Composicao {
   const projetos = criarProjetosServico(criarProjetosRepositorio(banco));
   const trabalhos = criarTrabalhosServico(criarTrabalhosRepositorio(banco));
   const nucleo = montarNucleo(entrada, projetos, trabalhos, usuarios);
-  const { google, resumos } = montarIntegracoes(entrada, projetos, trabalhos, nucleo);
+  const { comentarios } = nucleo;
+  const { google, resumos, perguntar } = montarIntegracoes(entrada, projetos, trabalhos, nucleo);
   const servicos: ServicosDaAplicacao = {
     autenticacao: criarAutenticacaoServico(dependenciasDeAuth),
     convites: criarConvitesServico(dependenciasDeAuth, contas),
@@ -244,17 +251,14 @@ export function compor(base: EntradaBase): Composicao {
     envios: nucleo.uploads.envios,
     controleDeCusto: nucleo.custo,
     classificacao: nucleo.classificacao,
-    comentarios: nucleo.comentarios,
-    painel: criarPainelServico(nucleo.comentarios),
-    exportacao: criarExportacaoServico({
-      comentarios: nucleo.comentarios,
-      projetos,
-      registrador,
-    }),
+    comentarios,
+    painel: criarPainelServico(comentarios),
+    exportacao: criarExportacaoServico({ comentarios, projetos, registrador }),
     exclusao: montarExclusao(entrada, { contas, usuarios, projetos }, nucleo, google),
     googleOauth: google.oauth,
     googleUnidades: google.unidades,
     resumos: resumos.servico,
+    perguntar: perguntar.servico,
   };
   const agendador = montarAgendadorDoSistema({
     ...entrada,
@@ -264,7 +268,7 @@ export function compor(base: EntradaBase): Composicao {
   });
   return {
     servicos,
-    executorDeTrabalhos: montarExecutor(entrada, nucleo, google, resumos),
+    executorDeTrabalhos: montarExecutor(entrada, nucleo, google, resumos, perguntar),
     agendador,
     provedorDeCobranca: escolherProvedorDeCobranca(entrada.configuracao.cobrancaAtivada),
   };

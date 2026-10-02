@@ -261,3 +261,60 @@ export interface ComentarioCitado {
   unidade: string | null;
   comentadoEm: string | null;
 }
+
+export type StatusDaPergunta =
+  | 'interpreting'
+  | 'awaiting_confirmation'
+  | 'not_answerable'
+  | 'running'
+  | 'paused_limit'
+  | 'done'
+  | 'failed';
+
+export type FaixaDaPergunta = 'yes' | 'uncertain' | 'no';
+
+export interface Pergunta {
+  id: string;
+  texto: string;
+  status: StatusDaPergunta;
+  respondivel: boolean | null;
+  interpretacao: string | null;
+  motivoNaoRespondivel: string | null;
+  filtros: FiltrosDoPainel;
+  criadoEm: string;
+}
+
+export interface ConfirmacaoDaPergunta {
+  totalAvaliar: number;
+  foraDoLimite: number;
+  jaRespondidos: number;
+  porcentagemEstimada: number;
+  porcentagemJaConsumida: number;
+  cabe: boolean;
+}
+
+export interface PerguntaDetalhada extends Pergunta {
+  progresso: { feito: number; total: number };
+  confirmacao: ConfirmacaoDaPergunta | null;
+}
+
+export interface RespostaDaPergunta {
+  id: string;
+  texto: string | null;
+  fonte: string;
+  unidade: string | null;
+  autor: string | null;
+  comentadoEm: string | null;
+  nota: number | null;
+  tema: string | null;
+  sentimento: string | null;
+  probabilidade: number;
+}
+
+export interface ResultadoDaPergunta {
+  contagens: { sim: number; incerto: number; nao: number };
+  total: number;
+  pagina: number;
+  tamanhoPagina: number;
+  itens: RespostaDaPergunta[];
+}

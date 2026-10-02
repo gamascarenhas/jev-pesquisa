@@ -6,6 +6,38 @@ const PALAVRAS_POR_TRECHO = 12;
 const MAXIMO_DE_ACHADOS_SIMULADOS = 3;
 const REGEX_DADOS = /<dados>([\s\S]*?)<\/dados>/;
 const REGEX_COMENTARIO = /<comment id="(c\d+)">([\s\S]*?)<\/comment>/g;
+const REGEX_PERGUNTA = /<pergunta>([\s\S]*?)<\/pergunta>/;
+const REGEX_NAO_RESPONDIVEL =
+  /calcul|previs|prever|m[eé]dia|\bsoma\b|faturamento|receita|lucro|quanto (vendeu|faturou)/i;
+
+// Pergunta livre: termos como "calcule" ou "previsão" são recusados; o resto vira "o comentário fala disso?".
+function montarInterpretacao(prompt: string): string {
+  const pergunta = desescapar(REGEX_PERGUNTA.exec(prompt)?.[1] ?? '').trim();
+  if (REGEX_NAO_RESPONDIVEL.test(pergunta)) {
+    return JSON.stringify({
+      respondivel: false,
+      instrucoes: null,
+      criterios: null,
+      interpretacao_pt: 'A pergunta pede um cálculo ou uma previsão.',
+      motivo_se_nao_respondivel_pt:
+        'Cálculos e previsões não saem da leitura de comentários. Use os filtros e os gráficos do painel ou reformule a pergunta sobre o que os clientes escreveram.',
+    });
+  }
+  const termos = pergunta
+    .replace(/[^\p{L}\p{N}\s]/gu, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return JSON.stringify({
+    respondivel: true,
+    instrucoes: '`comment` ' + termos,
+    criterios: {
+      true: 'The comment clearly says what the question describes',
+      false: 'The comment does not say it',
+    },
+    interpretacao_pt: 'Vou procurar comentários em que o cliente fala sobre: ' + termos + '.',
+    motivo_se_nao_respondivel_pt: null,
+  });
+}
 
 interface DadosDoResumo {
   temaRotulo?: string;
@@ -36,6 +68,9 @@ function lerDados(prompt: string): DadosDoResumo {
 }
 
 function montarResposta(prompt: string): string {
+  if (REGEX_PERGUNTA.test(prompt)) {
+    return montarInterpretacao(prompt);
+  }
   const dados = lerDados(prompt);
   const comentarios = [...prompt.matchAll(REGEX_COMENTARIO)].map((m) => ({
     id: m[1] ?? '',
